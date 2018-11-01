@@ -23,16 +23,4 @@ public class GoodsController {
 		return gs.query();
 	}
 	
-	@RequestMapping("/query1")
-	public String query1(){
-		
-		
-		
-		
-		
-		return null;
-	}
-	
-	
-	
 }
