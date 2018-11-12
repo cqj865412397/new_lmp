@@ -15,6 +15,11 @@ public class GoodsController {
 	
 	@RequestMapping("/query")
 	public Goods query(){
+		
+		
+		
+		
+		
 		return gs.query();
 	}
 	
