@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Customer">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Sid" jdbcType="INTEGER" property="sid" />
+    <result column="Lid" jdbcType="INTEGER" property="lid" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="Province" jdbcType="VARCHAR" property="province" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="District" jdbcType="VARCHAR" property="district" />
+    <result column="Addres" jdbcType="VARCHAR" property="addres" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="freezemoney" jdbcType="DOUBLE" property="freezemoney" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Core" jdbcType="DOUBLE" property="core" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="async" jdbcType="INTEGER" property="async" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Name, Sid, Lid, Phone, Province, City, District, Addres, Balance, freezemoney, 
+    Remark, Code, Core, time, status, async, uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lmq.domain.Customer">
+    insert into customer (Id, Name, Sid, 
+      Lid, Phone, Province, 
+      City, District, Addres, 
+      Balance, freezemoney, Remark, 
+      Code, Core, time, 
+      status, async, uid)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
+      #{lid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{addres,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DOUBLE}, #{freezemoney,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{core,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Customer">
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="sid != null">
+        Sid,
+      </if>
+      <if test="lid != null">
+        Lid,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="province != null">
+        Province,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="district != null">
+        District,
+      </if>
+      <if test="addres != null">
+        Addres,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="freezemoney != null">
+        freezemoney,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="core != null">
+        Core,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="async != null">
+        async,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="lid != null">
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="freezemoney != null">
+        #{freezemoney,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="core != null">
+        #{core,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Customer">
+    update customer
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        Sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="lid != null">
+        Lid = #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        Province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        District = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        Addres = #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="freezemoney != null">
+        freezemoney = #{freezemoney,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="core != null">
+        Core = #{core,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        async = #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Customer">
+    update customer
+    set Name = #{name,jdbcType=VARCHAR},
+      Sid = #{sid,jdbcType=INTEGER},
+      Lid = #{lid,jdbcType=INTEGER},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Province = #{province,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      District = #{district,jdbcType=VARCHAR},
+      Addres = #{addres,jdbcType=VARCHAR},
+      Balance = #{balance,jdbcType=DOUBLE},
+      freezemoney = #{freezemoney,jdbcType=DOUBLE},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Core = #{core,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

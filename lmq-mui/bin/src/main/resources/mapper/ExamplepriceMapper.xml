@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.ExamplepriceMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Exampleprice">
+    <result column="pprice" jdbcType="INTEGER" property="pprice" />
+    <result column="dprice" jdbcType="VARCHAR" property="dprice" />
+    <result column="sprice" jdbcType="VARCHAR" property="sprice" />
+    <result column="cprice" jdbcType="VARCHAR" property="cprice" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lmq.domain.Exampleprice">
+    insert into exampleprice (pprice, dprice, sprice, 
+      cprice)
+    values (#{pprice,jdbcType=INTEGER}, #{dprice,jdbcType=VARCHAR}, #{sprice,jdbcType=VARCHAR}, 
+      #{cprice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Exampleprice">
+    insert into exampleprice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pprice != null">
+        pprice,
+      </if>
+      <if test="dprice != null">
+        dprice,
+      </if>
+      <if test="sprice != null">
+        sprice,
+      </if>
+      <if test="cprice != null">
+        cprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pprice != null">
+        #{pprice,jdbcType=INTEGER},
+      </if>
+      <if test="dprice != null">
+        #{dprice,jdbcType=VARCHAR},
+      </if>
+      <if test="sprice != null">
+        #{sprice,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null">
+        #{cprice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.SalesdetailsMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Salesdetails">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Salesid" jdbcType="INTEGER" property="salesid" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="Takeinmoney" jdbcType="DOUBLE" property="takeinmoney" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="async" jdbcType="INTEGER" property="async" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Salesid, money, count, Takeinmoney, status, async, uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salesdetails
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salesdetails
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lmq.domain.Salesdetails">
+    insert into salesdetails (Id, Salesid, money, 
+      count, Takeinmoney, status, 
+      async, uid)
+    values (#{id,jdbcType=INTEGER}, #{salesid,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, 
+      #{count,jdbcType=INTEGER}, #{takeinmoney,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, 
+      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Salesdetails">
+    insert into salesdetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="salesid != null">
+        Salesid,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="takeinmoney != null">
+        Takeinmoney,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="async != null">
+        async,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="salesid != null">
+        #{salesid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="takeinmoney != null">
+        #{takeinmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Salesdetails">
+    update salesdetails
+    <set>
+      <if test="salesid != null">
+        Salesid = #{salesid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="takeinmoney != null">
+        Takeinmoney = #{takeinmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        async = #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Salesdetails">
+    update salesdetails
+    set Salesid = #{salesid,jdbcType=INTEGER},
+      money = #{money,jdbcType=DOUBLE},
+      count = #{count,jdbcType=INTEGER},
+      Takeinmoney = #{takeinmoney,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
