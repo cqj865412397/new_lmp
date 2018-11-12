@@ -16,11 +16,21 @@ public class GoodsController {
 	@RequestMapping("/query")
 	public Goods query(){
 		
-		System.out.println("1");
+		System.out.println("qiao");
 		
 		
 		
 		return gs.query();
+	}
+	
+	@RequestMapping("/query1")
+	public String query1(){
+		
+		
+		
+		
+		
+		return null;
 	}
 	
 	
