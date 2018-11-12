@@ -23,6 +23,10 @@ public class GoodsController {
 		return gs.query();
 	}
 	
-	
+	@RequestMapping("/zxc")
+	public Goods query1(){
+		System.out.println("1");
+		return gs.query();
+	}
 	
 }
