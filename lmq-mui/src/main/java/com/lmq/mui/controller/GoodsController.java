@@ -1,10 +1,22 @@
 package com.lmq.mui.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class GoodsController {
+import com.lmq.domain.Goods;
+import com.lmq.service.GoodsService;
 
+@RestController
+@RequestMapping("/goods")
+public class GoodsController {
+	@Autowired
+	GoodsService gs;
+	
+	@RequestMapping("/query")
+	public Goods query(){
+		return gs.query();
+	}
 	
 	
 	
