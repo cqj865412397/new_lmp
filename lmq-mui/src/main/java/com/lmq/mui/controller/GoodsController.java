@@ -15,7 +15,10 @@ public class GoodsController {
 	
 	@RequestMapping("/query")
 	public Goods query(){
-		System.out.println("=====");
+		
+		System.out.println("1");
+		
+		
 		
 		return gs.query();
 	}
