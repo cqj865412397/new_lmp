@@ -101,4 +101,8 @@
       uid = #{uid,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select * from paytype where `status`=0
+  </select>
 </mapper>

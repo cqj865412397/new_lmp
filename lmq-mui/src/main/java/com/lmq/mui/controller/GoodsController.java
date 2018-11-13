@@ -18,7 +18,7 @@ public class GoodsController {
 		
 		System.out.println("1");
 		
-		
+		System.out.println(1);
 		
 		return gs.query();
 	}
