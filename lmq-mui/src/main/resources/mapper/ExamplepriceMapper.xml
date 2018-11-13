@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.ExamplepriceMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Exampleprice">
+    <result column="pprice" jdbcType="INTEGER" property="pprice" />
+    <result column="dprice" jdbcType="VARCHAR" property="dprice" />
+    <result column="sprice" jdbcType="VARCHAR" property="sprice" />
+    <result column="cprice" jdbcType="VARCHAR" property="cprice" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lmq.domain.Exampleprice">
+    insert into exampleprice (pprice, dprice, sprice, 
+      cprice, user1, user2, 
+      user3, user4, user5
+      )
+    values (#{pprice,jdbcType=INTEGER}, #{dprice,jdbcType=VARCHAR}, #{sprice,jdbcType=VARCHAR}, 
+      #{cprice,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
+      #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Exampleprice">
+    insert into exampleprice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pprice != null">
+        pprice,
+      </if>
+      <if test="dprice != null">
+        dprice,
+      </if>
+      <if test="sprice != null">
+        sprice,
+      </if>
+      <if test="cprice != null">
+        cprice,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pprice != null">
+        #{pprice,jdbcType=INTEGER},
+      </if>
+      <if test="dprice != null">
+        #{dprice,jdbcType=VARCHAR},
+      </if>
+      <if test="sprice != null">
+        #{sprice,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null">
+        #{cprice,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
