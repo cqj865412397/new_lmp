@@ -2,12 +2,12 @@ package com.lmq.domain;
 
 import java.util.Date;
 
-public class Goodstype {
+public class Userstyle {
     private Integer id;
 
     private String name;
 
-    private Integer parentid;
+    private Integer sid;
 
     private Date time;
 
@@ -43,12 +43,12 @@ public class Goodstype {
         this.name = name;
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getSid() {
+        return sid;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
     public Date getTime() {

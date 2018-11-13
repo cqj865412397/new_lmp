@@ -2,20 +2,28 @@ package com.lmq.domain;
 
 import java.util.Date;
 
-public class Goodstype {
+public class Salesindent {
     private Integer id;
 
-    private String name;
+    private Double money;
 
-    private Integer parentid;
+    private Integer count;
+
+    private String cid;
+
+    private String salesindentnub;
+
+    private Integer sid;
+
+    private Double pid;
+
+    private String remark;
 
     private Date time;
 
     private Integer status;
 
-    private Integer async;
-
-    private String uid;
+    private Double deposi;
 
     private String user1;
 
@@ -35,20 +43,60 @@ public class Goodstype {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Double getMoney() {
+        return money;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    public String getSalesindentnub() {
+        return salesindentnub;
+    }
+
+    public void setSalesindentnub(String salesindentnub) {
+        this.salesindentnub = salesindentnub;
+    }
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
+    public Double getPid() {
+        return pid;
+    }
+
+    public void setPid(Double pid) {
+        this.pid = pid;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Date getTime() {
@@ -67,20 +115,12 @@ public class Goodstype {
         this.status = status;
     }
 
-    public Integer getAsync() {
-        return async;
+    public Double getDeposi() {
+        return deposi;
     }
 
-    public void setAsync(Integer async) {
-        this.async = async;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setDeposi(Double deposi) {
+        this.deposi = deposi;
     }
 
     public String getUser1() {

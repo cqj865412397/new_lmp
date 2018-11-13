@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lmq.dao.SalesstockinfoMapper">
-  <resultMap id="BaseResultMap" type="com.lmq.domain.Salesstockinfo">
+<mapper namespace="com.lmq.dao.SalesindentMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Salesindent">
     <id column="Id" jdbcType="INTEGER" property="id" />
-    <result column="salesid" jdbcType="INTEGER" property="salesid" />
-    <result column="stockdetailid" jdbcType="INTEGER" property="stockdetailid" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
     <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="SalesIndentNub" jdbcType="VARCHAR" property="salesindentnub" />
+    <result column="Sid" jdbcType="INTEGER" property="sid" />
+    <result column="pid" jdbcType="DOUBLE" property="pid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="async" jdbcType="INTEGER" property="async" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="deposi" jdbcType="DOUBLE" property="deposi" />
     <result column="user1" jdbcType="VARCHAR" property="user1" />
     <result column="user2" jdbcType="VARCHAR" property="user2" />
     <result column="user3" jdbcType="VARCHAR" property="user3" />
@@ -17,45 +20,59 @@
     <result column="user5" jdbcType="VARCHAR" property="user5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, salesid, stockdetailid, count, time, status, async, uid, user1, user2, user3, 
-    user4, user5
+    Id, money, count, cid, SalesIndentNub, Sid, pid, remark, time, status, deposi, user1, 
+    user2, user3, user4, user5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from salesstockinfo
+    from salesindent
     where Id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from salesstockinfo
+    delete from salesindent
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Salesstockinfo">
-    insert into salesstockinfo (Id, salesid, stockdetailid, 
-      count, time, status, 
-      async, uid, user1, 
+  <insert id="insert" parameterType="com.lmq.domain.Salesindent">
+    insert into salesindent (Id, money, count, 
+      cid, SalesIndentNub, Sid, 
+      pid, remark, time, 
+      status, deposi, user1, 
       user2, user3, user4, 
       user5)
-    values (#{id,jdbcType=INTEGER}, #{salesid,jdbcType=INTEGER}, #{stockdetailid,jdbcType=INTEGER}, 
-      #{count,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{count,jdbcType=INTEGER}, 
+      #{cid,jdbcType=VARCHAR}, #{salesindentnub,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
+      #{pid,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{deposi,jdbcType=DOUBLE}, #{user1,jdbcType=VARCHAR}, 
       #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
       #{user5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lmq.domain.Salesstockinfo">
-    insert into salesstockinfo
+  <insert id="insertSelective" parameterType="com.lmq.domain.Salesindent">
+    insert into salesindent
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         Id,
       </if>
-      <if test="salesid != null">
-        salesid,
-      </if>
-      <if test="stockdetailid != null">
-        stockdetailid,
+      <if test="money != null">
+        money,
       </if>
       <if test="count != null">
         count,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="salesindentnub != null">
+        SalesIndentNub,
+      </if>
+      <if test="sid != null">
+        Sid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="remark != null">
+        remark,
       </if>
       <if test="time != null">
         time,
@@ -63,11 +80,8 @@
       <if test="status != null">
         status,
       </if>
-      <if test="async != null">
-        async,
-      </if>
-      <if test="uid != null">
-        uid,
+      <if test="deposi != null">
+        deposi,
       </if>
       <if test="user1 != null">
         user1,
@@ -89,14 +103,26 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="salesid != null">
-        #{salesid,jdbcType=INTEGER},
-      </if>
-      <if test="stockdetailid != null">
-        #{stockdetailid,jdbcType=INTEGER},
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
       </if>
       <if test="count != null">
         #{count,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="salesindentnub != null">
+        #{salesindentnub,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
@@ -104,11 +130,8 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="async != null">
-        #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+      <if test="deposi != null">
+        #{deposi,jdbcType=DOUBLE},
       </if>
       <if test="user1 != null">
         #{user1,jdbcType=VARCHAR},
@@ -127,17 +150,29 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Salesstockinfo">
-    update salesstockinfo
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Salesindent">
+    update salesindent
     <set>
-      <if test="salesid != null">
-        salesid = #{salesid,jdbcType=INTEGER},
-      </if>
-      <if test="stockdetailid != null">
-        stockdetailid = #{stockdetailid,jdbcType=INTEGER},
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
       </if>
       <if test="count != null">
         count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="salesindentnub != null">
+        SalesIndentNub = #{salesindentnub,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        Sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
@@ -145,11 +180,8 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="async != null">
-        async = #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
+      <if test="deposi != null">
+        deposi = #{deposi,jdbcType=DOUBLE},
       </if>
       <if test="user1 != null">
         user1 = #{user1,jdbcType=VARCHAR},
@@ -169,15 +201,18 @@
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Salesstockinfo">
-    update salesstockinfo
-    set salesid = #{salesid,jdbcType=INTEGER},
-      stockdetailid = #{stockdetailid,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Salesindent">
+    update salesindent
+    set money = #{money,jdbcType=DOUBLE},
       count = #{count,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=VARCHAR},
+      SalesIndentNub = #{salesindentnub,jdbcType=VARCHAR},
+      Sid = #{sid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
-      async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR},
+      deposi = #{deposi,jdbcType=DOUBLE},
       user1 = #{user1,jdbcType=VARCHAR},
       user2 = #{user2,jdbcType=VARCHAR},
       user3 = #{user3,jdbcType=VARCHAR},

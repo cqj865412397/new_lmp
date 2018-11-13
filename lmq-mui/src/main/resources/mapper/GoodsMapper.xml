@@ -13,12 +13,18 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="async" jdbcType="INTEGER" property="async" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lmq.domain.Goods">
     <result column="Detail" jdbcType="LONGVARCHAR" property="detail" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, name, Tid, Bid, time, Code, Codeprev, Sid, status, async, uid
+    Id, name, Tid, Bid, time, Code, Codeprev, Sid, status, async, uid, user1, user2, 
+    user3, user4, user5
   </sql>
   <sql id="Blob_Column_List">
     Detail
@@ -39,13 +45,15 @@
     insert into goods (Id, name, Tid, 
       Bid, time, Code, 
       Codeprev, Sid, status, 
-      async, uid, Detail
-      )
+      async, uid, user1, 
+      user2, user3, user4, 
+      user5, Detail)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
       #{bid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
       #{codeprev,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{detail,jdbcType=LONGVARCHAR}
-      )
+      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
+      #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
+      #{user5,jdbcType=VARCHAR}, #{detail,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lmq.domain.Goods">
     insert into goods
@@ -82,6 +90,21 @@
       </if>
       <if test="uid != null">
         uid,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
       </if>
       <if test="detail != null">
         Detail,
@@ -121,6 +144,21 @@
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
       </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
+      </if>
       <if test="detail != null">
         #{detail,jdbcType=LONGVARCHAR},
       </if>
@@ -159,6 +197,21 @@
       <if test="uid != null">
         uid = #{uid,jdbcType=VARCHAR},
       </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
       <if test="detail != null">
         Detail = #{detail,jdbcType=LONGVARCHAR},
       </if>
@@ -177,6 +230,11 @@
       status = #{status,jdbcType=INTEGER},
       async = #{async,jdbcType=INTEGER},
       uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR},
       Detail = #{detail,jdbcType=LONGVARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
@@ -191,7 +249,12 @@
       Sid = #{sid,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR}
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

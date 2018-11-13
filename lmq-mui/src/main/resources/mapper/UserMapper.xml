@@ -9,9 +9,14 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="async" jdbcType="INTEGER" property="async" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, name, pwd, Time, status, async, uid
+    Id, name, pwd, Time, status, async, uid, user1, user2, user3, user4, user5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,10 +31,14 @@
   <insert id="insert" parameterType="com.lmq.domain.User">
     insert into user (Id, name, pwd, 
       Time, status, async, 
-      uid)
+      uid, user1, user2, 
+      user3, user4, user5
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, 
-      #{uid,jdbcType=VARCHAR})
+      #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
+      #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lmq.domain.User">
     insert into user
@@ -55,6 +64,21 @@
       <if test="uid != null">
         uid,
       </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -77,6 +101,21 @@
       </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +140,21 @@
       <if test="uid != null">
         uid = #{uid,jdbcType=VARCHAR},
       </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
@@ -111,7 +165,12 @@
       Time = #{time,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR}
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

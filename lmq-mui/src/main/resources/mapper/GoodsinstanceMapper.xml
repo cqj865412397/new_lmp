@@ -11,9 +11,16 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="async" jdbcType="INTEGER" property="async" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="DefaultState" jdbcType="INTEGER" property="defaultstate" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, ids, Gid, Ecode, Qcode, time, status, async, uid
+    Id, ids, Gid, Ecode, Qcode, time, status, async, uid, DefaultState, user1, user2, 
+    user3, user4, user5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +35,16 @@
   <insert id="insert" parameterType="com.lmq.domain.Goodsinstance">
     insert into goodsinstance (Id, ids, Gid, 
       Ecode, Qcode, time, 
-      status, async, uid)
+      status, async, uid, 
+      DefaultState, user1, user2, 
+      user3, user4, user5
+      )
     values (#{id,jdbcType=INTEGER}, #{ids,jdbcType=VARCHAR}, #{gid,jdbcType=INTEGER}, 
       #{ecode,jdbcType=VARCHAR}, #{qcode,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+      #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{defaultstate,jdbcType=INTEGER}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
+      #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lmq.domain.Goodsinstance">
     insert into goodsinstance
@@ -63,6 +76,24 @@
       <if test="uid != null">
         uid,
       </if>
+      <if test="defaultstate != null">
+        DefaultState,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -91,6 +122,24 @@
       </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultstate != null">
+        #{defaultstate,jdbcType=INTEGER},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -121,6 +170,24 @@
       <if test="uid != null">
         uid = #{uid,jdbcType=VARCHAR},
       </if>
+      <if test="defaultstate != null">
+        DefaultState = #{defaultstate,jdbcType=INTEGER},
+      </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
@@ -133,7 +200,13 @@
       time = #{time,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR}
+      uid = #{uid,jdbcType=VARCHAR},
+      DefaultState = #{defaultstate,jdbcType=INTEGER},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -7,23 +7,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.lmq.service.GoodsService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LmqMuiApplicationTests {
 	
 	
-	@Autowired
-	GoodsService service;
+
 
 	@Test
 	public void contextLoads() {
 	}
 
 	
-	public void testQuery() {
-		service.query();
-	}
-	
+
 }
