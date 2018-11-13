@@ -1,5 +1,7 @@
 package com.lmq.dao;
 
+import java.util.List;
+
 import com.lmq.domain.Paytype;
 
 public interface PaytypeMapper {
@@ -14,4 +16,5 @@ public interface PaytypeMapper {
     int updateByPrimaryKeySelective(Paytype record);
 
     int updateByPrimaryKey(Paytype record);
+    List<Paytype> queryAll();
 }
