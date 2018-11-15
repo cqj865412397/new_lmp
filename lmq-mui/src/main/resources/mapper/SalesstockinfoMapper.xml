@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.SalesstockinfoMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Salesstockinfo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="salesid" jdbcType="INTEGER" property="salesid" />
+    <result column="stockdetailid" jdbcType="INTEGER" property="stockdetailid" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="async" jdbcType="INTEGER" property="async" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, salesid, stockdetailid, count, time, status, async, uid, user1, user2, user3, 
+    user4, user5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salesstockinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salesstockinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lmq.domain.Salesstockinfo">
+    insert into salesstockinfo (Id, salesid, stockdetailid, 
+      count, time, status, 
+      async, uid, user1, 
+      user2, user3, user4, 
+      user5)
+    values (#{id,jdbcType=INTEGER}, #{salesid,jdbcType=INTEGER}, #{stockdetailid,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
+      #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
+      #{user5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Salesstockinfo">
+    insert into salesstockinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="salesid != null">
+        salesid,
+      </if>
+      <if test="stockdetailid != null">
+        stockdetailid,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="async != null">
+        async,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="salesid != null">
+        #{salesid,jdbcType=INTEGER},
+      </if>
+      <if test="stockdetailid != null">
+        #{stockdetailid,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Salesstockinfo">
+    update salesstockinfo
+    <set>
+      <if test="salesid != null">
+        salesid = #{salesid,jdbcType=INTEGER},
+      </if>
+      <if test="stockdetailid != null">
+        stockdetailid = #{stockdetailid,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        async = #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Salesstockinfo">
+    update salesstockinfo
+    set salesid = #{salesid,jdbcType=INTEGER},
+      stockdetailid = #{stockdetailid,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

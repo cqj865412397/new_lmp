@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.SalesindentMapper">
+	<resultMap id="BaseResultMap"
+		type="com.lmq.domain.Salesindent">
+		<id column="Id" jdbcType="INTEGER" property="id" />
+		<result column="money" jdbcType="DOUBLE" property="money" />
+		<result column="count" jdbcType="INTEGER" property="count" />
+		<result column="cid" jdbcType="VARCHAR" property="cid" />
+		<result column="SalesIndentNub" jdbcType="VARCHAR"
+			property="salesindentnub" />
+		<result column="Sid" jdbcType="INTEGER" property="sid" />
+		<result column="pid" jdbcType="DOUBLE" property="pid" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="time" jdbcType="TIMESTAMP" property="time" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="deposi" jdbcType="DOUBLE" property="deposi" />
+		<result column="user1" jdbcType="VARCHAR" property="user1" />
+		<result column="user2" jdbcType="VARCHAR" property="user2" />
+		<result column="user3" jdbcType="VARCHAR" property="user3" />
+		<result column="user4" jdbcType="VARCHAR" property="user4" />
+		<result column="user5" jdbcType="VARCHAR" property="user5" />
+		<result column="stname" jdbcType="VARCHAR" property="stname" />
+		<result column="pname" jdbcType="VARCHAR" property="pname" />
+		<result column="cname" jdbcType="VARCHAR" property="cname" />
+
+	</resultMap>
+
+
+	<resultMap type="com.lmq.domain.Salesindent" id="SSMap"
+		extends="BaseResultMap">
+		<collection property="Salesindentdetails"
+			ofType="com.lmq.domain.Salesindentdetails" column="id">
+			<result column="sdmoney" jdbcType="DOUBLE" property="money" />
+			<result column="sdcount" jdbcType="INTEGER" property="count" />
+			<result column="sdTakeinmoney" jdbcType="DOUBLE"
+				property="takeinmoney" />
+			<result column="gid" jdbcType="INTEGER" property="gid" />
+			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
+			<result column="gname" jdbcType="VARCHAR" property="gname" />
+
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, money, count, cid, SalesIndentNub, Sid, pid, remark,
+		time, status,
+		deposi, user1,
+		user2, user3, user4, user5
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from salesindent
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from salesindent
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lmq.domain.Salesindent">
+		insert into salesindent (Id,
+		money, count,
+		cid, SalesIndentNub, Sid,
+		pid, remark, time,
+		status,
+		deposi, user1,
+		user2, user3, user4,
+		user5)
+		values
+		(#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE},
+		#{count,jdbcType=INTEGER},
+		#{cid,jdbcType=VARCHAR},
+		#{salesindentnub,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER},
+		#{pid,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR},
+		#{time,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER},
+		#{deposi,jdbcType=DOUBLE}, #{user1,jdbcType=VARCHAR},
+		#{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR},
+		#{user4,jdbcType=VARCHAR},
+		#{user5,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.lmq.domain.Salesindent">
+		insert into salesindent
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="count != null">
+				count,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="salesindentnub != null">
+				SalesIndentNub,
+			</if>
+			<if test="sid != null">
+				Sid,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="deposi != null">
+				deposi,
+			</if>
+			<if test="user1 != null">
+				user1,
+			</if>
+			<if test="user2 != null">
+				user2,
+			</if>
+			<if test="user3 != null">
+				user3,
+			</if>
+			<if test="user4 != null">
+				user4,
+			</if>
+			<if test="user5 != null">
+				user5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=DOUBLE},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=INTEGER},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=VARCHAR},
+			</if>
+			<if test="salesindentnub != null">
+				#{salesindentnub,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="deposi != null">
+				#{deposi,jdbcType=DOUBLE},
+			</if>
+			<if test="user1 != null">
+				#{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				#{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				#{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				#{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				#{user5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.lmq.domain.Salesindent">
+		update salesindent
+		<set>
+			<if test="money != null">
+				money = #{money,jdbcType=DOUBLE},
+			</if>
+			<if test="count != null">
+				count = #{count,jdbcType=INTEGER},
+			</if>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=VARCHAR},
+			</if>
+			<if test="salesindentnub != null">
+				SalesIndentNub = #{salesindentnub,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				Sid = #{sid,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="deposi != null">
+				deposi = #{deposi,jdbcType=DOUBLE},
+			</if>
+			<if test="user1 != null">
+				user1 = #{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				user2 = #{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				user3 = #{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				user4 = #{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				user5 = #{user5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.lmq.domain.Salesindent">
+		update salesindent
+		set money = #{money,jdbcType=DOUBLE},
+		count = #{count,jdbcType=INTEGER},
+		cid = #{cid,jdbcType=VARCHAR},
+		SalesIndentNub = #{salesindentnub,jdbcType=VARCHAR},
+		Sid =
+		#{sid,jdbcType=INTEGER},
+		pid = #{pid,jdbcType=DOUBLE},
+		remark =
+		#{remark,jdbcType=VARCHAR},
+		time = #{time,jdbcType=TIMESTAMP},
+		status =
+		#{status,jdbcType=INTEGER},
+		deposi = #{deposi,jdbcType=DOUBLE},
+		user1 =
+		#{user1,jdbcType=VARCHAR},
+		user2 = #{user2,jdbcType=VARCHAR},
+		user3 =
+		#{user3,jdbcType=VARCHAR},
+		user4 = #{user4,jdbcType=VARCHAR},
+		user5 =
+		#{user5,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="queryById" resultMap="SSMap">
+		<!-- SELECT s.`Id` AS id,s.`money`
+		AS
+		money,s.`count` AS `count`,s.`SalesIndentNub` AS `SalesIndentNub`,
+		s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
+		AS `status`,
+		sd.`money` AS sdmoney,sd.`count`AS
+		sdcount,sd.`Takeinmoney` AS
+		sdTakeinmoney,sd.`status` AS sdstatus,
+		i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` AS gid,
+		st.`name` AS stname
+		FROM salesindent AS s
+		LEFT JOIN salesindentdetails AS sd
+		ON
+		s.id=sd.Salesindentid
+		LEFT JOIN img AS i
+		ON sd.gid=i.gid
+		LEFT JOIN
+		`store` AS st
+		ON st.`Id`=s.`Sid`
+		where s.`Id`=#{id} -->
+	SELECT s.`Id` AS id,s.`money` AS
+		money,s.`count` AS `count`,s.`SalesIndentNub` AS `SalesIndentNub`,
+		s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
+		AS `status`,
+		sd.`money` AS sdmoney,sd.`count`AS
+		sdcount,sd.`Takeinmoney` AS
+		sdTakeinmoney,sd.`status` AS sdstatus,
+		i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` AS gid,
+		st.`name` AS stname,s.`pid`,p.`Name` AS pname,c.`Name` AS cname,g.`name` AS gname
+		FROM salesindent AS s
+		LEFT JOIN salesindentdetails AS sd
+		ON
+		s.id=sd.Salesindentid
+		LEFT JOIN img AS i
+		ON sd.gid=i.gid
+		LEFT JOIN
+		`store` AS st
+		ON st.`Id`=s.`Sid`
+		LEFT JOIN
+		paytype AS p
+		ON s.`pid`=p.`Id`
+		LEFT JOIN
+		`customer` AS c
+		ON c.`Id`=s.`cid`
+		LEFT JOIN
+		`goods` AS g
+		ON g.`Id`=sd.`gid`
+		where s.`Id`=#{id}
+	</select>
+
+	<select id="queryList" resultMap="BaseResultMap">
+		SELECT s.`Id`,s.`SalesIndentNub`,s.`money`,s.`status`,st.`name` as
+		stname FROM
+		salesindent AS s
+		LEFT JOIN `store` AS st
+		ON st.`Id`=s.`Sid`
+		where s.`status`!=2 and  DATE(s.`time`) BETWEEN #{startTime} AND #{endTime}
+		and (
+		s.`SalesIndentNub` LIKE CONCAT('%',#{filtrate},'%') OR st.`name`
+		LIKE
+		CONCAT('%',#{filtrate},'%') )
+		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
+			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
+			</if> -->
+	</select>
+	
+	<update id="updateStatusById">
+		update salesindent set `status`=#{status} where Id=#{id}
+	</update>
+</mapper>

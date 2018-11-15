@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.StoreMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Store">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="Province" jdbcType="VARCHAR" property="province" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="Time" jdbcType="TIMESTAMP" property="time" />
+    <result column="stid" jdbcType="INTEGER" property="stid" />
+    <result column="Parented" jdbcType="VARCHAR" property="parented" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="async" jdbcType="INTEGER" property="async" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, name, Province, City, district, address, Time, stid, Parented, status, async, 
+    uid, user1, user2, user3, user4, user5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from store
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lmq.domain.Store">
+    insert into store (Id, name, Province, 
+      City, district, address, 
+      Time, stid, Parented, 
+      status, async, uid, 
+      user1, user2, user3, 
+      user4, user5)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{stid,jdbcType=INTEGER}, #{parented,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, 
+      #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Store">
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="province != null">
+        Province,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="district != null">
+        district,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="time != null">
+        Time,
+      </if>
+      <if test="stid != null">
+        stid,
+      </if>
+      <if test="parented != null">
+        Parented,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="async != null">
+        async,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stid != null">
+        #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="parented != null">
+        #{parented,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Store">
+    update store
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        Province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        Time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stid != null">
+        stid = #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="parented != null">
+        Parented = #{parented,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        async = #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Store">
+    update store
+    set name = #{name,jdbcType=VARCHAR},
+      Province = #{province,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      Time = #{time,jdbcType=TIMESTAMP},
+      stid = #{stid,jdbcType=INTEGER},
+      Parented = #{parented,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

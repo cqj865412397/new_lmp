@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.lmq.domain.Goods">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="Tid" jdbcType="INTEGER" property="tid" />
+    <result column="Bid" jdbcType="INTEGER" property="bid" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Codeprev" jdbcType="VARCHAR" property="codeprev" />
+    <result column="Sid" jdbcType="INTEGER" property="sid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="async" jdbcType="INTEGER" property="async" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user1" jdbcType="VARCHAR" property="user1" />
+    <result column="user2" jdbcType="VARCHAR" property="user2" />
+    <result column="user3" jdbcType="VARCHAR" property="user3" />
+    <result column="user4" jdbcType="VARCHAR" property="user4" />
+    <result column="user5" jdbcType="VARCHAR" property="user5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lmq.domain.Goods">
+    <result column="Detail" jdbcType="LONGVARCHAR" property="detail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, name, Tid, Bid, time, Code, Codeprev, Sid, status, async, uid, user1, user2, 
+    user3, user4, user5
+  </sql>
+  <sql id="Blob_Column_List">
+    Detail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lmq.domain.Goods">
+    insert into goods (Id, name, Tid, 
+      Bid, time, Code, 
+      Codeprev, Sid, status, 
+      async, uid, user1, 
+      user2, user3, user4, 
+      user5, Detail)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
+      #{bid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{codeprev,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
+      #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
+      #{user5,jdbcType=VARCHAR}, #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lmq.domain.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="tid != null">
+        Tid,
+      </if>
+      <if test="bid != null">
+        Bid,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="codeprev != null">
+        Codeprev,
+      </if>
+      <if test="sid != null">
+        Sid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="async != null">
+        async,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="user1 != null">
+        user1,
+      </if>
+      <if test="user2 != null">
+        user2,
+      </if>
+      <if test="user3 != null">
+        user3,
+      </if>
+      <if test="user4 != null">
+        user4,
+      </if>
+      <if test="user5 != null">
+        user5,
+      </if>
+      <if test="detail != null">
+        Detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="codeprev != null">
+        #{codeprev,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        #{user5,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Goods">
+    update goods
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        Tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        Bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="codeprev != null">
+        Codeprev = #{codeprev,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        Sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="async != null">
+        async = #{async,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="user1 != null">
+        user1 = #{user1,jdbcType=VARCHAR},
+      </if>
+      <if test="user2 != null">
+        user2 = #{user2,jdbcType=VARCHAR},
+      </if>
+      <if test="user3 != null">
+        user3 = #{user3,jdbcType=VARCHAR},
+      </if>
+      <if test="user4 != null">
+        user4 = #{user4,jdbcType=VARCHAR},
+      </if>
+      <if test="user5 != null">
+        user5 = #{user5,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        Detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lmq.domain.Goods">
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      Tid = #{tid,jdbcType=INTEGER},
+      Bid = #{bid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      Code = #{code,jdbcType=VARCHAR},
+      Codeprev = #{codeprev,jdbcType=VARCHAR},
+      Sid = #{sid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR},
+      Detail = #{detail,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Goods">
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      Tid = #{tid,jdbcType=INTEGER},
+      Bid = #{bid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      Code = #{code,jdbcType=VARCHAR},
+      Codeprev = #{codeprev,jdbcType=VARCHAR},
+      Sid = #{sid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      async = #{async,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      user1 = #{user1,jdbcType=VARCHAR},
+      user2 = #{user2,jdbcType=VARCHAR},
+      user3 = #{user3,jdbcType=VARCHAR},
+      user4 = #{user4,jdbcType=VARCHAR},
+      user5 = #{user5,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
