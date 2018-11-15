@@ -35,10 +35,9 @@
 			<result column="sdcount" jdbcType="INTEGER" property="count" />
 			<result column="sdTakeinmoney" jdbcType="DOUBLE"
 				property="takeinmoney" />
-			<result column="gid" jdbcType="INTEGER" property="gid" />
+			<result column="gid"  property="user1" />
 			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
 			<result column="gname" jdbcType="VARCHAR" property="gname" />
-
 		</collection>
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -292,14 +291,14 @@
 		sd.`money` AS sdmoney,sd.`count`AS
 		sdcount,sd.`Takeinmoney` AS
 		sdTakeinmoney,sd.`status` AS sdstatus,
-		i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` AS gid,
+		i.url AS imgurl,sd.`Id` AS sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS pname,c.`Name` AS cname,g.`name` AS gname
 		FROM salesindent AS s
 		LEFT JOIN salesindentdetails AS sd
 		ON
 		s.id=sd.Salesindentid
 		LEFT JOIN img AS i
-		ON sd.gid=i.gid
+		ON sd.user1=i.gid
 		LEFT JOIN
 		`store` AS st
 		ON st.`Id`=s.`Sid`
@@ -311,7 +310,7 @@
 		ON c.`Id`=s.`cid`
 		LEFT JOIN
 		`goods` AS g
-		ON g.`Id`=sd.`gid`
+		ON g.`Id`=sd.`user1`
 		where s.`Id`=#{id}
 	</select>
 
