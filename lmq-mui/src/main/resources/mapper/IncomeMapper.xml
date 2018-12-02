@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.report.IncomeMapper">
+  <resultMap id="AllIncome" type="com.lmq.domain.report.AllIncome">
+	<id column="xs" property="xs"/>
+	<result column="dj" property="dj"/>
+	<result column="cz" property="cz"/>
+	<result column="jh" property="jh"/>
+	<result column="fk" property="fk"/>
+  </resultMap>
+  <resultMap id="Income" type="com.lmq.domain.report.Income">
+  	<id column="name" property="name"/>
+  	<result column="bh" property="bh"/>
+  	<result column="time" property="time"/>
+  	<result column="money" property="money"/>
+  	<result column="lx" property="lx"/>
+  </resultMap>
+  <select id="queryAll" resultMap="AllIncome">
+	SELECT (SELECT SUM(money) FROM customerrecharge WHERE `status`=0) AS cz,
+	(SELECT SUM(Allprice) FROM stock WHERE `status`=0) AS jh,
+	(SELECT SUM(money) FROM remittance WHERE `status`=0) AS fk,
+	SUM(deposi) AS dj, SUM(Takeinmoney) AS xs FROM `Sales` WHERE `status`=0
+  </select>
+  <select id="queryXS" resultMap="Income">
+	SELECT s.user1 AS bh,c.`Name` AS `name`,s.`time`,s.`Takeinmoney` AS money,'销售收入' AS lx FROM sales AS s 
+	LEFT JOIN customer AS c ON c.`Id`=s.`cid`
+  </select>
+  <select id="querySK" resultMap="Income">
+	SELECT customer.`Name` AS NAME,sales.`user1` AS bh,sales.`deposi` AS money,sales.`time`,'定金' AS lx FROM sales 
+	LEFT JOIN customer ON customer.`Id`=sales.`cid`
+	WHERE deposi>0 AND sales.`status`=0 
+	UNION ALL
+	SELECT customer.`Name` AS NAME,customerrecharge.`Id` AS bh,customerrecharge.`money`,customerrecharge.`Time`,'充值' AS lx FROM customerrecharge 
+	LEFT JOIN customer ON customer.`Id`=customerrecharge.`cid`
+	WHERE customerrecharge.`status`=0 ORDER BY `time`
+  </select>
+  <select id="queryJH" resultMap="Income">
+	SELECT supplier.`Name` AS `name`,stock.`Code` AS bh,stock.`Allprice` AS money,stock.`Time` AS `time`,'进货' AS lx FROM stock 
+	LEFT JOIN supplier ON supplier.`Id`=stock.`Supid`
+  </select>
+  <select id="queryFK" resultMap="Income">
+	SELECT s.`Name` AS `name`,r.`Id` AS bh,r.`money`,r.`Time` AS `time` FROM remittance AS r 
+	LEFT JOIN supplier AS s ON s.`Id`=r.`Sid`
+  </select>
+</mapper>
