@@ -2,6 +2,7 @@ package com.lmq.dao;
 
 import java.util.List;
 
+import com.lmq.domain.Customer;
 import com.lmq.domain.Supplier;
 import com.lmq.domain.SupplierClassify;
 
@@ -25,4 +26,6 @@ public interface SupplierMapper {
     
     
     List<SupplierClassify> queryByIdAllSupplier(Integer sid);
+    int updateBalanceById(Supplier record);
+
 }
