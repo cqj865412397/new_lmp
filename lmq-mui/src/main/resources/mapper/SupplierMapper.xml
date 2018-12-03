@@ -354,4 +354,8 @@
 		supplier WHERE sid=#{id} AND acronymname=#{acronymname}
 	</select>
 
+  
+    <update id="updateBalanceById" parameterType="com.lmq.domain.Customer">
+  update supplier set Balance=Balance-#{balance,jdbcType=DOUBLE} where Id = #{id,jdbcType=INTEGER};
+  </update>
 </mapper>

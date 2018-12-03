@@ -337,4 +337,10 @@
 		where Id = #{id,jdbcType=INTEGER}
 	</update>
 
+  <update id="updateBalanceById" parameterType="com.lmq.domain.Customer">
+  update customer set Balance=Balance-#{balance,jdbcType=DOUBLE} where Id = #{id,jdbcType=INTEGER};
+  </update>
+  <select id="queryBalanceById" parameterType="com.lmq.domain.Customer">
+  	select * from customer where id=#{id}
+  </select>
 </mapper>

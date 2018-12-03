@@ -31,8 +31,17 @@ public interface CustomerMapper {
 
     int updateByPrimaryKey(Customer record);
     
+    
+    
     /*<!-- 根据门店查询出客户消费的总金额和客户信息 -->*/
     List<Classify> queryGroupByAcronymname(Integer sid);
     
     
+    
+    int updateBalanceById(Customer record);
+    
+    Customer queryBalanceById(Integer id);
+    
+    String getTimeNum(Integer uid);
+
 }

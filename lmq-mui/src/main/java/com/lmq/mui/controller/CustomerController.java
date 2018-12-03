@@ -50,4 +50,9 @@ public class CustomerController {
 	public int updateCustomerById(Customer record) {
 		return customerService.updateByPrimaryKeySelective(record);
 	}
+	
+	@RequestMapping("/queryBalanceById")
+	public Customer queryBalanceById(Integer id) {
+		return customerService.selectByPrimaryKey(id);
+	}
 }
