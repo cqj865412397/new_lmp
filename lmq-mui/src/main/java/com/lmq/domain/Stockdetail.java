@@ -30,8 +30,19 @@ public class Stockdetail {
     private String user4;
 
     private String user5;
+    
+    //所属的批次号
+    private String code;
+    
+    public String getCode() {
+		return code;
+	}
 
-    public Integer getId() {
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Integer getId() {
         return id;
     }
 

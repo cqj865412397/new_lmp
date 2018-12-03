@@ -3,9 +3,14 @@ package com.lmq.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Salesindent {
     private Integer id;
-
+    
+    //出售总金额
     private Double money;
 
     private Integer count;
@@ -20,14 +25,18 @@ public class Salesindent {
 
     private String remark;
 
+//    @JsonFormat(pattern="YYYY-MM-DD")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date time;
 
     private Integer status;
 
     private Double deposi;
-
+    
+    //创建时间
     private String user1;
-
+    
+    //实际销售总金额
     private String user2;
 
     private String user3;
@@ -35,10 +44,14 @@ public class Salesindent {
     private String user4;
 
     private String user5;
+    //详情表集合
+    private List<Salesindentdetails> salesindentdetails;
+    //店铺名称
     private String stname;
-    private List<Salesindentdetails> Salesindentdetails;
     
+    //结算账户
     private String pname;
+    //客户名称
     private String cname;
     
     public String getCname() {
@@ -66,13 +79,13 @@ public class Salesindent {
 	}
 	
 	
-    
-    public List<Salesindentdetails> getSalesindentdetails() {
-		return Salesindentdetails;
+
+	public List<Salesindentdetails> getSalesindentdetails() {
+		return salesindentdetails;
 	}
 
 	public void setSalesindentdetails(List<Salesindentdetails> salesindentdetails) {
-		Salesindentdetails = salesindentdetails;
+		this.salesindentdetails = salesindentdetails;
 	}
 
 	public Integer getId() {

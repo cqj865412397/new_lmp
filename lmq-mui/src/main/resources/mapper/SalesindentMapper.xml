@@ -7,7 +7,7 @@
 		<result column="money" jdbcType="DOUBLE" property="money" />
 		<result column="count" jdbcType="INTEGER" property="count" />
 		<result column="cid" jdbcType="VARCHAR" property="cid" />
-		<result column="SalesIndentNub" jdbcType="VARCHAR"
+		<result column="salesIndentNub" jdbcType="VARCHAR"
 			property="salesindentnub" />
 		<result column="Sid" jdbcType="INTEGER" property="sid" />
 		<result column="pid" jdbcType="DOUBLE" property="pid" />
@@ -29,13 +29,14 @@
 
 	<resultMap type="com.lmq.domain.Salesindent" id="SSMap"
 		extends="BaseResultMap">
-		<collection property="Salesindentdetails"
+		<collection property="salesindentdetails"
 			ofType="com.lmq.domain.Salesindentdetails" column="id">
+			<result column="sdid" jdbcType="INTEGER" property="id" />
 			<result column="sdmoney" jdbcType="DOUBLE" property="money" />
 			<result column="sdcount" jdbcType="INTEGER" property="count" />
 			<result column="sdTakeinmoney" jdbcType="DOUBLE"
 				property="takeinmoney" />
-			<result column="gid"  property="user1" />
+			<result column="gid" property="user1" />
 			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
 			<result column="gname" jdbcType="VARCHAR" property="gname" />
 		</collection>
@@ -81,7 +82,8 @@
 		#{user5,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.lmq.domain.Salesindent">
+		parameterType="com.lmq.domain.Salesindent" useGeneratedKeys="true"
+		keyProperty="id">
 		insert into salesindent
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -117,7 +119,7 @@
 			<if test="deposi != null">
 				deposi,
 			</if>
-			<if test="user1 != null">
+			<if test="user1==null">
 				user1,
 			</if>
 			<if test="user2 != null">
@@ -167,8 +169,8 @@
 			<if test="deposi != null">
 				#{deposi,jdbcType=DOUBLE},
 			</if>
-			<if test="user1 != null">
-				#{user1,jdbcType=VARCHAR},
+			<if test="user1==null">
+				now(),
 			</if>
 			<if test="user2 != null">
 				#{user2,jdbcType=VARCHAR},
@@ -264,37 +266,29 @@
 	</update>
 
 	<select id="queryById" resultMap="SSMap">
-		<!-- SELECT s.`Id` AS id,s.`money`
-		AS
-		money,s.`count` AS `count`,s.`SalesIndentNub` AS `SalesIndentNub`,
-		s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
+		<!-- SELECT s.`Id` AS id,s.`money` AS money,s.`count` AS `count`,s.`SalesIndentNub` 
+			AS `SalesIndentNub`, s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS 
+			deposi,s.`status` AS `status`, sd.`money` AS sdmoney,sd.`count`AS sdcount,sd.`Takeinmoney` 
+			AS sdTakeinmoney,sd.`status` AS sdstatus, i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` 
+			AS gid, st.`name` AS stname FROM salesindent AS s LEFT JOIN salesindentdetails 
+			AS sd ON s.id=sd.Salesindentid LEFT JOIN img AS i ON sd.gid=i.gid LEFT JOIN 
+			`store` AS st ON st.`Id`=s.`Sid` where s.`Id`=#{id} -->
+		SELECT s.`Id` AS id,s.`user2` AS
+		user2,s.`count` AS
+		`count`,s.`SalesIndentNub` AS `SalesIndentNub`,
+		s.`remark` AS
+		remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
 		AS `status`,
 		sd.`money` AS sdmoney,sd.`count`AS
 		sdcount,sd.`Takeinmoney` AS
 		sdTakeinmoney,sd.`status` AS sdstatus,
-		i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` AS gid,
-		st.`name` AS stname
+		i.url AS imgurl,sd.`Id` AS
+		sdid,sd.`user1` AS gid,
+		st.`name` AS stname,s.`pid`,p.`Name` AS
+		pname,c.`Name` AS cname,g.`name` AS gname,sd.`id` as sdid,s.cid
 		FROM salesindent AS s
-		LEFT JOIN salesindentdetails AS sd
-		ON
-		s.id=sd.Salesindentid
-		LEFT JOIN img AS i
-		ON sd.gid=i.gid
-		LEFT JOIN
-		`store` AS st
-		ON st.`Id`=s.`Sid`
-		where s.`Id`=#{id} -->
-	SELECT s.`Id` AS id,s.`money` AS
-		money,s.`count` AS `count`,s.`SalesIndentNub` AS `SalesIndentNub`,
-		s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
-		AS `status`,
-		sd.`money` AS sdmoney,sd.`count`AS
-		sdcount,sd.`Takeinmoney` AS
-		sdTakeinmoney,sd.`status` AS sdstatus,
-		i.url AS imgurl,sd.`Id` AS sdid,sd.`user1` AS gid,
-		st.`name` AS stname,s.`pid`,p.`Name` AS pname,c.`Name` AS cname,g.`name` AS gname
-		FROM salesindent AS s
-		LEFT JOIN salesindentdetails AS sd
+		LEFT
+		JOIN salesindentdetails AS sd
 		ON
 		s.id=sd.Salesindentid
 		LEFT JOIN img AS i
@@ -313,24 +307,79 @@
 		ON g.`Id`=sd.`user1`
 		where s.`Id`=#{id}
 	</select>
+	<select id="queryBySalesIndentNub" resultMap="SSMap">
+		<!-- SELECT s.`Id` AS id,s.`money` AS money,s.`count` AS `count`,s.`SalesIndentNub` 
+			AS `SalesIndentNub`, s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS 
+			deposi,s.`status` AS `status`, sd.`money` AS sdmoney,sd.`count`AS sdcount,sd.`Takeinmoney` 
+			AS sdTakeinmoney,sd.`status` AS sdstatus, i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` 
+			AS gid, st.`name` AS stname FROM salesindent AS s LEFT JOIN salesindentdetails 
+			AS sd ON s.id=sd.Salesindentid LEFT JOIN img AS i ON sd.gid=i.gid LEFT JOIN 
+			`store` AS st ON st.`Id`=s.`Sid` where s.`Id`=#{id} -->
+		SELECT s.`Id` AS id,s.`user2` AS
+		user2,s.`count` AS
+		`count`,s.`SalesIndentNub` AS `SalesIndentNub`,
+		s.`remark` AS
+		remark,s.`time`AS `time`,s.`deposi` AS deposi,s.`status`
+		AS `status`,
+		sd.`money` AS sdmoney,sd.`count`AS
+		sdcount,sd.`Takeinmoney` AS
+		sdTakeinmoney,sd.`status` AS sdstatus,
+		i.url AS imgurl,sd.`Id` AS
+		sdid,sd.`user1` AS gid,
+		st.`name` AS stname,s.`pid`,p.`Name` AS
+		pname,c.`Name` AS cname,g.`name` AS gname,sd.`id` AS sdid,s.cid
+		FROM salesindent AS s
+		LEFT
+		JOIN salesindentdetails AS sd
+		ON
+		s.id=sd.Salesindentid
+		LEFT JOIN img AS i
+		ON sd.user1=i.gid
+		LEFT JOIN
+		`store` AS st
+		ON st.`Id`=s.`Sid`
+		LEFT JOIN
+		paytype AS p
+		ON s.`pid`=p.`Id`
+		LEFT JOIN
+		`customer` AS c
+		ON c.`Id`=s.`cid`
+		LEFT JOIN
+		`goods` AS g
+		ON g.`Id`=sd.`user1`
+		WHERE s.`SalesIndentNub`=#{SalesIndentNub}
+	</select>
 
 	<select id="queryList" resultMap="BaseResultMap">
-		SELECT s.`Id`,s.`SalesIndentNub`,s.`money`,s.`status`,st.`name` as
-		stname FROM
+		SELECT s.`Id`,s.`SalesIndentNub`,s.`user2`,s.`status`,st.`name` AS
+		stname,c.`Name` AS cname,s.`deposi` FROM
 		salesindent AS s
 		LEFT JOIN `store` AS st
 		ON st.`Id`=s.`Sid`
-		where s.`status`!=2 and  DATE(s.`time`) BETWEEN #{startTime} AND #{endTime}
+		LEFT JOIN
+		`customer` AS c
+		ON c.`Id`=s.`cid`
+		where s.`status`!=1 and DATE(s.`time`) BETWEEN #{startTime} AND
+		#{endTime}
 		and (
-		s.`SalesIndentNub` LIKE CONCAT('%',#{filtrate},'%') OR st.`name`
+		s.`SalesIndentNub` LIKE CONCAT('%',#{filtrate},'%') OR
+		st.`name`
 		LIKE
-		CONCAT('%',#{filtrate},'%') )
+		CONCAT('%',#{filtrate},'%') ) ORDER BY s.`user1` DESC
 		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
 			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
 			</if> -->
 	</select>
-	
+
 	<update id="updateStatusById">
-		update salesindent set `status`=#{status} where Id=#{id}
+		update salesindent set `status`=#{status} where
+		Id=#{id}
 	</update>
+
+	<select id="getTimeNum" resultType="String">
+		SELECT MAX(RIGHT(SalesIndentNub,12))AS maxNub FROM
+		`salesindent`
+		WHERE `SalesIndentNub` LIKE
+		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
+	</select>
 </mapper>

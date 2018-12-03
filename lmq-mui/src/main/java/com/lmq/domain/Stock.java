@@ -1,6 +1,9 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Stock {
     private Integer id;
@@ -22,18 +25,78 @@ public class Stock {
     private Integer async;
 
     private String uid;
-
+    
+    //单内时间
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String user1;
-
+    //应付款
     private String user2;
-
+    //实付款
     private String user3;
 
     private String user4;
 
     private String user5;
+    
+	private String user6;
+	
+	private String user7;
+	private String user8;
+	private String user9;
+    private String spname;
+    
+    private List<Stockdetail> stockdetails;
+    
+    
+	public List<Stockdetail> getStockdetails() {
+		return stockdetails;
+	}
 
-    public Integer getId() {
+	public void setStockdetails(List<Stockdetail> stockdetails) {
+		this.stockdetails = stockdetails;
+	}
+
+	public String getSpname() {
+		return spname;
+	}
+	
+	public String getUser6() {
+		return user6;
+	}
+
+	public void setUser6(String user6) {
+		this.user6 = user6;
+	}
+
+	public String getUser7() {
+		return user7;
+	}
+
+	public void setUser7(String user7) {
+		this.user7 = user7;
+	}
+
+	public String getUser8() {
+		return user8;
+	}
+
+	public void setUser8(String user8) {
+		this.user8 = user8;
+	}
+
+	public String getUser9() {
+		return user9;
+	}
+
+	public void setUser9(String user9) {
+		this.user9 = user9;
+	}
+
+	public void setSpname(String spname) {
+		this.spname = spname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

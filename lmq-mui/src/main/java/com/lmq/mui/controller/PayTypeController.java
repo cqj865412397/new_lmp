@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lmq.domain.Paytype;
+import com.lmq.service.PayTypeService;
 import com.lmq.service.imp.PayTypeServiceImpl;
 
 @RestController
 @RequestMapping("/paytype")
 public class PayTypeController {
 	@Autowired
-	PayTypeServiceImpl ps;
+	PayTypeService ps;
 	
 	@RequestMapping("/queryAll")
 	public List<Paytype> queryAll() {

@@ -55,4 +55,6 @@ public class CustomerController {
 	public Customer queryBalanceById(Integer id) {
 		return customerService.selectByPrimaryKey(id);
 	}
+	
+	
 }

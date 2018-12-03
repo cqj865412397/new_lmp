@@ -1,5 +1,7 @@
 package com.lmq.dao;
 
+import java.util.Map;
+
 import com.lmq.domain.Salesindentdetails;
 
 public interface SalesindentdetailsMapper {
@@ -14,4 +16,5 @@ public interface SalesindentdetailsMapper {
     int updateByPrimaryKeySelective(Salesindentdetails record);
 
     int updateByPrimaryKey(Salesindentdetails record);
+    int adds(Map<String, Object> map);
 }

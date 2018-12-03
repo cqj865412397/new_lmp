@@ -14,41 +14,6 @@ import com.lmq.service.PayTypeService;
 public class PayTypeServiceImpl implements PayTypeService{
 	@Autowired
 	PaytypeMapper pm;
-	@Override
-	public int deleteByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insert(Paytype record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insertSelective(Paytype record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Paytype selectByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateByPrimaryKeySelective(Paytype record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateByPrimaryKey(Paytype record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Paytype> queryAll() {

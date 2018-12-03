@@ -2,6 +2,8 @@ package com.lmq.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Remittance {
     private Integer id;
 
@@ -16,7 +18,8 @@ public class Remittance {
     private Integer async;
 
     private String uid;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String user1;
 
     private String user2;
@@ -26,8 +29,18 @@ public class Remittance {
     private String user4;
 
     private String user5;
+    
+    private String sname;
+    
+    public String getSname() {
+		return sname;
+	}
 
-    public Integer getId() {
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

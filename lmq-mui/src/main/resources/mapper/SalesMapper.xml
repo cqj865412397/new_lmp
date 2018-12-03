@@ -1,223 +1,388 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmq.dao.SalesMapper">
-  <resultMap id="BaseResultMap" type="com.lmq.domain.Sales">
-    <id column="Id" jdbcType="INTEGER" property="id" />
-    <result column="money" jdbcType="DOUBLE" property="money" />
-    <result column="count" jdbcType="INTEGER" property="count" />
-    <result column="Takeinmoney" jdbcType="VARCHAR" property="takeinmoney" />
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="Pid" jdbcType="INTEGER" property="pid" />
-    <result column="Sid" jdbcType="INTEGER" property="sid" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="async" jdbcType="INTEGER" property="async" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="user1" jdbcType="VARCHAR" property="user1" />
-    <result column="user2" jdbcType="VARCHAR" property="user2" />
-    <result column="user3" jdbcType="VARCHAR" property="user3" />
-    <result column="user4" jdbcType="VARCHAR" property="user4" />
-    <result column="user5" jdbcType="VARCHAR" property="user5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Id, money, count, Takeinmoney, cid, Pid, Sid, time, status, async, uid, user1, user2, 
-    user3, user4, user5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sales
-    where Id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sales
-    where Id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Sales">
-    insert into sales (Id, money, count, 
-      Takeinmoney, cid, Pid, 
-      Sid, time, status, 
-      async, uid, user1, 
-      user2, user3, user4, 
-      user5)
-    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{count,jdbcType=INTEGER}, 
-      #{takeinmoney,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
-      #{sid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
-      #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
-      #{user5,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lmq.domain.Sales">
-    insert into sales
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        Id,
-      </if>
-      <if test="money != null">
-        money,
-      </if>
-      <if test="count != null">
-        count,
-      </if>
-      <if test="takeinmoney != null">
-        Takeinmoney,
-      </if>
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="pid != null">
-        Pid,
-      </if>
-      <if test="sid != null">
-        Sid,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="async != null">
-        async,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="user1 != null">
-        user1,
-      </if>
-      <if test="user2 != null">
-        user2,
-      </if>
-      <if test="user3 != null">
-        user3,
-      </if>
-      <if test="user4 != null">
-        user4,
-      </if>
-      <if test="user5 != null">
-        user5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="money != null">
-        #{money,jdbcType=DOUBLE},
-      </if>
-      <if test="count != null">
-        #{count,jdbcType=INTEGER},
-      </if>
-      <if test="takeinmoney != null">
-        #{takeinmoney,jdbcType=VARCHAR},
-      </if>
-      <if test="cid != null">
-        #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="async != null">
-        #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="user1 != null">
-        #{user1,jdbcType=VARCHAR},
-      </if>
-      <if test="user2 != null">
-        #{user2,jdbcType=VARCHAR},
-      </if>
-      <if test="user3 != null">
-        #{user3,jdbcType=VARCHAR},
-      </if>
-      <if test="user4 != null">
-        #{user4,jdbcType=VARCHAR},
-      </if>
-      <if test="user5 != null">
-        #{user5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Sales">
-    update sales
-    <set>
-      <if test="money != null">
-        money = #{money,jdbcType=DOUBLE},
-      </if>
-      <if test="count != null">
-        count = #{count,jdbcType=INTEGER},
-      </if>
-      <if test="takeinmoney != null">
-        Takeinmoney = #{takeinmoney,jdbcType=VARCHAR},
-      </if>
-      <if test="cid != null">
-        cid = #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null">
-        Pid = #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        Sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="async != null">
-        async = #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="user1 != null">
-        user1 = #{user1,jdbcType=VARCHAR},
-      </if>
-      <if test="user2 != null">
-        user2 = #{user2,jdbcType=VARCHAR},
-      </if>
-      <if test="user3 != null">
-        user3 = #{user3,jdbcType=VARCHAR},
-      </if>
-      <if test="user4 != null">
-        user4 = #{user4,jdbcType=VARCHAR},
-      </if>
-      <if test="user5 != null">
-        user5 = #{user5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where Id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Sales">
-    update sales
-    set money = #{money,jdbcType=DOUBLE},
-      count = #{count,jdbcType=INTEGER},
-      Takeinmoney = #{takeinmoney,jdbcType=VARCHAR},
-      cid = #{cid,jdbcType=INTEGER},
-      Pid = #{pid,jdbcType=INTEGER},
-      Sid = #{sid,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR},
-      user1 = #{user1,jdbcType=VARCHAR},
-      user2 = #{user2,jdbcType=VARCHAR},
-      user3 = #{user3,jdbcType=VARCHAR},
-      user4 = #{user4,jdbcType=VARCHAR},
-      user5 = #{user5,jdbcType=VARCHAR}
-    where Id = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.lmq.domain.Sales">
+		<id column="Id" jdbcType="INTEGER" property="id" />
+		<result column="money" jdbcType="DOUBLE" property="money" />
+		<result column="count" jdbcType="INTEGER" property="count" />
+		<result column="Takeinmoney" jdbcType="VARCHAR"
+			property="takeinmoney" />
+		<result column="cid" jdbcType="INTEGER" property="cid" />
+		<result column="Pid" jdbcType="INTEGER" property="pid" />
+		<result column="Sid" jdbcType="INTEGER" property="sid" />
+		<result column="time" jdbcType="TIMESTAMP" property="time" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="async" jdbcType="INTEGER" property="async" />
+		<result column="uid" jdbcType="VARCHAR" property="uid" />
+		<result column="user1" jdbcType="VARCHAR" property="user1" />
+		<result column="user2" jdbcType="VARCHAR" property="user2" />
+		<result column="user3" jdbcType="VARCHAR" property="user3" />
+		<result column="user4" jdbcType="VARCHAR" property="user4" />
+		<result column="user5" jdbcType="VARCHAR" property="user5" />
+		<result column="user6" jdbcType="VARCHAR" property="user6" />
+		<result column="user7" jdbcType="VARCHAR" property="user7" />
+		<result column="user8" jdbcType="VARCHAR" property="user8" />
+		<result column="user9" jdbcType="VARCHAR" property="user9" />
+		<result column="stname" jdbcType="VARCHAR" property="stname" />
+		<result column="pname" jdbcType="VARCHAR" property="pname" />
+		<result column="cname" jdbcType="VARCHAR" property="cname" />
+	</resultMap>
+
+
+	<resultMap type="com.lmq.domain.Sales" id="SSMap"
+		extends="BaseResultMap">
+		<collection property="salesdetails"
+			ofType="com.lmq.domain.Salesdetails" column="id">
+			<result column="sdid" jdbcType="INTEGER" property="id" />
+			<result column="sdmoney" jdbcType="DOUBLE" property="money" />
+			<result column="sdcount" jdbcType="INTEGER" property="count" />
+			<result column="sdTakeinmoney" jdbcType="DOUBLE"
+				property="takeinmoney" />
+			<result column="gid" property="user1" />
+			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
+			<result column="gname" jdbcType="VARCHAR" property="gname" />
+		</collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		Id, money, count, Takeinmoney, cid, Pid, Sid, time, status, async, uid,
+		user1, user2,
+		user3, user4, user5, user6,
+		user7, user8, user9
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sales
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from sales
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lmq.domain.Sales">
+		insert into sales (Id, money, count,
+		Takeinmoney, cid, Pid,
+		Sid, time, status,
+		async, uid, user1,
+		user2, user3, user4,
+		user5, user6, user7, user8, user9)
+		values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE},
+		#{count,jdbcType=INTEGER},
+		#{takeinmoney,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER},
+		#{sid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER},
+		#{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR},
+		#{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR},
+		#{user4,jdbcType=VARCHAR},
+		#{user5,jdbcType=VARCHAR},
+		#{user6,jdbcType=VARCHAR}, #{user7,jdbcType=VARCHAR}, #{user8,jdbcType=VARCHAR},
+		#{user9,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.lmq.domain.Sales" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into sales
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="count != null">
+				count,
+			</if>
+			<if test="takeinmoney != null">
+				Takeinmoney,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="pid != null">
+				Pid,
+			</if>
+			<if test="sid != null">
+				Sid,
+			</if>
+			<if test="time == null">
+				time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="async != null">
+				async,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="user1 != null">
+				user1,
+			</if>
+			<if test="user2 != null">
+				user2,
+			</if>
+			<if test="user3 != null">
+				user3,
+			</if>
+			<if test="user4 != null">
+				user4,
+			</if>
+			<if test="user5 != null">
+				user5,
+			</if>
+			<if test="user6 != null">
+				user6,
+			</if>
+			<if test="user7 != null">
+				user7,
+			</if>
+			<if test="user8 != null">
+				user8,
+			</if>
+			<if test="user9 != null">
+				user9,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=DOUBLE},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=INTEGER},
+			</if>
+			<if test="takeinmoney != null">
+				#{takeinmoney,jdbcType=VARCHAR},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="time == null">
+				now(),
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="async != null">
+				#{async,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="user1 != null">
+				#{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				#{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				#{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				#{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				#{user5,jdbcType=VARCHAR},
+			</if>
+			<if test="user6 != null">
+				#{user6,jdbcType=VARCHAR},
+			</if>
+			<if test="user7 != null">
+				#{user7,jdbcType=VARCHAR},
+			</if>
+			<if test="user8 != null">
+				#{user8,jdbcType=VARCHAR},
+			</if>
+			<if test="user9 != null">
+				#{user9,jdbcType=VARCHAR},
+			</if>
+
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.lmq.domain.Sales">
+		update sales
+		<set>
+			<if test="money != null">
+				money = #{money,jdbcType=DOUBLE},
+			</if>
+			<if test="count != null">
+				count = #{count,jdbcType=INTEGER},
+			</if>
+			<if test="takeinmoney != null">
+				Takeinmoney = #{takeinmoney,jdbcType=VARCHAR},
+			</if>
+			<if test="cid != null">
+				cid = #{cid,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				Pid = #{pid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				Sid = #{sid,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="async != null">
+				async = #{async,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="user1 != null">
+				user1 = #{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				user2 = #{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				user3 = #{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				user4 = #{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				user5 = #{user5,jdbcType=VARCHAR},
+			</if>
+			<if test="user6 != null">
+				user6 = #{user6,jdbcType=VARCHAR},
+			</if>
+			<if test="user7 != null">
+				user7 = #{user7,jdbcType=VARCHAR},
+			</if>
+
+			<if test="user8 != null">
+				user8 = #{user8,jdbcType=VARCHAR},
+			</if>
+			<if test="user9 != null">
+				user9 = #{user9,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.lmq.domain.Sales">
+		update sales
+		set money = #{money,jdbcType=DOUBLE},
+		count = #{count,jdbcType=INTEGER},
+		Takeinmoney = #{takeinmoney,jdbcType=VARCHAR},
+		cid = #{cid,jdbcType=INTEGER},
+		Pid = #{pid,jdbcType=INTEGER},
+		Sid = #{sid,jdbcType=INTEGER},
+		time = #{time,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		async = #{async,jdbcType=INTEGER},
+		uid = #{uid,jdbcType=VARCHAR},
+		user1 = #{user1,jdbcType=VARCHAR},
+		user2 = #{user2,jdbcType=VARCHAR},
+		user3 = #{user3,jdbcType=VARCHAR},
+		user4 = #{user4,jdbcType=VARCHAR},
+		user5 = #{user5,jdbcType=VARCHAR},
+		user6 = #{user6,jdbcType=VARCHAR},
+		user7 = #{user7,jdbcType=VARCHAR},
+		user8 = #{user8,jdbcType=VARCHAR},
+		user9 = #{user9,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getTimeNum" resultType="String">
+		SELECT
+		MAX(RIGHT(`user1`,12))AS maxNub FROM
+		`sales`
+		WHERE `user1` LIKE
+		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
+	</select>
+
+	<select id="queryList" resultMap="BaseResultMap">
+		SELECT s.`Id`,s.`takeinmoney`,s.`status`,st.`name` AS
+		stname,c.`Name`
+		AS cname,s.`user1`,s.`time` AS `time` ,s.`user5`,s.`user4` FROM
+		sales AS s
+		LEFT
+		JOIN `store` AS st
+		ON st.`Id`=s.`Sid`
+		LEFT JOIN
+		`customer` AS c
+		ON
+		c.`Id`=s.`cid`
+		WHERE s.`status`!=1 AND DATE(s.`user4`) BETWEEN
+		#{startTime} AND
+		#{endTime}
+		AND (
+		c.`Name` LIKE
+		CONCAT('%',#{filtrate},'%') OR
+		st.`name`
+		LIKE
+		CONCAT('%',#{filtrate},'%') ) ORDER BY s.`time` DESC
+		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
+			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
+			</if> -->
+	</select>
+
+
+	<select id="queryById" resultMap="SSMap">
+		<!-- SELECT s.`Id` AS id,s.`money` AS money,s.`count` AS `count`,s.`SalesIndentNub` 
+			AS `SalesIndentNub`, s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS 
+			deposi,s.`status` AS `status`, sd.`money` AS sdmoney,sd.`count`AS sdcount,sd.`Takeinmoney` 
+			AS sdTakeinmoney,sd.`status` AS sdstatus, i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` 
+			AS gid, st.`name` AS stname FROM salesindent AS s LEFT JOIN salesindentdetails 
+			AS sd ON s.id=sd.Salesindentid LEFT JOIN img AS i ON sd.gid=i.gid LEFT JOIN 
+			`store` AS st ON st.`Id`=s.`Sid` where s.`Id`=#{id} -->
+		SELECT s.`Id` AS id,s.`takeinmoney` AS
+		takeinmoney,s.`count` AS
+		`count`,s.`user2` AS `user2`,s.`user1` AS `user1`,
+		s.`user3` AS
+		`user3`,s.`time`AS `time`,s.user5,s.`status`
+		AS `status`,
+		sd.`money` AS
+		sdmoney,sd.`count`AS
+		sdcount,sd.`Takeinmoney` AS
+		sdTakeinmoney,sd.`status` AS sdstatus,
+		i.url AS imgurl,sd.`Id` AS
+		sdid,sd.`user1` AS gid,
+		st.`name` AS stname,s.`pid`,p.`Name` AS
+		pname,c.`Name` AS cname,g.`name` AS gname,sd.`id` AS sdid,s.cid
+		FROM
+		sales AS s
+		LEFT
+		JOIN salesdetails AS sd
+		ON
+		s.id=sd.Salesid
+		LEFT JOIN img AS
+		i
+		ON sd.user1=i.gid
+		LEFT JOIN
+		`store` AS st
+		ON st.`Id`=s.`Sid`
+		LEFT JOIN
+		paytype AS p
+		ON s.`pid`=p.`Id`
+		LEFT JOIN
+		`customer` AS c
+		ON c.`Id`=s.`cid`
+		LEFT JOIN
+		`goods` AS g
+		ON g.`Id`=sd.`user1`
+		WHERE s.`Id`=#{id}
+	</select>
+
+	<update id="updateStatusById">
+		update sales set `status`=#{status} where
+		Id=#{id}
+	</update>
 </mapper>

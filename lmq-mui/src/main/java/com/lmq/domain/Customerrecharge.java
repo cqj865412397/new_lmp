@@ -2,9 +2,11 @@ package com.lmq.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Customerrecharge {
     private Integer id;
-
+	
     private Date time;
 
     private Double money;
@@ -16,17 +18,31 @@ public class Customerrecharge {
     private Integer async;
 
     private String uid;
-
+    
+    //创建时间
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String user1;
-
+    //单据号
     private String user2;
-
+    //结算方式
     private String user3;
-
+    //备注
     private String user4;
 
     private String user5;
 
+    public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	private String cname;
+    
+    
+    
     public Integer getId() {
         return id;
     }

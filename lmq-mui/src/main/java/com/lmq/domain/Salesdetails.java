@@ -16,7 +16,7 @@ public class Salesdetails {
     private Integer async;
 
     private String uid;
-
+    //gid 单品id
     private String user1;
 
     private String user2;
@@ -26,8 +26,29 @@ public class Salesdetails {
     private String user4;
 
     private String user5;
+    
+	private String imgurl;
 
-    public Integer getId() {
+	private String gname;
+    
+	
+    public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

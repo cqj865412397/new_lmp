@@ -185,4 +185,20 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="adds"  useGeneratedKeys="true"
+		keyProperty="id">
+	insert into salesdetails(Salesid,count,money,Takeinmoney,async,uid,user1,user2,user3,user4,user5) values
+		<foreach collection="slist" separator=","  item="s">
+			(#{salesid},#{s.count},#{s.money},#{s.takeinmoney},#{s.async},#{s.uid},#{s.user1},#{s.user2},#{s.user3},#{s.user4},#{s.user5})
+		</foreach>
+	</insert>
+	
+	<select id="queryBySalesid" resultMap="BaseResultMap">
+		select * from salesdetails where Salesid=#{Salesid}
+	</select>
+	
+	<update id="updateStatusBySalesid">
+		update salesdetails set status=1 where Salesid=#{Salesid}
+	</update>
 </mapper>

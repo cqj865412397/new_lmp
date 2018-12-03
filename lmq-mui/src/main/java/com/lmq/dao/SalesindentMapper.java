@@ -22,4 +22,7 @@ public interface SalesindentMapper {
     Salesindent queryById(Integer id);
     List<Salesindent> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate);
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
+    String getTimeNum(Integer uid);
+    Salesindent queryBySalesIndentNub(String SalesIndentNub);
+    
 }

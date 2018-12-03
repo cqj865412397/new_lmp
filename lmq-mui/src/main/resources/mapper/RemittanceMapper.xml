@@ -14,6 +14,7 @@
     <result column="user3" jdbcType="VARCHAR" property="user3" />
     <result column="user4" jdbcType="VARCHAR" property="user4" />
     <result column="user5" jdbcType="VARCHAR" property="user5" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
   </resultMap>
   <sql id="Base_Column_List">
     Id, money, Sid, Time, status, async, uid, user1, user2, user3, user4, user5
@@ -40,85 +41,86 @@
       #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lmq.domain.Remittance">
-    insert into remittance
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        Id,
-      </if>
-      <if test="money != null">
-        money,
-      </if>
-      <if test="sid != null">
-        Sid,
-      </if>
-      <if test="time != null">
-        Time,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="async != null">
-        async,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="user1 != null">
-        user1,
-      </if>
-      <if test="user2 != null">
-        user2,
-      </if>
-      <if test="user3 != null">
-        user3,
-      </if>
-      <if test="user4 != null">
-        user4,
-      </if>
-      <if test="user5 != null">
-        user5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="money != null">
-        #{money,jdbcType=DOUBLE},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="async != null">
-        #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="user1 != null">
-        #{user1,jdbcType=VARCHAR},
-      </if>
-      <if test="user2 != null">
-        #{user2,jdbcType=VARCHAR},
-      </if>
-      <if test="user3 != null">
-        #{user3,jdbcType=VARCHAR},
-      </if>
-      <if test="user4 != null">
-        #{user4,jdbcType=VARCHAR},
-      </if>
-      <if test="user5 != null">
-        #{user5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+  <insert id="insertSelective"
+		parameterType="com.lmq.domain.Remittance">
+		insert into remittance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="time == null">
+				Time,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="sid != null">
+				Sid,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="async != null">
+				async,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="user1 != null">
+				user1,
+			</if>
+			<if test="user2 != null">
+				user2,
+			</if>
+			<if test="user3 != null">
+				user3,
+			</if>
+			<if test="user4 != null">
+				user4,
+			</if>
+			<if test="user5 != null">
+				user5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="time == null">
+				now(),
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=DOUBLE},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="async != null">
+				#{async,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="user1 != null">
+				#{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				#{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				#{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				#{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				#{user5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Remittance">
     update remittance
     <set>
@@ -173,4 +175,37 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getTimeNum" resultType="String">
+		SELECT
+		MAX(RIGHT(`user2`,12))AS maxNub FROM
+		`remittance`
+		WHERE `user2`
+		LIKE
+		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
+	</select>
+
+	<select id="queryList" resultMap="BaseResultMap">
+		SELECT r.`Id`,r.`user2`,r.`money`,s.`Name` AS sname,r.`user1` FROM
+		`remittance` r INNER JOIN `supplier` s ON r.sid=s.id
+		WHERE
+		r.`status`!=1 AND DATE(r.`user1`) BETWEEN
+		#{startTime} AND
+		#{endTime}
+		AND
+		(
+		r.`user2` LIKE
+		CONCAT('%',#{filtrate},'%') OR
+		s.`name`
+		LIKE
+		CONCAT('%',#{filtrate},'%') ) ORDER BY r.`time` DESC
+		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
+			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
+			</if> -->
+	</select>
+	
+	<update id="updateStatusById">
+		update remittance set `status`=#{status} where
+		Id=#{id}
+	</update>
 </mapper>
