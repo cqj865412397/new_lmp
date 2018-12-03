@@ -1,8 +1,18 @@
 package com.lmq.dao;
 
+import java.util.List;
+
 import com.lmq.domain.Goodstype;
 
 public interface GoodstypeMapper {
+	// 用于查询类别
+	public List<Goodstype> queryTypeByParentId(Integer parentId);
+	
+	//查询所有父类id（包含本类id）
+	public List<Goodstype> queryAllParentIdByTid(Integer tId);
+	/**
+	 * 自动生成的方法
+	 */
     int deleteByPrimaryKey(Integer id);
 
     int insert(Goodstype record);

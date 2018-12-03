@@ -32,7 +32,7 @@
     delete from stock
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Stock">
+  <insert id="insert" parameterType="com.lmq.domain.Stock" useGeneratedKeys="true" keyProperty="id">
     insert into stock (Id, Code, Allprice, 
       Allcount, Time, Sid, 
       Supid, status, async, 
@@ -40,7 +40,7 @@
       user3, user4, user5
       )
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{allprice,jdbcType=DOUBLE}, 
-      #{allcount,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, 
+      #{allcount,jdbcType=INTEGER}, NOW(), #{sid,jdbcType=INTEGER}, 
       #{supid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, 
       #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
       #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
@@ -209,4 +209,17 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+	  <!-- 批量删除 -->
+	<delete id="deleteByIds">
+		DELETE FROM `stock`
+		WHERE `stock`.`status` = 0 AND `stock`.`Id` IN
+		(
+		<foreach collection="list" separator="," item="l">
+			#{l}
+		</foreach>
+		)
+	</delete>  
+  
+  
 </mapper>

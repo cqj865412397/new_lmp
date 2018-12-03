@@ -1,8 +1,18 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Goodstype {
+	//========自定义=============
+	
+	//子类集合
+	List<Goodstype> gtList;
+	
+	//========自定义end===========
+	
+	
+	
     private Integer id;
 
     private String name;
@@ -27,7 +37,16 @@ public class Goodstype {
 
     private String user5;
 
-    public Integer getId() {
+    
+    public List<Goodstype> getGtList() {
+		return gtList;
+	}
+
+	public void setGtList(List<Goodstype> gtList) {
+		this.gtList = gtList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

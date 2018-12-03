@@ -29,14 +29,14 @@
     delete from standardinstance
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Standardinstance">
+  <insert id="insert" parameterType="com.lmq.domain.Standardinstance" useGeneratedKeys="true" keyProperty="id">
     insert into standardinstance (Id, Name, sid, 
       Gid, time, status, 
       async, uid, user1, 
       user2, user3, user4, 
       user5)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
-      #{gid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{gid,jdbcType=INTEGER}, NOW(), #{status,jdbcType=INTEGER}, 
       #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
       #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
       #{user5,jdbcType=VARCHAR})
@@ -184,4 +184,41 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 查询非自定义规格值 -->
+  <select id="querystandardInstanceBySid" resultType="com.lmq.domain.Standardinstance">
+  		SELECT * FROM `standardinstance`
+		WHERE `standardinstance`.`status` = 0 
+		AND `standardinstance`.`sid` = #{sId} 
+		AND `standardinstance`.`Gid` = -1
+  </select>
+  <!-- 查询当前规格下全部规格值 -->
+  <select id="queryAllStandardInstanceBySid" resultType="com.lmq.domain.Standardinstance">
+  		SELECT * FROM `standardinstance`
+		WHERE `standardinstance`.`status` = 0 
+		AND `standardinstance`.`sid` = #{sId}
+		AND `Gid` in (-1,#{gId}) 
+  </select>
+  
+  <!-- 删除自定义规格值 -->
+  <delete id="deleteByGid">
+  		DELETE FROM `standardinstance`
+		WHERE  `standardinstance`.`status` AND`standardinstance`.`Gid` = #{gId}
+  </delete>
+  
+  <!-- 自定义规格值和对应的规格 -->
+  <select id="queryStandardListByGid" resultMap="selfstandard">
+  		SELECT `standardinstance`.*,`standard`.`Name` AS standardName,`standard`.`Id`AS standardId 
+  		,`standard`.`Gid` AS standardGid
+  		FROM `standardinstance`
+		LEFT JOIN `standard` ON `standard`.id = `standardinstance`.`sid`
+		WHERE standardinstance.`status` = 0 AND  `standard`.`status` = 0
+		AND `standardinstance`.`Gid` = #{gId}
+  </select>
+  <resultMap type="com.lmq.domain.Standardinstance" id="selfstandard" extends="BaseResultMap">
+  		<result column="standardName" property="standardName"/>
+  		<result column="standardId" property="standardId"/>
+  		<result column="standardGid" property="standardGid"/>
+  </resultMap>
+  
 </mapper>

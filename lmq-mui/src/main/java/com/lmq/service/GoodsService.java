@@ -1,26 +1,28 @@
-package com.lmq.dao;
+package com.lmq.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.lmq.domain.Goods;
-public interface GoodsMapper {
+import com.lmq.domain.GoodsVo;
+
+public interface GoodsService {
 	
-	// 用于查询主页的方法
-	public List<Goods> queryGoodsList(@Param("Sid")Integer Sid,@Param("goodsName")String goodsName);
+	//查询商品列表
+	public List<Goods> queryGoodsList(Integer Sid,String goodsName);
 	//查询商品详情
 	public Goods queryGoodsInfoByGid(Integer gId);
+	//修改商品
+	public Integer updateGoods(GoodsVo goodsVo,Integer gId);
 	//查询商品（in goodsid）
 	public List<Goods> queryGoodsListByGoodsIds(Integer[] goodsIds);
 	/**
-	 * 自动生成的方法
+	 * 自动生成方法
 	 */
-    int deleteByPrimaryKey(Integer id);
-	//新增商品
-	public Integer insert(Goods goods);
-	
+	int deleteByPrimaryKey(Integer id);
+	//添加商品
+    int insert(GoodsVo goodsVo);
+
     int insertSelective(Goods record);
 
     Goods selectByPrimaryKey(Integer id);

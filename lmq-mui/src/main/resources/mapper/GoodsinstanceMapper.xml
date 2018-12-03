@@ -32,7 +32,7 @@
     delete from goodsinstance
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Goodsinstance">
+  <insert id="insert" parameterType="com.lmq.domain.Goodsinstance" useGeneratedKeys="true" keyProperty="id">
     insert into goodsinstance (Id, ids, Gid, 
       Ecode, Qcode, time, 
       status, async, uid, 
@@ -40,7 +40,7 @@
       user3, user4, user5
       )
     values (#{id,jdbcType=INTEGER}, #{ids,jdbcType=VARCHAR}, #{gid,jdbcType=INTEGER}, 
-      #{ecode,jdbcType=VARCHAR}, #{qcode,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{ecode,jdbcType=VARCHAR}, #{qcode,jdbcType=VARCHAR}, NOW(), 
       #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
       #{defaultstate,jdbcType=INTEGER}, #{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR}, 
       #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}
@@ -209,4 +209,73 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义 -->
+  <select id="queryGoodsinstanceInfoByGid" resultMap="GoodsInstanceInfo">
+  	SELECT goodsinstance.Id,goodsinstance.ids,goodsinstance.`Qcode`,goodsinstance.`Ecode`,GROUP_CONCAT(standardinstance.`Name`)AS standardName 
+	,goodsinstance.`Ecode`,goodsinstance.`Qcode`
+	FROM goodsinstance 
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+	WHERE goodsinstance.`status` = 0 AND standardinstance.`status` = 0
+	AND goodsinstance.`Gid` = #{gId}
+	GROUP BY goodsinstance.`Id`
+	ORDER BY goodsinstance.`ids` ASC
+  </select>
+  <resultMap type="com.lmq.domain.Goodsinstance" id="GoodsInstanceInfo" extends="BaseResultMap">
+		<result property="standardName" column="standardName"/>
+		<association property="basePrice" column="id" select="com.lmq.dao.StockdetailMapper.queryInitPrice" ></association>
+		<association property="totalCount" column="id" select="com.lmq.dao.StockdetailMapper.queryTotalCountByGoodsInstanceId"></association>
+		<collection property="priceList" column="id" ofType="com.lmq.domain.Goodsinstanceprice" select="com.lmq.dao.GoodsinstancepriceMapper.queryPriceListByGid"></collection>
+  </resultMap>
+  <select id="queryOneGoodsInstanceByGid" resultType="com.lmq.domain.Goodsinstance">
+  	SELECT * FROM `goodsinstance`
+	WHERE `status` = 0 AND Gid = #{gId} AND DefaultState = 1
+  </select>
+  
+  <delete id="deleteByGid">
+  		DELETE FROM `goodsinstance` WHERE `Gid` = #{gId}	
+  </delete>
+  
+  <!-- 打印查询 -->
+	<select id="queryGoodsInstanceInfoByGid" resultType="com.lmq.domain.Goodsinstance">
+		SELECT goodsinstance.Id,goodsinstance.ids,goodsinstance.`Qcode`,goodsinstance.`Ecode`,GROUP_CONCAT(standardinstance.`Name`)AS standardName,
+		`pricetype`.`Name`AS defPriceName,`pricetype`.`Agio`,goodsinstanceprice.`price` AS defPrice,
+		(goodsinstanceprice.`price`/`pricetype`.`Agio`*10)AS costPrice
+		FROM goodsinstance 
+		LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+		INNER JOIN `goodsinstanceprice` ON `goodsinstanceprice`.`goodsinstanceid` = goodsinstance.`Id`
+		INNER JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
+		WHERE goodsinstance.`status` = 0 AND(standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND `goodsinstanceprice`.`status` = 0
+		AND pricetype.`DefaultPrice` = 1 AND goodsinstance.`Gid` = #{gId}
+		GROUP BY goodsinstance.`Id`#必须要
+	</select>
+  
+  
+  
+  
+  <select id="quertyGoodsInstanceIdsByGid" resultType="Integer">
+  		SELECT goodsinstance.`Id` FROM `goodsinstance`
+		WHERE `status` = 0 AND Gid = #{gId}
+  </select>
+  <!-- 查询单品价格   报价>客户类型价格>默认价格   -->
+  <select id="queryGoodsInstanceVoList" resultType="com.lmq.domain.GoodsInstanceVo">
+  	SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
+	,goodsinstanceprice.`price`,pricetype.`Name`AS priceName,q.`monye` AS money,`pricetype`.`DefaultPrice`,`goodsinstanceprice`.`Ptype`
+	,goods.`name`AS goodsName,i.url,`bit`.`Name` AS bitName
+	FROM goodsinstance
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+	LEFT JOIN `goodsinstanceprice` ON `goodsinstanceprice`.`goodsinstanceid` = goodsinstance.`Id`
+	INNER JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
+	LEFT JOIN (
+		SELECT * FROM `quote` WHERE `quote`.`status` = 0 AND `quote`.`cid` = #{cId}
+	) AS q ON q.`gid` = goodsinstance.`Id`
+	INNER JOIN `goods` ON `goods`.id = goodsinstance.`Gid`
+	INNER JOIN `bit` ON `bit`.`Id` = `goods`.`Bid`
+	INNER JOIN (SELECT * FROM `img` WHERE `img`.`status` = 0 GROUP BY `img`.`Id`)AS i ON i.Gid = goods.`Id`
+	WHERE goodsinstance.`status` = 0 AND (standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND goodsinstanceprice.`status` = 0
+	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
+	AND (standardinstance.`Name` LIKE CONCAT('%',#{gName},'%') OR goods.`name` LIKE CONCAT('%',#{gName},'%'))
+	GROUP BY `goodsinstanceprice`.`Id`
+  </select>
+  
 </mapper>

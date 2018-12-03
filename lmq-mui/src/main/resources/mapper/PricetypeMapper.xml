@@ -209,4 +209,14 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <select id="queryPriceTypeBySid" resultType="com.lmq.domain.Pricetype">
+  	SELECT * FROM `pricetype`
+	WHERE `status` = 0 AND Sid = #{sId}
+	ORDER BY TIME 
+  </select>
 </mapper>
