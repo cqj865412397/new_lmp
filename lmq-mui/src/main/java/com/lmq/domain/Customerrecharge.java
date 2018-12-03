@@ -30,8 +30,21 @@ public class Customerrecharge {
     private String user4;
 
     private String user5;
+    
+    //支付名称
+    private String pname;
+    //客户名称
+    private String cname;
+    
+    public String getPname() {
+		return pname;
+	}
 
-    public String getCname() {
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getCname() {
 		return cname;
 	}
 
@@ -39,7 +52,6 @@ public class Customerrecharge {
 		this.cname = cname;
 	}
 
-	private String cname;
     
     
     

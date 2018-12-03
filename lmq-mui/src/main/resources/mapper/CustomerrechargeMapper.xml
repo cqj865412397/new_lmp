@@ -16,6 +16,7 @@
 		<result column="user4" jdbcType="VARCHAR" property="user4" />
 		<result column="user5" jdbcType="VARCHAR" property="user5" />
 		<result column="cname" jdbcType="VARCHAR" property="cname" />
+		<result column="pname" jdbcType="VARCHAR" property="pname" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		Id, Time, money, cid, status, async, uid, user1, user2,
@@ -231,6 +232,7 @@
 	</update>
 	
 	<select id="queryInfoById" resultMap="BaseResultMap" >
-		SELECT cc.*,c.`Name` as cname FROM customerrecharge cc INNER JOIN customer c ON cc.`cid`=c.`Id` AND cc.`Id`=#{id}
+		SELECT cc.*,c.`Name` as cname,p.Name AS pname FROM customerrecharge cc INNER JOIN customer c ON cc.`cid`=c.`Id` AND cc.`Id`=#{id}
+		INNER JOIN paytype p ON cc.`user3`=p.`Id`
 	</select>
 </mapper>

@@ -69,5 +69,11 @@ public class RemittanceServiceImpl implements RemittanceService{
 		return 0;
 	}
 
+	@Override
+	public Remittance queryInfoById(Integer id) {
+		// TODO Auto-generated method stub
+		return rm.queryInfoById(id);
+	}
+
 	
 }

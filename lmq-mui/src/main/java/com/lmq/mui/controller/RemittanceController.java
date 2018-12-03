@@ -49,4 +49,10 @@ public class RemittanceController {
 				public int updateStatusByIdToDelete(Integer id) {
 					return rs.updateStatusById(id, 1);
 				}
+				
+				@RequestMapping("/queryById")
+				//通过id查询出单据信息
+				public Remittance queryById(Integer id) {
+					return rs.queryInfoById(id);
+				}
 }

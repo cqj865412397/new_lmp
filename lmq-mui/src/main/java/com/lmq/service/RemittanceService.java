@@ -14,5 +14,5 @@ public interface RemittanceService {
     List<Remittance> queryList(String startTime,String endTime,String filtrate);
     
     int updateStatusById(Integer id,Integer status);
-
+    Remittance queryInfoById(Integer id);
 }

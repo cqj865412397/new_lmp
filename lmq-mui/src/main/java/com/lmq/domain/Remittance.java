@@ -32,7 +32,17 @@ public class Remittance {
     
     private String sname;
     
-    public String getSname() {
+    private String pname;
+    
+    public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getSname() {
 		return sname;
 	}
 

@@ -25,4 +25,5 @@ public interface RemittanceMapper {
 			@Param("filtrate") String filtrate);
 	
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
+    Remittance queryInfoById(Integer id);
 }

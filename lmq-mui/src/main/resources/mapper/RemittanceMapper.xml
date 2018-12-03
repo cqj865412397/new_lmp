@@ -15,6 +15,7 @@
     <result column="user4" jdbcType="VARCHAR" property="user4" />
     <result column="user5" jdbcType="VARCHAR" property="user5" />
     <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
   </resultMap>
   <sql id="Base_Column_List">
     Id, money, Sid, Time, status, async, uid, user1, user2, user3, user4, user5
@@ -208,4 +209,10 @@
 		update remittance set `status`=#{status} where
 		Id=#{id}
 	</update>
+	
+	<select id="queryInfoById" resultMap="BaseResultMap" >
+
+		SELECT re.*,s.`Name`AS sname ,p.Name AS pname FROM remittance re 
+		INNER JOIN `supplier` s ON re.`Sid`=s.`Id` AND re.`Id`=#{id} INNER JOIN paytype p ON re.`user3`=p.`Id`
+	</select>
 </mapper>
