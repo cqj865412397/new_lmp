@@ -16,7 +16,6 @@ public class Supplier {
     private String province;
 
     private String city;
-
     private String district;
 
     private String addres;
@@ -44,8 +43,51 @@ public class Supplier {
     private String user4;
 
     private String user5;
+	/**
+	 * 联系人
+	 */
+	private String contacts;
+    public String getContacts() {
+		return contacts;
+	}
+    /**
+	 *名字拼英 缩写
+	 */
+	private String acronymname;
+	/**
+	 * 名字全拼
+	 */
+	private String englishname;
+	public String getAcronymname() {
+		return acronymname;
+	}
 
-    public Integer getId() {
+	public void setAcronymname(String acronymname) {
+		this.acronymname = acronymname;
+	}
+
+	public String getEnglishname() {
+		return englishname;
+	}
+
+	public void setEnglishname(String englishname) {
+		this.englishname = englishname;
+	}
+
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+
+	private Supplierlevel obj;
+    public Supplierlevel getObj() {
+		return obj;
+	}
+    
+	public void setObj(Supplierlevel obj) {
+		this.obj = obj;
+	}
+
+	public Integer getId() {
         return id;
     }
 
