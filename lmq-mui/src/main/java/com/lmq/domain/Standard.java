@@ -1,6 +1,7 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Standard {
     private Integer id;
@@ -28,8 +29,17 @@ public class Standard {
     private String user4;
 
     private String user5;
+ // 商品属性值
+    private List<Standardinstance> list;
+    public List<Standardinstance> getList() {
+		return list;
+	}
 
-    public Integer getId() {
+	public void setList(List<Standardinstance> list) {
+		this.list = list;
+	}
+
+	public Integer getId() {
         return id;
     }
 

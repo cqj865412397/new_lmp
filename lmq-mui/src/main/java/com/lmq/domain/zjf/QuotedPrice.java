@@ -25,8 +25,8 @@ public class QuotedPrice {
 	private Double price;
 	// 商品属性名
 	private List<Standard> standardlist;
-	// 商品属性值
-	private List<Standardinstance> list;
+	
+	
 
 	public String getGname() {
 		return gname;
@@ -66,13 +66,5 @@ public class QuotedPrice {
 
 	public void setStandardlist(List<Standard> standardlist) {
 		this.standardlist = standardlist;
-	}
-
-	public List<Standardinstance> getList() {
-		return list;
-	}
-
-	public void setList(List<Standardinstance> list) {
-		this.list = list;
 	}
 }

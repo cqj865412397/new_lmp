@@ -2,26 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmq.dao.QuotedPriceMapper">
 	<resultMap type="com.lmq.domain.zjf.QuotedPrice" id="BaseData">
-		<id column="gname" property="gname"/>
-		<result column="id" property="id"/>
+		<id column="id" property="id"/>
+		<result column="gname" property="gname"/>
 		<result column="name" property="name"/>
 		<result column="url" property="url"/>
+		<result column="price" property="price"/>
 		<collection property="standardlist" ofType="com.lmq.domain.Standard">
 			<result property="name" column="sname"/>
-		</collection>
-		<!-- <collection property="list" ofType="com.lmq.domain.Standardinstance">
+			<collection property="list" ofType="com.lmq.domain.Standardinstance">
 			<result property="name" column="val"/>
-		</collection> -->
+			</collection>
+		</collection>
+		
 	</resultMap>
-	<select id="queryBySidAll" resultMap="BaseData">
+	<resultMap type="com.lmq.domain.QuotedPriceClass" id="ResultMapQuotedPriceClass">
+		<id column="id" property="id" />
+		<result column="acronymname" property="acronymname" />
+		<collection property="list" column="{id=id,acronymname=acronymname}"
+			ofType="com.lmq.domain.QuotedPrice" select="queryGroupByAcronymnam">
+		</collection>
+	</resultMap>
+	<select id="queryBySidAll" resultMap="ResultMapQuotedPriceClass">
+	SELECT DISTINCT c.`acronymname`,c.sid as id FROM customer c
+	INNER JOIN `quote` q ON c.id=q.`cid` WHERE c.sid=#{sid}
+	</select>
+	<select id="queryGroupByAcronymnam" resultMap="BaseData">
 		SELECT
-		q.id,c.`Name`,goods.`name` AS gname,q.monye AS price,s2.`Name` AS
+		q.id,c.`Name`,img.url,goods.`name` AS gname,q.monye AS price,s2.`Name` AS
 		sname,s1.`Name` AS val FROM `quote` q
 		INNER JOIN customer c ON c.id=q.`cid` 
-		INNER JOIN goodsinstance g ON g.`Id`=q.`gid` 
+		INNER JOIN goodsinstance g ON g.`Id`=q.`gid`
+		INNER JOIN img ON img.`Gid`=g.`Id` AND img.imgtype!=1	 
 		INNER JOIN goods ON goods.`Id`=g.`Gid` 
 		LEFT JOIN standardinstance s1 ON FIND_IN_SET(s1.`Id`,g.`ids`) 
 		INNER JOIN standard s2 ON s2.`Id`=s1.`sid` 
-		WHERE c.`Sid`=#{sid}
+		WHERE c.`Sid`=#{id} and acronymname=#{acronymname}
 	</select>
 </mapper>

@@ -33,28 +33,37 @@
 			property="contactsname" />
 	</resultMap>
 
-	<resultMap type="com.lmq.domain.Classify" id="ResultMapClassify">
+	<resultMap type="com.lmq.domain.Classify"
+		id="ResultMapClassify">
 		<id column="acronymname" property="acronymname" />
 		<result column="id" property="id" />
-		<collection property="list" column="{id=id,acronymname=acronymname}"
+		<collection property="list"
+			column="{id=id,acronymname=acronymname}"
 			ofType="com.lmq.domain.Customer" select="queryGroupByAcronymname1">
 		</collection>
 	</resultMap>
 
 	<select id="queryGroupByAcronymname"
 		resultMap="ResultMapClassify">
-		SELECT DISTINCT c.`acronymname`,c.sid as id FROM customer c where sid=#{sid}
+		SELECT DISTINCT c.`acronymname`,c.sid as id FROM customer c
+		where sid=#{sid}
 	</select>
 
 	<select id="queryGroupByAcronymname1" resultMap="BaseResultMap">
-		SELECT * FROM customer
+		SELECT * FROM
+		customer
 		WHERE Sid=#{id} AND acronymname=#{acronymname}
 	</select>
-
+	<!--根据客户ID查询客户类型ID -->
+	<select id="queryByIdResultPid" resultType="int">
+		SELECT pid FROM customer WHERE id=#{id}
+	</select>
 	<sql id="Base_Column_List">
-		Id, Name, Sid, Lid, Phone, Province, City, District, Addres, Balance,
+		Id, Name, Sid, Lid, Phone, Province, City, District,
+		Addres, Balance,
 		freezemoney,
-		Remark, Code, Core, time, status, async, uid, user1, user2, user3, user4,
+		Remark, Code, Core, time, status, async,
+		uid, user1, user2, user3, user4,
 		user5
 	</sql>
 	<select id="selectByPrimaryKey"
@@ -69,24 +78,34 @@
 		where Id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.lmq.domain.Customer">
-		insert into customer (Id, Name, Sid,
+		insert into customer (Id,
+		Name, Sid,
 		Lid, Phone, Province,
 		City, District, Addres,
-		Balance, freezemoney, Remark,
+		Balance,
+		freezemoney, Remark,
 		Code, Core, time,
 		status, async, uid,
-		user1, user2, user3,
+		user1, user2,
+		user3,
 		user4, user5)
-		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
 		#{sid,jdbcType=INTEGER},
-		#{lid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
-		#{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+		#{lid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{district,jdbcType=VARCHAR},
 		#{addres,jdbcType=VARCHAR},
-		#{balance,jdbcType=DOUBLE}, #{freezemoney,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR},
-		#{code,jdbcType=VARCHAR}, #{core,jdbcType=DOUBLE},
+		#{balance,jdbcType=DOUBLE}, #{freezemoney,jdbcType=DOUBLE},
+		#{remark,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{core,jdbcType=DOUBLE},
 		#{time,jdbcType=TIMESTAMP},
-		#{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
-		#{user1,jdbcType=VARCHAR}, #{user2,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER},
+		#{uid,jdbcType=VARCHAR},
+		#{user1,jdbcType=VARCHAR},
+		#{user2,jdbcType=VARCHAR},
 		#{user3,jdbcType=VARCHAR},
 		#{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR})
 	</insert>
@@ -313,34 +332,45 @@
 		parameterType="com.lmq.domain.Customer">
 		update customer
 		set Name = #{name,jdbcType=VARCHAR},
-		Sid = #{sid,jdbcType=INTEGER},
+		Sid =
+		#{sid,jdbcType=INTEGER},
 		Lid = #{lid,jdbcType=INTEGER},
-		Phone = #{phone,jdbcType=VARCHAR},
+		Phone =
+		#{phone,jdbcType=VARCHAR},
 		Province = #{province,jdbcType=VARCHAR},
 		City = #{city,jdbcType=VARCHAR},
-		District = #{district,jdbcType=VARCHAR},
+		District =
+		#{district,jdbcType=VARCHAR},
 		Addres = #{addres,jdbcType=VARCHAR},
 		Balance = #{balance,jdbcType=DOUBLE},
-		freezemoney = #{freezemoney,jdbcType=DOUBLE},
+		freezemoney =
+		#{freezemoney,jdbcType=DOUBLE},
 		Remark = #{remark,jdbcType=VARCHAR},
 		Code = #{code,jdbcType=VARCHAR},
 		Core = #{core,jdbcType=DOUBLE},
-		time = #{time,jdbcType=TIMESTAMP},
+		time =
+		#{time,jdbcType=TIMESTAMP},
 		status = #{status,jdbcType=INTEGER},
-		async = #{async,jdbcType=INTEGER},
+		async =
+		#{async,jdbcType=INTEGER},
 		uid = #{uid,jdbcType=VARCHAR},
 		contactsname=#{contactsname,jdbcType=VARCHAR},
 		acronymname=#{acronymname,jdbcType=VARCHAR},
 		englishname=#{englishname,jdbcType=VARCHAR},
-		user4 = #{user4,jdbcType=VARCHAR},
+		user4 =
+		#{user4,jdbcType=VARCHAR},
 		user5 = #{user5,jdbcType=VARCHAR}
-		where Id = #{id,jdbcType=INTEGER}
+		where Id =
+		#{id,jdbcType=INTEGER}
 	</update>
 
-  <update id="updateBalanceById" parameterType="com.lmq.domain.Customer">
-  update customer set Balance=Balance-#{balance,jdbcType=DOUBLE} where Id = #{id,jdbcType=INTEGER};
-  </update>
-  <select id="queryBalanceById" parameterType="com.lmq.domain.Customer">
-  	select * from customer where id=#{id}
-  </select>
+	<update id="updateBalanceById"
+		parameterType="com.lmq.domain.Customer">
+		update customer set Balance=Balance-#{balance,jdbcType=DOUBLE} where Id =
+		#{id,jdbcType=INTEGER};
+	</update>
+	<select id="queryBalanceById"
+		parameterType="com.lmq.domain.Customer">
+		select * from customer where id=#{id}
+	</select>
 </mapper>

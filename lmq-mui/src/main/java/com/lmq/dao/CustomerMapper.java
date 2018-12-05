@@ -36,12 +36,13 @@ public interface CustomerMapper {
     /*<!-- 根据门店查询出客户消费的总金额和客户信息 -->*/
     List<Classify> queryGroupByAcronymname(Integer sid);
     
-    
+    //根据用户的id查询到类型
+    int queryByIdResultPid(Integer id);
     
     int updateBalanceById(Customer record);
     
     Customer queryBalanceById(Integer id);
     
     String getTimeNum(Integer uid);
-
+    
 }
