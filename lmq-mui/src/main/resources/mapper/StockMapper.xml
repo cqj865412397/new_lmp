@@ -58,7 +58,7 @@
 		#{code,jdbcType=VARCHAR},
 		#{allprice,jdbcType=DOUBLE},
 		#{allcount,jdbcType=INTEGER},
-		#{time,jdbcType=TIMESTAMP},
+		  NOW(),
 		#{sid,jdbcType=INTEGER},
 		#{supid,jdbcType=INTEGER},
 		#{status,jdbcType=INTEGER},
@@ -318,4 +318,16 @@
 		WHERE `Code` LIKE
 		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
 	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds">
+		DELETE FROM `stock`
+		WHERE `stock`.`status` = 0 AND `stock`.`Id` IN
+		(
+		<foreach collection="list" separator="," item="l">
+			#{l}
+		</foreach>
+		)
+	</delete>  
+	
 </mapper>

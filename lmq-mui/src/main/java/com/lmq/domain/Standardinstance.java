@@ -3,6 +3,14 @@ package com.lmq.domain;
 import java.util.Date;
 
 public class Standardinstance {
+	
+	//规格名称
+	String standardName;
+	//规格id
+	Integer standardId;
+	//规格Gid
+	Integer standardGid;
+	
     private Integer id;
 
     private String name;
@@ -29,11 +37,43 @@ public class Standardinstance {
 
     private String user5;
 
-    public Integer getId() {
+    
+    public Integer getStandardGid() {
+		return standardGid;
+	}
+
+
+	public void setStandardGid(Integer standardGid) {
+		this.standardGid = standardGid;
+	}
+
+
+	public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    
+    public String getStandardName() {
+		return standardName;
+	}
+
+
+	public void setStandardName(String standardName) {
+		this.standardName = standardName;
+	}
+
+
+	public Integer getStandardId() {
+		return standardId;
+	}
+
+
+	public void setStandardId(Integer standardId) {
+		this.standardId = standardId;
+	}
+
+
+	public void setId(Integer id) {
         this.id = id;
     }
 

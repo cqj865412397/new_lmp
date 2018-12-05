@@ -41,7 +41,7 @@
     delete from goods
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Goods">
+  <insert id="insert" parameterType="com.lmq.domain.Goods" useGeneratedKeys="true" keyProperty="id">
     insert into goods (Id, name, Tid, 
       Bid, time, Code, 
       Codeprev, Sid, status, 
@@ -49,7 +49,7 @@
       user2, user3, user4, 
       user5, Detail)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
-      #{bid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{bid,jdbcType=INTEGER}, NOW(), #{code,jdbcType=VARCHAR}, 
       #{codeprev,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
       #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
@@ -257,4 +257,59 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+    <!-- 自定义 -->
+    <!-- 主页查询 -->
+    <select id="queryGoodsList" resultMap="goodsAndPriceListAndStock">
+    	SELECT goods.`name`,goodsinstance.*,goodsinstanceprice.*,`pricetype`.`Name` AS pName,`bit`.`Name` AS bitName,imgR.url,SUM(stockdetail.`count`-stockdetail.`scount`)AS totalCount FROM `goods` 
+		INNER JOIN `goodsinstance` ON `goods`.`Id` = `goodsinstance`.gid 
+		INNER JOIN `goodsinstanceprice` ON `goodsinstanceprice`.goodsinstanceid = `goodsinstance`.id
+		INNER JOIN stockdetail ON stockdetail.`Goodsinstanceid` = goodsinstance.`Id`
+		INNER JOIN `bit` ON `bit`.`Id` = `goods`.`Bid`
+		INNER JOIN (SELECT Gid,url FROM goods INNER JOIN img ON img.`Gid` = goods.`Id` WHERE img.`status`=0 GROUP BY Gid ) AS imgR ON imgR.`Gid` = goods.`Id`
+		LEFT JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
+		WHERE goodsinstance.`DefaultState` = 1
+		AND goods.`status` = 0 AND goodsinstance.`status` = 0 AND goodsinstanceprice.`status` = 0 AND `stockdetail`.`status` = 0 AND `bit`.`status` = 0  AND `pricetype`.`status` = 0
+		OR ISNULL(`pricetype`.`status`) = TRUE #特殊情况一口价
+		AND goods.`Sid` = #{Sid}
+		AND goods.`name` LIKE CONCAT('%',#{goodsName},'%')
+		GROUP BY goodsinstance.`Id`,goodsinstanceprice.`Ptype`
+		ORDER BY goods.`time`DESC
+    </select>
+    <resultMap type="com.lmq.domain.Goods" id="goodsAndPriceListAndStock" extends="BaseResultMap">
+    	<result property="totalCount"  column="totalCount" />
+    	<result property="ptype"  column="ptype" />
+    	<result property="price"  column="price" />
+    	<result property="bitName" column="bitName"/>
+    	<result property="url" column="url"/>
+    	<result property="Gid" column="Gid"/>
+    </resultMap>
+    <!-- 商品详情查询 -->
+   	<select id="queryGoodsInfoByGid" resultMap="GoodsInfo" >
+   		SELECT goods.*,`bit`.`Name`AS bitName,goodstype.`Name`AS tName,img.`url`AS imgUrl FROM goods
+		INNER JOIN `bit` ON `bit`.`Id` = `goods`.`Bid`
+		INNER JOIN goodstype ON goodstype.id = goods.`Tid`
+		INNER JOIN img ON img.`Gid` = goods.`Id`
+		WHERE goods.`status` = 0 AND `bit`.`status` = 0 AND goodstype.`status` = 0 AND img.`status` = 0
+		AND goods.`Id` = #{gId}
+		LIMIT 0,1
+   	</select>
+   	<resultMap type="com.lmq.domain.Goods" id="GoodsInfo" extends="BaseResultMap">
+   		<result property="tName" column="tName" />
+   		<result property="ImgUrl" column="ImgUrl" />
+   		<result property="bitName" column="bitName" />
+   	</resultMap>
+   	<!-- 打印数据 -->
+   	<select id="queryGoodsListByGoodsIds" resultMap="printerInfo">
+   		SELECT goods.`name`,goods.`Id` FROM goods
+		WHERE goods.`status` = 0 AND id IN
+		(
+			<foreach collection="array" item="a" separator=",">
+			#{a}
+			</foreach>
+		)
+   	</select>
+   	<resultMap type="com.lmq.domain.Goods" id="printerInfo" extends="BaseResultMap">
+   		<collection property="gInList" column="id" select="com.lmq.dao.GoodsinstanceMapper.queryGoodsInstanceInfoByGid"></collection>
+   	</resultMap>
 </mapper>

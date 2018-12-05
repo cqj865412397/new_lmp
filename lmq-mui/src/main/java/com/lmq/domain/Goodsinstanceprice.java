@@ -3,11 +3,17 @@ package com.lmq.domain;
 import java.util.Date;
 
 public class Goodsinstanceprice {
+	
+	//自定义
+	private String pName;//价格中文名称
+	//折扣
+	private Integer agio;
+	
     private Integer id;
-
+    //编号
     private String ptype;
 
-    private Integer price;
+    private Double price;
 
     private String goodsinstanceid;
 
@@ -31,7 +37,25 @@ public class Goodsinstanceprice {
 
     private String user5;
 
-    public Integer getId() {
+    
+    
+    public Integer getAgio() {
+		return agio;
+	}
+
+	public void setAgio(Integer agio) {
+		this.agio = agio;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -47,11 +71,11 @@ public class Goodsinstanceprice {
         this.ptype = ptype;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

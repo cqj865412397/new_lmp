@@ -287,5 +287,53 @@
 			(#{s.goodsinstanceid},#{sid},#{s.count},0,0,#{s.sum},#{s.price},0,#{s.uid},#{s.user1},#{s.user2},#{s.user3},#{s.user4},#{s.user5})
 		</foreach>
 	</insert>
+	
+	<!-- lirui自定义 -->
+	<select id="queryTotalCountByGoodsInstanceId"
+		resultType="Integer">
+		SELECT SUM(stockdetail.`count`-stockdetail.`scount`)AS
+		totalCount FROM
+		goodsinstance
+		INNER JOIN stockdetail ON
+		stockdetail.`Goodsinstanceid` =
+		goodsinstance.`Id`
+		WHERE
+		goodsinstance.`status` = 0 AND stockdetail.`status` = 0
+		AND
+		goodsinstance.`Id` = #{gInId}
+		GROUP BY goodsinstance.`Id`
+	</select>
+	<select id="queryInitPriceBygoodsInstanceId"
+		resultType="com.lmq.domain.Stockdetail">
+		SELECT * FROM `stockdetail`
+		INNER JOIN `stock` ON `stockdetail`.`Sid` = `stock`.`Id`
+		WHERE `stock`.`status` = 0 AND `stockdetail`.`status` = 0
+		AND `stockdetail`.`Goodsinstanceid` = #{gInId} AND `stock`.`Code` = -1
+	</select>
+	<!-- 查询第一次进货价格 -->
+	<select id="queryInitPrice"
+		resultType="Double">
+		SELECT Price FROM `stockdetail`
+		INNER JOIN `stock` ON `stockdetail`.`Sid` = `stock`.`Id`
+		WHERE `stock`.`status` = 0 AND `stockdetail`.`status` = 0
+		AND `stockdetail`.`Goodsinstanceid` = #{gInId} AND `stock`.`Code` = -1
+	</select>
+	<!-- 查询主表id -->
+	<select id="querySid" resultType="Integer">
+		SELECT Sid FROM `stockdetail` 
+		WHERE `status` = 0 AND `Goodsinstanceid` = #{gInId}
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByGoodsInstanceIds">
+		DELETE FROM `stockdetail`
+		WHERE `stockdetail`.`status` = 0 AND `stockdetail`.`Goodsinstanceid` IN
+		(
+		<foreach collection="list" separator="," item="l">
+			#{l}
+		</foreach>
+		)
+	</delete>
 
 </mapper>

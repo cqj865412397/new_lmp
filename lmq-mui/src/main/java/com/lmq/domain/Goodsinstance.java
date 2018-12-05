@@ -1,8 +1,28 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Goodsinstance {
+	//=========扩展==============
+	//单品名称（由规格值组成）
+	String standardName;
+	//价格集合
+	List<Goodsinstanceprice> priceList;
+	//库存
+	Integer totalCount;
+	//进货价格
+	Double basePrice;//第一次进货价
+	
+	//=====打印=======
+	String defPriceName;//默认价格中文名称
+	Integer Agio;//默认价格折扣
+	double defPrice;//默认价格
+	double costPrice;//出售价格 = 默认价格/默认价格折扣
+	
+	//=========扩展end============
+	
+	
     private Integer id;
 
     private String ids;
@@ -33,7 +53,75 @@ public class Goodsinstance {
 
     private String user5;
 
-    public Integer getId() {
+    
+    
+    
+
+	public String getDefPriceName() {
+		return defPriceName;
+	}
+
+	public void setDefPriceName(String defPriceName) {
+		this.defPriceName = defPriceName;
+	}
+
+	public Integer getAgio() {
+		return Agio;
+	}
+
+	public void setAgio(Integer agio) {
+		Agio = agio;
+	}
+
+	public double getDefPrice() {
+		return defPrice;
+	}
+
+	public void setDefPrice(double defPrice) {
+		this.defPrice = defPrice;
+	}
+
+	public double getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(double costPrice) {
+		this.costPrice = costPrice;
+	}
+
+	public Double getBasePrice() {
+		return basePrice;
+	}
+
+	public void setBasePrice(Double basePrice) {
+		this.basePrice = basePrice;
+	}
+
+	public String getStandardName() {
+		return standardName;
+	}
+
+	public void setStandardName(String standardName) {
+		this.standardName = standardName;
+	}
+
+	public List<Goodsinstanceprice> getPriceList() {
+		return priceList;
+	}
+
+	public void setPriceList(List<Goodsinstanceprice> priceList) {
+		this.priceList = priceList;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public Integer getId() {
         return id;
     }
 

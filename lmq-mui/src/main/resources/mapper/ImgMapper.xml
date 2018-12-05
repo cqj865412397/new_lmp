@@ -1,223 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmq.dao.ImgMapper">
-  <resultMap id="BaseResultMap" type="com.lmq.domain.Img">
-    <id column="Id" jdbcType="INTEGER" property="id" />
-    <result column="Name" jdbcType="VARCHAR" property="name" />
-    <result column="Oldname" jdbcType="VARCHAR" property="oldname" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="imgtype" jdbcType="INTEGER" property="imgtype" />
-    <result column="Gid" jdbcType="INTEGER" property="gid" />
-    <result column="Goodsinstanceid" jdbcType="INTEGER" property="goodsinstanceid" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="async" jdbcType="INTEGER" property="async" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="user1" jdbcType="VARCHAR" property="user1" />
-    <result column="user2" jdbcType="VARCHAR" property="user2" />
-    <result column="user3" jdbcType="VARCHAR" property="user3" />
-    <result column="user4" jdbcType="VARCHAR" property="user4" />
-    <result column="user5" jdbcType="VARCHAR" property="user5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Id, Name, Oldname, url, imgtype, Gid, Goodsinstanceid, time, status, async, uid, 
-    user1, user2, user3, user4, user5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from img
-    where Id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from img
-    where Id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lmq.domain.Img">
-    insert into img (Id, Name, Oldname, 
-      url, imgtype, Gid, 
-      Goodsinstanceid, time, status, 
-      async, uid, user1, 
-      user2, user3, user4, 
-      user5)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{oldname,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{imgtype,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}, 
-      #{goodsinstanceid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR}, 
-      #{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, 
-      #{user5,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lmq.domain.Img">
-    insert into img
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        Id,
-      </if>
-      <if test="name != null">
-        Name,
-      </if>
-      <if test="oldname != null">
-        Oldname,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="imgtype != null">
-        imgtype,
-      </if>
-      <if test="gid != null">
-        Gid,
-      </if>
-      <if test="goodsinstanceid != null">
-        Goodsinstanceid,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="async != null">
-        async,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="user1 != null">
-        user1,
-      </if>
-      <if test="user2 != null">
-        user2,
-      </if>
-      <if test="user3 != null">
-        user3,
-      </if>
-      <if test="user4 != null">
-        user4,
-      </if>
-      <if test="user5 != null">
-        user5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="oldname != null">
-        #{oldname,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="imgtype != null">
-        #{imgtype,jdbcType=INTEGER},
-      </if>
-      <if test="gid != null">
-        #{gid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsinstanceid != null">
-        #{goodsinstanceid,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="async != null">
-        #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="user1 != null">
-        #{user1,jdbcType=VARCHAR},
-      </if>
-      <if test="user2 != null">
-        #{user2,jdbcType=VARCHAR},
-      </if>
-      <if test="user3 != null">
-        #{user3,jdbcType=VARCHAR},
-      </if>
-      <if test="user4 != null">
-        #{user4,jdbcType=VARCHAR},
-      </if>
-      <if test="user5 != null">
-        #{user5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lmq.domain.Img">
-    update img
-    <set>
-      <if test="name != null">
-        Name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="oldname != null">
-        Oldname = #{oldname,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="imgtype != null">
-        imgtype = #{imgtype,jdbcType=INTEGER},
-      </if>
-      <if test="gid != null">
-        Gid = #{gid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsinstanceid != null">
-        Goodsinstanceid = #{goodsinstanceid,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="async != null">
-        async = #{async,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="user1 != null">
-        user1 = #{user1,jdbcType=VARCHAR},
-      </if>
-      <if test="user2 != null">
-        user2 = #{user2,jdbcType=VARCHAR},
-      </if>
-      <if test="user3 != null">
-        user3 = #{user3,jdbcType=VARCHAR},
-      </if>
-      <if test="user4 != null">
-        user4 = #{user4,jdbcType=VARCHAR},
-      </if>
-      <if test="user5 != null">
-        user5 = #{user5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where Id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lmq.domain.Img">
-    update img
-    set Name = #{name,jdbcType=VARCHAR},
-      Oldname = #{oldname,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      imgtype = #{imgtype,jdbcType=INTEGER},
-      Gid = #{gid,jdbcType=INTEGER},
-      Goodsinstanceid = #{goodsinstanceid,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      async = #{async,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR},
-      user1 = #{user1,jdbcType=VARCHAR},
-      user2 = #{user2,jdbcType=VARCHAR},
-      user3 = #{user3,jdbcType=VARCHAR},
-      user4 = #{user4,jdbcType=VARCHAR},
-      user5 = #{user5,jdbcType=VARCHAR}
-    where Id = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.lmq.domain.Img">
+		<id column="Id" jdbcType="INTEGER" property="id" />
+		<result column="Name" jdbcType="VARCHAR" property="name" />
+		<result column="Oldname" jdbcType="VARCHAR" property="oldname" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+		<result column="imgtype" jdbcType="INTEGER" property="imgtype" />
+		<result column="Gid" jdbcType="INTEGER" property="gid" />
+		<result column="Goodsinstanceid" jdbcType="INTEGER"
+			property="goodsinstanceid" />
+		<result column="time" jdbcType="TIMESTAMP" property="time" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="async" jdbcType="INTEGER" property="async" />
+		<result column="uid" jdbcType="VARCHAR" property="uid" />
+		<result column="user1" jdbcType="VARCHAR" property="user1" />
+		<result column="user2" jdbcType="VARCHAR" property="user2" />
+		<result column="user3" jdbcType="VARCHAR" property="user3" />
+		<result column="user4" jdbcType="VARCHAR" property="user4" />
+		<result column="user5" jdbcType="VARCHAR" property="user5" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, Name, Oldname, url, imgtype, Gid, Goodsinstanceid,
+		time, status,
+		async, uid,
+		user1, user2, user3, user4, user5
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from img
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from img
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lmq.domain.Img">
+		insert into img (Id, Name,
+		Oldname,
+		url, imgtype, Gid,
+		Goodsinstanceid, time, status,
+		async, uid,
+		user1,
+		user2, user3, user4,
+		user5)
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{oldname,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR}, #{imgtype,jdbcType=INTEGER},
+		#{gid,jdbcType=INTEGER},
+		#{goodsinstanceid,jdbcType=INTEGER},
+		NOW(),
+		#{status,jdbcType=INTEGER},
+		#{async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
+		#{user1,jdbcType=VARCHAR},
+		#{user2,jdbcType=VARCHAR},
+		#{user3,jdbcType=VARCHAR},
+		#{user4,jdbcType=VARCHAR},
+		#{user5,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lmq.domain.Img">
+		insert into img
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="name != null">
+				Name,
+			</if>
+			<if test="oldname != null">
+				Oldname,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="imgtype != null">
+				imgtype,
+			</if>
+			<if test="gid != null">
+				Gid,
+			</if>
+			<if test="goodsinstanceid != null">
+				Goodsinstanceid,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="async != null">
+				async,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="user1 != null">
+				user1,
+			</if>
+			<if test="user2 != null">
+				user2,
+			</if>
+			<if test="user3 != null">
+				user3,
+			</if>
+			<if test="user4 != null">
+				user4,
+			</if>
+			<if test="user5 != null">
+				user5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="oldname != null">
+				#{oldname,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="imgtype != null">
+				#{imgtype,jdbcType=INTEGER},
+			</if>
+			<if test="gid != null">
+				#{gid,jdbcType=INTEGER},
+			</if>
+			<if test="goodsinstanceid != null">
+				#{goodsinstanceid,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="async != null">
+				#{async,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="user1 != null">
+				#{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				#{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				#{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				#{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				#{user5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.lmq.domain.Img">
+		update img
+		<set>
+			<if test="name != null">
+				Name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="oldname != null">
+				Oldname = #{oldname,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="imgtype != null">
+				imgtype = #{imgtype,jdbcType=INTEGER},
+			</if>
+			<if test="gid != null">
+				Gid = #{gid,jdbcType=INTEGER},
+			</if>
+			<if test="goodsinstanceid != null">
+				Goodsinstanceid = #{goodsinstanceid,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="async != null">
+				async = #{async,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="user1 != null">
+				user1 = #{user1,jdbcType=VARCHAR},
+			</if>
+			<if test="user2 != null">
+				user2 = #{user2,jdbcType=VARCHAR},
+			</if>
+			<if test="user3 != null">
+				user3 = #{user3,jdbcType=VARCHAR},
+			</if>
+			<if test="user4 != null">
+				user4 = #{user4,jdbcType=VARCHAR},
+			</if>
+			<if test="user5 != null">
+				user5 = #{user5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.lmq.domain.Img">
+		update img
+		set Name = #{name,jdbcType=VARCHAR},
+		Oldname =
+		#{oldname,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
+		imgtype =
+		#{imgtype,jdbcType=INTEGER},
+		Gid = #{gid,jdbcType=INTEGER},
+		Goodsinstanceid = #{goodsinstanceid,jdbcType=INTEGER},
+		time =
+		#{time,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		async =
+		#{async,jdbcType=INTEGER},
+		uid = #{uid,jdbcType=VARCHAR},
+		user1 =
+		#{user1,jdbcType=VARCHAR},
+		user2 = #{user2,jdbcType=VARCHAR},
+		user3 =
+		#{user3,jdbcType=VARCHAR},
+		user4 = #{user4,jdbcType=VARCHAR},
+		user5 =
+		#{user5,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="deleteByGid">
+		DELETE FROM `img`
+		WHERE `img`.`status` = 0 AND `img`.`Gid` = #{gId}
+	</delete>
 </mapper>

@@ -1,8 +1,18 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Standard {
+	//=========扩展============
+	//规格值集合
+	List<Standardinstance> sInList;
+
+	//=========扩展end============
+	
+	
+	
+	
     private Integer id;
 
     private String name;
@@ -29,7 +39,16 @@ public class Standard {
 
     private String user5;
 
-    public Integer getId() {
+    
+    public List<Standardinstance> getsInList() {
+		return sInList;
+	}
+
+	public void setsInList(List<Standardinstance> sInList) {
+		this.sInList = sInList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -82,8 +82,14 @@ public class StockServiceImpl implements StockService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Integer insert(Stock stock) {
+		return stockmapper.insert(stock);
+	}
 
+	public Integer deleteByIds(List<Integer> stockIds) {
+		return stockmapper.deleteByIds(stockIds);
+	}
+}
 
 	
-
-}
