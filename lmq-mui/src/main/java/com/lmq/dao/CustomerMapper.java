@@ -43,5 +43,7 @@ public interface CustomerMapper {
     Customer queryBalanceById(Integer id);
     
     String getTimeNum(Integer uid);
+    //根据客户ID查询客户Pid(客户类型)
+    int queryByIdResultPid(Integer id);
 
 }

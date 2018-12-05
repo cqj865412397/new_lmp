@@ -50,7 +50,10 @@
 		SELECT * FROM customer
 		WHERE Sid=#{id} AND acronymname=#{acronymname}
 	</select>
-
+	<!-- 根据客户ID查询客户Pid(客户类型) -->
+	<select id="queryByIdResultPid" resultType="int">
+		SELECT pid FROM customer WHERE id=#{id}
+	</select>
 	<sql id="Base_Column_List">
 		Id, Name, Sid, Lid, Phone, Province, City, District, Addres, Balance,
 		freezemoney,
