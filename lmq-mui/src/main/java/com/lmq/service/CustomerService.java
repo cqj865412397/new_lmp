@@ -28,6 +28,13 @@ public interface CustomerService {
 	Customer selectByPrimaryKey(Integer id);
 	
 	/**
+	 * 根据客户ID查询客户Pid(客户类型)
+	 * @param id
+	 * @return
+	 */
+    int queryByIdResultPid(Integer id);
+	
+	/**
 	 * 修改客戶
 	 * @param record
 	 * @return
