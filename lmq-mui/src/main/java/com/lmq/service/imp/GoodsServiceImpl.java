@@ -116,7 +116,7 @@ public class GoodsServiceImpl implements GoodsService{
 				Img img = new Img();
 				img.setName(str);
 				img.setOldname(file.getOriginalFilename());
-				img.setUrl("/static/img/goods/"+str);
+				img.setUrl("goods/"+str);//"/static/img/goods/"
 				img.setImgtype(1);
 				img.setGid(gid);
 				img.setGoodsinstanceid(-1);

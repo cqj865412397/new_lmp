@@ -1,5 +1,7 @@
 package com.lmq.mui.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,8 +134,12 @@ public class GoodsController {
 		goodsvo.getGoods().setUid("lirui");
 		goodsvo.getGoods().setSid(1);
 		//设置图片路径
-		String path=session.getServletContext().getRealPath("/static/img/goods");
+		String path="D:/img/goods";//session.getServletContext().getRealPath("/static/img/goods");
 		goodsvo.setPath(path);
+		File file = new File(path);
+		if(!file.isDirectory()) {
+			file.mkdirs();
+		}
 		//设置图片
 		List<MultipartFile> imgList  = new ArrayList<MultipartFile>();
 		if(file1!=null)
@@ -173,7 +179,11 @@ public class GoodsController {
 			goodsvo.getGoods().setUid("lirui");
 			goodsvo.getGoods().setSid(1);
 			//设置图片路径
-			String path=session.getServletContext().getRealPath("/static/img/goods");
+			String path="D:/img/goods";//session.getServletContext().getRealPath("/static/img/goods");
+			File file = new File(path);
+			if(!file.isDirectory()) {
+				file.mkdirs();
+			}
 			goodsvo.setPath(path);
 			//设置图片
 			List<MultipartFile> imgList  = new ArrayList<MultipartFile>();
