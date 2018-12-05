@@ -2,8 +2,8 @@ package com.lmq.service;
 
 import java.util.List;
 
-import com.lmq.domain.zjf.QuotedPrice;
+import com.lmq.domain.QuotedPriceClass;
 
 public interface QuotedPriceService {
-	public List<QuotedPrice> queryBySidAll(Integer sid);
+	public List<QuotedPriceClass> queryBySidAll(Integer sid);
 }	
