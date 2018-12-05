@@ -87,6 +87,14 @@ public class CustomerServiceImpl implements CustomerService{
 		// TODO Auto-generated method stub
 		return mapper.queryBalanceById(id);
 	}
+	/**
+	 * 根据客户ID查询客户Pid(客户类型)
+	 */
+	@Override
+	public int queryByIdResultPid(Integer id) {
+		// TODO Auto-generated method stub
+		return mapper.queryByIdResultPid(id);
+	}
 
 
 }

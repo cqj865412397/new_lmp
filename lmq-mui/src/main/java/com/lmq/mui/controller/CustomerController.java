@@ -51,6 +51,14 @@ public class CustomerController {
 		return customerService.updateByPrimaryKeySelective(record);
 	}
 	
+	/**
+	 * 根据客户ID查询客户Pid(客户类型)
+	 */
+	@RequestMapping("queryByIdResultPid")
+	public int queryByIdResultPid(Integer id) {
+		return customerService.queryByIdResultPid(id);
+	}
+	
 	@RequestMapping("/queryBalanceById")
 	public Customer queryBalanceById(Integer id) {
 		return customerService.selectByPrimaryKey(id);
