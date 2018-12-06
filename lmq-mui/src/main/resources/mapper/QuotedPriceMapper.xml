@@ -31,11 +31,11 @@
 		q.id,c.`Name`,img.url,goods.`name` AS gname,q.monye AS price,s2.`Name` AS
 		sname,s1.`Name` AS val FROM `quote` q
 		INNER JOIN customer c ON c.id=q.`cid` 
-		INNER JOIN goodsinstance g ON g.`Id`=q.`gid`
-		INNER JOIN img ON img.`Gid`=g.`Id` AND img.imgtype!=1	 
+		INNER JOIN goodsinstance g ON g.`Id`=q.`gid` 
 		INNER JOIN goods ON goods.`Id`=g.`Gid` 
+		INNER JOIN img ON img.`Gid`=goods.`Id`
 		LEFT JOIN standardinstance s1 ON FIND_IN_SET(s1.`Id`,g.`ids`) 
-		INNER JOIN standard s2 ON s2.`Id`=s1.`sid` 
+		LEFT JOIN standard s2 ON s2.`Id`=s1.`sid` 
 		WHERE c.`Sid`=#{id} and acronymname=#{acronymname}
 	</select>
 </mapper>
