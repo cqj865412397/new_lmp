@@ -34,7 +34,7 @@ public class AccountController {
 	//应付-供应商
 	@RequestMapping("/payAccount")
 	public List<Account> payAccount(Condition c) {
-		System.out.println("应收对账");
+		System.out.println("应付对账");
 		c.setSupplier(1);
 		System.out.println("时间范围date:"+c.getDate()+"供应商："+c.getCustomer()+"\n"+c.getStartdate()+"-"+c.getEnddate());
 		return as.queryPay(c);
