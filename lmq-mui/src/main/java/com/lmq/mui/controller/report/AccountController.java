@@ -36,7 +36,7 @@ public class AccountController {
 	public List<Account> payAccount(Condition c) {
 		System.out.println("应付对账");
 		c.setSupplier(1);
-		System.out.println("时间范围date:"+c.getDate()+"供应商："+c.getCustomer()+"\n"+c.getStartdate()+"-"+c.getEnddate());
+		System.out.println("时间范围date:"+c.getDate()+"供应商："+c.getSupplier()+"\n"+c.getStartdate()+"-"+c.getEnddate());
 		return as.queryPay(c);
 	}
 }
