@@ -38,4 +38,12 @@
 		LEFT JOIN standard s2 ON s2.`Id`=s1.`sid` 
 		WHERE c.`Sid`=#{id} and acronymname=#{acronymname}
 	</select>
+	<!--添加报价  -->
+	<insert id="addQuoteprice">
+		insert into `quote`(id,cid,gid,monye) values(#{id},#{cid},#{gid},#{monye})
+	</insert>
+	<!-- 修改报价 -->
+	<update id="updateByIdQuoteprice">
+		update `quote` set monye=#{monye} where id=#{id}
+	</update>
 </mapper>

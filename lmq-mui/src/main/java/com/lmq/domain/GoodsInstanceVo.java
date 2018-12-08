@@ -2,38 +2,44 @@ package com.lmq.domain;
 /**
  * 
  * @author lirui
- *	ÓÃ»§ÕÔ¿Í»§±¨¼ÛºÍ³Âµ¥Æ·±¨¼Û
+ *	ï¿½Ã»ï¿½ï¿½Ô¿Í»ï¿½ï¿½ï¿½ï¿½ÛºÍ³Âµï¿½Æ·ï¿½ï¿½ï¿½ï¿½
  */
 public class GoodsInstanceVo {
-	//ÉÌÆ·Ãû³Æ
+	//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	String goodsName;
-	//µ¥Æ·¹æ¸ñ×é³ÉÃû³Æ
+	//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	String standardName;
-	//¹æ¸ñÖµids
+	//ï¿½ï¿½ï¿½Öµids
 	String ids;
-	//µ¥Æ·id
+	//ï¿½ï¿½Æ·id
 	Integer goodsInstanceId;
-	//±¨¼Û
+	//ï¿½ï¿½ï¿½ï¿½
 	Double money;
 	
 
-	//¼Û¸ñÀàÐÍid
+	//ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½id
 	Integer Ptype; 
-	//¼Û¸ñÃû³Æ
+	//ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	String priceName;
-	//¼Û¸ñ(ÁãÊÛºÍ´ò°üºÍÅú·¢µÈ)
+	//ï¿½Û¸ï¿½(ï¿½ï¿½ï¿½ÛºÍ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	Double price;
-	//ÊÇ·ñÎªÄ¬ÈÏ¼Û¸ñ
+	//ï¿½Ç·ï¿½ÎªÄ¬ï¿½Ï¼Û¸ï¿½
 	Integer DefaultPrice;
 	
-	//Í¼Æ¬µØÖ·
+	//Í¼Æ¬ï¿½ï¿½Ö·
 	String url;
-	//µ¥Î»Ãû³Æ
+	//ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
 	String bitName;
 	
-	
+	Integer qid;
 	public String getBitName() {
 		return bitName;
+	}
+	public Integer getQid() {
+		return qid;
+	}
+	public void setQid(Integer qid) {
+		this.qid = qid;
 	}
 	public void setBitName(String bitName) {
 		this.bitName = bitName;
