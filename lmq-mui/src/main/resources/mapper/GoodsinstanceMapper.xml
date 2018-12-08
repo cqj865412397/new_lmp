@@ -276,6 +276,7 @@
 	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
 	AND (standardinstance.`Name` LIKE CONCAT('%',#{gName},'%') OR goods.`name` LIKE CONCAT('%',#{gName},'%'))
 	GROUP BY `goodsinstanceprice`.`Id`
+	ORDER BY goods.`time`DESC#排序
   </select>
   
 </mapper>
