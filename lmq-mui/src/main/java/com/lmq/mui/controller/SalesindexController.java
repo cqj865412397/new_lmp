@@ -23,7 +23,8 @@ public class SalesindexController {
 	//通过id查询出订单详情
 	@RequestMapping("/queryById")
 	public Salesindent queryById(Integer id) {
-		return sis.queryById(id);
+		Salesindent s=sis.queryById(id);
+		return s;
 	}
 	
 	//显示列表 传入了时间和搜索条件
