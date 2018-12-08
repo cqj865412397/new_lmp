@@ -336,13 +336,6 @@
 
 
 	<select id="queryById" resultMap="SSMap">
-		<!-- SELECT s.`Id` AS id,s.`money` AS money,s.`count` AS `count`,s.`SalesIndentNub` 
-			AS `SalesIndentNub`, s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS 
-			deposi,s.`status` AS `status`, sd.`money` AS sdmoney,sd.`count`AS sdcount,sd.`Takeinmoney` 
-			AS sdTakeinmoney,sd.`status` AS sdstatus, i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` 
-			AS gid, st.`name` AS stname FROM salesindent AS s LEFT JOIN salesindentdetails 
-			AS sd ON s.id=sd.Salesindentid LEFT JOIN img AS i ON sd.gid=i.gid LEFT JOIN 
-			`store` AS st ON st.`Id`=s.`Sid` where s.`Id`=#{id} -->
 		SELECT s.`Id` AS id,s.`takeinmoney` AS
 		takeinmoney,s.`count` AS
 		`count`,s.`user2` AS `user2`,s.`user1` AS `user1`,
