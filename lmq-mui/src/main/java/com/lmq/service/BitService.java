@@ -6,4 +6,5 @@ import com.lmq.domain.Bit;
 
 public interface BitService {
 	public List<Bit> queryBitBySid(Integer Sid);
+	public Integer insert(Bit bit);
 }

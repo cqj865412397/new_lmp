@@ -38,7 +38,7 @@
 		user3, user4, user5
 		)
 		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-		#{time,jdbcType=TIMESTAMP},
+		NOW(),
 		#{sid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER},
 		#{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR},
 		#{user2,jdbcType=VARCHAR},

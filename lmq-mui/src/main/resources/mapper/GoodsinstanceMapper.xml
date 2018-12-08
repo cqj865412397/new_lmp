@@ -278,5 +278,23 @@
 	GROUP BY `goodsinstanceprice`.`Id`
 	ORDER BY goods.`time`DESC#排序
   </select>
-  
+  <!-- 查询sid门店下全部单品默认价格 -->
+  <select id="queryGoodsInstanceVoAboutDefPriceList" resultType="com.lmq.domain.GoodsInstanceVo">
+	 SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
+	,goodsinstanceprice.`price`,pricetype.`Name`AS priceName,`pricetype`.`DefaultPrice`,`goodsinstanceprice`.`Ptype`
+	,goods.`name`AS goodsName,`bit`.`Name` AS bitName,i.url
+	FROM goodsinstance
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+	LEFT JOIN `goodsinstanceprice` ON `goodsinstanceprice`.`goodsinstanceid` = goodsinstance.`Id`
+	INNER JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
+	INNER JOIN `goods` ON `goods`.id = goodsinstance.`Gid`
+	INNER JOIN `bit` ON `bit`.`Id` = `goods`.`Bid`
+	INNER JOIN (SELECT * FROM `img` WHERE `img`.`status` = 0 GROUP BY `img`.`Id`)AS i ON i.Gid = goods.`Id`
+	WHERE goodsinstance.`status` = 0 AND (standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND goodsinstanceprice.`status` = 0
+	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
+	AND `pricetype`.`DefaultPrice` = 1
+	AND `goods`.`Sid` = #{sId}
+	GROUP BY `goodsinstanceprice`.`Id`
+	ORDER BY goods.`time`DESC#排序
+  </select>
 </mapper>
