@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.report.RankMapper">
+  <resultMap id="Rank" type="com.lmq.domain.report.Rank">
+    <id column="id" property="id" />
+    <result column="number" property="number" />
+    <result column="name" property="name" />
+    <result column="name2" property="name2" />
+    <result column="percentage" property="percentage" />
+  </resultMap>
+
+  <select id="querySalesPersonRank" resultMap="Rank">
+	SELECT u.`Id` AS id,u.`name`,SUM(s.`Takeinmoney`) AS number FROM `user` AS u
+	LEFT JOIN sales AS s ON s.`uid`=u.`Id`
+	WHERE u.`status`=0 AND s.`status`=0 
+<!-- 	AND s.`time`>DATE_ADD(DATE(NOW()),INTERVAL  1-DAYOFWEEK(NOW()) DAY) -->
+	GROUP BY u.`Id`
+	ORDER BY number;
+  </select>
+  <select id="queryCustomerRank" resultMap="Rank">
+	SELECT c.`Id` AS id,c.`Name` AS `name`,SUM(s.`Takeinmoney`) AS number FROM customer AS c
+	LEFT JOIN sales AS s ON c.`Id`=s.`cid`
+	WHERE c.`status`=0 AND s.`status`=0
+	GROUP BY c.`Id`
+	ORDER BY number DESC
+  </select>
+  <select id="queryGoodsRank" resultMap="Rank">
+	SELECT gi.`Id` AS id,goods.`name`,t.standardName AS name2,SUM(st.`Takeinmoney`) AS number FROM goodsinstance AS gi
+	LEFT JOIN goods ON goods.`Id`=gi.`Gid`
+	LEFT JOIN (
+		SELECT goodsinstance.Id,GROUP_CONCAT(standardinstance.`Name`)AS standardName FROM goodsinstance 
+		LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+		GROUP BY goodsinstance.`Id`
+	) AS t ON t.Id=gi.`Id`
+	LEFT JOIN salesdetails AS st ON st.`user1`=gi.`Id`
+	LEFT JOIN sales AS s ON s.`Id`=st.`Salesid`
+	WHERE gi.`status`=0 AND s.`status`=0
+	GROUP BY gi.`Id`
+	ORDER BY number DESC
+  </select>
+</mapper>

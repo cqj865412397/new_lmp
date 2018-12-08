@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.report.SalesStatisticsMapper">
+  <resultMap id="SalesStock" type="com.lmq.domain.report.SalesStock">
+    <id column="goodsinstanceid" jdbcType="INTEGER" property="goodsinstanceid" />
+    <result column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+	<result column="standardName" property="standardName"/>
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="bname" jdbcType="VARCHAR" property="bname" />
+    <result column="paymoney" jdbcType="INTEGER" property="paymoney" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="money" property="money"/>
+    <result column="supplierid" jdbcType="INTEGER" property="supplierid" />
+    <result column="suppliername" jdbcType="VARCHAR" property="suppliername" />
+    <result column="stockid" jdbcType="INTEGER" property="stockid" />
+  </resultMap>
+  <!-- 与按客户利润统计相同 -->
+  <select id="query" resultMap="SalesStock">
+  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` AS bname, SUM(s.`money`) AS money,SUM(s.`Takeinmoney`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
+	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
+	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
+	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
+	INNER JOIN goodsinstance AS gi ON sd.`user1`=gi.`Id`
+	INNER JOIN goods AS g ON g.`Id`=gi.`Gid`
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , gi.`ids`)
+	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
+	GROUP BY gi.`Id`;
+  </select>
+  <select id="queryDetail" resultMap="SalesStock">
+  	SELECT s.`Id` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`Takeinmoney` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
+	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
+	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
+	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
+	INNER JOIN goodsinstance AS gi ON sd.`user1`=gi.`Id`
+	INNER JOIN goods AS g ON g.`Id`=gi.`Gid`
+	INNER JOIN customer AS c ON s.`cid`=c.`Id`
+	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
+	LEFT JOIN (SELECT goodsinstance.Id,GROUP_CONCAT(standardinstance.`Name`)AS standardName FROM goodsinstance 
+		LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+		GROUP BY goodsinstance.`Id`) AS t ON t.Id=gi.`Id`
+	WHERE gi.`Id`=#{gid}
+	ORDER BY s.`time`, s.`Id`
+  </select>
+  
+</mapper>
