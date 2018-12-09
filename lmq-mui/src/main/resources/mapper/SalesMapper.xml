@@ -40,7 +40,7 @@
 				property="takeinmoney" />
 			<result column="gid" property="user1" />
 			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
-			<result column="gname" jdbcType="VARCHAR" property="gname" />
+			<result column="gname" jdbcType="VARCHAR" property="user2" />
 		</collection>
 	</resultMap>
 
@@ -349,7 +349,7 @@
 		i.url AS imgurl,sd.`Id` AS
 		sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS
-		pname,c.`Name` AS cname,g.`name` AS gname,sd.`id` AS sdid,s.cid
+		pname,c.`Name` AS cname,sd.`user2` AS gname,sd.`id` AS sdid,s.cid
 		FROM
 		sales AS s
 		LEFT

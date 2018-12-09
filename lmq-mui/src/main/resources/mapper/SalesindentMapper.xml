@@ -38,7 +38,7 @@
 				property="takeinmoney" />
 			<result column="gid" property="user1" />
 			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
-			<result column="gname" jdbcType="VARCHAR" property="gname" />
+			<result column="gname" jdbcType="VARCHAR" property="user2" />
 		</collection>
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -266,13 +266,6 @@
 	</update>
 
 	<select id="queryById" resultMap="SSMap">
-		<!-- SELECT s.`Id` AS id,s.`money` AS money,s.`count` AS `count`,s.`SalesIndentNub` 
-			AS `SalesIndentNub`, s.`remark` AS remark,s.`time`AS `time`,s.`deposi` AS 
-			deposi,s.`status` AS `status`, sd.`money` AS sdmoney,sd.`count`AS sdcount,sd.`Takeinmoney` 
-			AS sdTakeinmoney,sd.`status` AS sdstatus, i.url AS imgurl,sd.`Id` AS sdid,sd.`gid` 
-			AS gid, st.`name` AS stname FROM salesindent AS s LEFT JOIN salesindentdetails 
-			AS sd ON s.id=sd.Salesindentid LEFT JOIN img AS i ON sd.gid=i.gid LEFT JOIN 
-			`store` AS st ON st.`Id`=s.`Sid` where s.`Id`=#{id} -->
 		SELECT s.`Id` AS id,s.`user2` AS
 		user2,s.`count` AS
 		`count`,s.`SalesIndentNub` AS `SalesIndentNub`,
@@ -285,7 +278,7 @@
 		i.url AS imgurl,sd.`Id` AS
 		sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS
-		pname,c.`Name` AS cname,g.`name` AS gname,sd.`id` as sdid,s.cid
+		pname,c.`Name` AS cname,sd.user2 AS gname,sd.`id` as sdid,s.cid
 		FROM salesindent AS s
 		LEFT
 		JOIN salesindentdetails AS sd
