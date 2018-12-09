@@ -136,8 +136,8 @@ public class GoodsController {
 	}
 	
 	//查询sid门店下单个单品（默认价格）
-	@RequestMapping("/querySimGoodsInstanceVoAboutDefPriceList")
-	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceList(Integer gInId,Integer sId) {
+	@RequestMapping("/querySimGoodsInstanceVoAboutDefPrice")
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(Integer gInId,Integer sId) {
 		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutDefPrice(gInId, sId);
 		return gIn;
 	}
