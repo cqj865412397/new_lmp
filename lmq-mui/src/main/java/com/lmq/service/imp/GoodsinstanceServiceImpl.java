@@ -54,15 +54,12 @@ public class GoodsinstanceServiceImpl implements GoodsinstanceService{
 
 
 	@Override
-	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(Integer gInId, Integer sId) {
-		return goodsinstanceMapper.querySimGoodsInstanceVoAboutDefPrice(gInId, sId);
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceAndPrice(Integer gInId, Integer sId, Integer cId) {
+		return goodsinstanceMapper.querySimGoodsInstanceVoAboutDefPriceAndPrice(gInId, sId, cId);
 	}
 
 
-	@Override
-	public GoodsInstanceVo querySimGoodsInstanceVoAboutPrice(Integer gInId, Integer sId, Integer cId) {
-		return goodsinstanceMapper.querySimGoodsInstanceVoAboutPrice(gInId, sId, cId);
-	}
+	
 
 	
 

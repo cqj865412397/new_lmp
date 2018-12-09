@@ -135,18 +135,14 @@ public class GoodsController {
 		return list;
 	}
 	
-	//查询sid门店下单个单品（默认价格）
-	@RequestMapping("/querySimGoodsInstanceVoAboutDefPrice")
-	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(Integer gInId,Integer sId) {
-		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutDefPrice(gInId, sId);
+	//查询sid门店下单个单品（默认价格和报价）
+	@RequestMapping("/querySimGoodsInstanceVoAboutDefPriceAndPrice")
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceAndPrice(Integer gInId,Integer sId,Integer  cId) {
+		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutDefPriceAndPrice(gInId, sId, cId);
 		return gIn;
 	}
-	//查询sid门店下单个单品（报价）
-	@RequestMapping("/querySimGoodsInstanceVoAboutPrice")
-	public GoodsInstanceVo querySimGoodsInstanceVoAboutPrice(Integer gInId, Integer sId, Integer cId) {
-		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutPrice(gInId, sId, cId);
-		return gIn;
-	}
+	
+	
 	// 添加单位
 	@RequestMapping("/addBit")
 	public Integer addBit(String name) {
