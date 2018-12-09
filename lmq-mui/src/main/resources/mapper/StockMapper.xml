@@ -23,9 +23,19 @@
 		<result column="user8" jdbcType="VARCHAR" property="user8" />
 		<result column="user9" jdbcType="VARCHAR" property="user9" />
 		<result column="spname" jdbcType="VARCHAR" property="spname" />
+		<result column="payname" jdbcType="VARCHAR" property="payname" />
 	</resultMap>
 
-
+	<resultMap type="com.lmq.domain.Stock" id="SSMap"
+		extends="BaseResultMap">
+		<collection property="stockdetails"
+			ofType="com.lmq.domain.Stockdetail" column="id">
+			<result column="sdcount" jdbcType="INTEGER" property="count" />
+			<result column="sdsum" jdbcType="DOUBLE" property="sum" />
+			<result column="sdprice" jdbcType="DOUBLE" property="price" />
+			<result column="gname" jdbcType="VARCHAR" property="user1" />
+		</collection>
+	</resultMap>
 
 	<sql id="Base_Column_List">
 		Id, Code, Allprice, Allcount, Time, Sid, Supid, status,
@@ -58,7 +68,7 @@
 		#{code,jdbcType=VARCHAR},
 		#{allprice,jdbcType=DOUBLE},
 		#{allcount,jdbcType=INTEGER},
-		  NOW(),
+		NOW(),
 		#{sid,jdbcType=INTEGER},
 		#{supid,jdbcType=INTEGER},
 		#{status,jdbcType=INTEGER},
@@ -70,7 +80,8 @@
 		#{user4,jdbcType=VARCHAR},
 		#{user5,jdbcType=VARCHAR},
 		#{user6,jdbcType=VARCHAR},
-		#{user7,jdbcType=VARCHAR}, #{user8,jdbcType=VARCHAR},
+		#{user7,jdbcType=VARCHAR},
+		#{user8,jdbcType=VARCHAR},
 		#{user9,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -318,7 +329,7 @@
 		WHERE `Code` LIKE
 		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
 	</select>
-	
+
 	<!-- 批量删除 -->
 	<delete id="deleteByIds">
 		DELETE FROM `stock`
@@ -328,6 +339,19 @@
 			#{l}
 		</foreach>
 		)
-	</delete>  
-	
+	</delete>
+	<select id="queryById" resultMap="SSMap">
+		SELECT s.*, sup.`Name` AS
+		spname,pt.`Name` AS payname,
+		sd.`Goodsinstanceid` AS sdid,sd.`count`
+		AS sdcount ,sd.`Price` AS sdprice,
+		sd.`Sum` AS sdsum,sd.`user1` AS
+		gname
+		FROM stock s INNER JOIN stockdetail sd ON s.`Id`=sd.`Sid` AND
+		s.id=#{id}
+		LEFT JOIN supplier sup ON sup.`Id`=s.`Supid`
+		LEFT JOIN paytype
+		AS pt ON pt.`Id`=s.`user4`
+
+	</select>
 </mapper>

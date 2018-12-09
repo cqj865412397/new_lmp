@@ -20,7 +20,7 @@ public class Stockdetail {
     private Integer async;
 
     private String uid;
-
+    //单品名称
     private String user1;
 
     private String user2;

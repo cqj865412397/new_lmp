@@ -33,7 +33,7 @@ public class Stock {
     private String user2;
     //实付款
     private String user3;
-
+    //支付类型
     private String user4;
 
     private String user5;
@@ -43,9 +43,20 @@ public class Stock {
 	private String user7;
 	private String user8;
 	private String user9;
-    private String spname;
+    //供应商名称
+	private String spname;
+    //支付名称
+	private String payname;
     
-    private List<Stockdetail> stockdetails;
+    public String getPayname() {
+		return payname;
+	}
+
+	public void setPayname(String payname) {
+		this.payname = payname;
+	}
+
+	private List<Stockdetail> stockdetails;
     
     
 	public List<Stockdetail> getStockdetails() {
