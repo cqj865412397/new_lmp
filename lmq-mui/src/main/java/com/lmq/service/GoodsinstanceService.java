@@ -2,6 +2,8 @@ package com.lmq.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lmq.domain.GoodsInstanceVo;
 import com.lmq.domain.Goodsinstance;
 
@@ -23,5 +25,8 @@ public interface GoodsinstanceService {
 	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer cId,String gName);
 	//查询sid门店下全部单品默认价格
 	public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
-	
+	//查询sid门店下单个单品默认价格
+    public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(Integer gInId,Integer sId);
+  //查询sid门店下单个单品报价
+    public GoodsInstanceVo querySimGoodsInstanceVoAboutPrice(Integer gInId,Integer sId,Integer cId);
 }

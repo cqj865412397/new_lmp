@@ -49,7 +49,19 @@ public class GoodsinstanceServiceImpl implements GoodsinstanceService{
 	}
 	
 	public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId) {
-		return goodsinstanceMapper.queryGoodsInstanceVoAboutDefPriceList(sId);
+		return goodsinstanceMapper.queryGoodsInstanceVoAboutDefPrice(sId);
+	}
+
+
+	@Override
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(Integer gInId, Integer sId) {
+		return goodsinstanceMapper.querySimGoodsInstanceVoAboutDefPriceList(gInId, sId);
+	}
+
+
+	@Override
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutPrice(Integer gInId, Integer sId, Integer cId) {
+		return goodsinstanceMapper.querySimGoodsInstanceVoAboutPrice(gInId, sId, cId);
 	}
 
 	
