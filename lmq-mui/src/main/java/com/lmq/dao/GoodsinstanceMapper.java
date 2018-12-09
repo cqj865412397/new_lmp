@@ -22,10 +22,8 @@ public interface GoodsinstanceMapper {
 	public List<GoodsInstanceVo> queryGoodsInstanceVoList(@Param("cId") Integer cId,@Param("gName") String gName);
 	//查询sid门店下全部单品默认价格
     public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
-	//查询sid门店下单个单品默认价格
-    public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPrice(@Param("gInId") Integer gInId,@Param("sId") Integer sId);
-	//查询sid门店下单个单品报价
-    public GoodsInstanceVo querySimGoodsInstanceVoAboutPrice(@Param("gInId") Integer gInId,@Param("sId") Integer sId,@Param("cId") Integer cId);
+	//查询sid门店下单个单品默认价格和报价
+    public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceAndPrice(@Param("gInId") Integer gInId,@Param("sId") Integer sId,@Param("cId") Integer cId);
     /**
 	 * �Զ���
 	 */
