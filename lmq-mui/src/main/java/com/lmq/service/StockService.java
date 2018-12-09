@@ -15,8 +15,8 @@ public interface StockService {
 	    String getTimeNum(Integer uid);
 	    
 	    Stock queryById(Integer id);
-	//新增
-	public Integer insert(Stock stock);
-	//批量删除
-	public Integer deleteByIds(List<Integer> stockIds);
+		//新增
+		public Integer insert(Stock stock);
+		//批量删除
+		public Integer deleteByIds(List<Integer> stockIds);
 }

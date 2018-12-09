@@ -80,7 +80,7 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public Stock queryById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return stockmapper.queryById(id);
 	}
 	
 	public Integer insert(Stock stock) {

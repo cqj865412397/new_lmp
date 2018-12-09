@@ -49,5 +49,11 @@ public class StockController {
 			ssi.insertSelective(s);
 			return s;
 		}
+		
+		//通过id查询出订单详情
+				@RequestMapping("/queryById")
+				public Stock queryById(Integer id) {
+					return ssi.queryById(id);
+				}
 	
 }
