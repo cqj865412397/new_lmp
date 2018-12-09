@@ -16,5 +16,9 @@ public class BitServiceImpl implements BitService{
 	public List<Bit> queryBitBySid(Integer Sid) {
 		return bitMapper.queryBitBySid(Sid);
 	}
+	@Override
+	public Integer insert(Bit bit) {
+		return bitMapper.insert(bit);
+	}
 
 }

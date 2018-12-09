@@ -8,23 +8,26 @@ import com.lmq.domain.GoodsInstanceVo;
 import com.lmq.domain.Goodsinstance;
 
 public interface GoodsinstanceMapper {
-	//╡Ия╞илф╥об╣╔ф╥╣доЙо╦пео╒
+	//О©╫О©╫я╞О©╫О©╫ф╥О©╫б╣О©╫ф╥О©╫О©╫О©╫О©╫о╦О©╫О©╫о╒
 	public List<Goodsinstance> queryGoodsinstanceInfoByGid(Integer gId) ;
-	//╡Ия╞илф╥обд╛хо╣╔ф╥
+	//О©╫О©╫я╞О©╫О©╫ф╥О©╫О©╫д╛О©╫о╣О©╫ф╥
 	public Goodsinstance queryOneGoodsInstanceByGid(Integer gId);
-	//и╬ЁЩ╣╔ф╥╦Ы╬щилф╥Gid
+	//и╬О©╫О©╫О©╫О©╫ф╥О©╫О©╫О©╫О©╫О©╫О©╫ф╥Gid
 	public Integer deleteByGid(Integer gId);
-	//╡Ия╞илф╥обкЫсп╣╔ф╥id╪╞╨о
+	//О©╫О©╫я╞О©╫О©╫ф╥О©╫О©╫О©╫О©╫О©╫п╣О©╫ф╥idО©╫О©╫О©╫О©╫
 	public List<Integer> quertyGoodsInstanceIdsByGid(Integer gId);
-	//╡Ия╞╣╔ф╥пео╒╪╞╨оё╗╢Рс║ё╘
+	//О©╫О©╫я╞О©╫О©╫ф╥О©╫О©╫о╒О©╫О©╫О©╫оёО©╫О©╫О©╫с║О©╫О©╫
 	public List<Goodsinstance> queryGoodsInstanceInfoByGid(Integer gId);
-	//╡Ия╞╣╔ф╥╪ш╦Я (╠╗╪ш>©м╩╖юЮпм╪ш╦Я>д╛хо╪ш╦Я) ж╖Ёждё╨Щ╡Ия╞ gNameн╙ё╗╣╔ф╥╧Ф╦Я╨милф╥цШЁфё╘
+	//О©╫О©╫я╞О©╫О©╫ф╥О©╫ш╦О©╫ (О©╫О©╫О©╫О©╫>О©╫м╩О©╫О©╫О©╫О©╫м╪ш╦О©╫>д╛О©╫о╪ш╦О©╫) ж╖О©╫О©╫дёО©╫О©╫О©╫О©╫я╞ gNameн╙О©╫О©╫О©╫О©╫ф╥О©╫О©╫О©╫О©╫О©╫О©╫ф╥О©╫О©╫О©╫фёО©╫
 	public List<GoodsInstanceVo> queryGoodsInstanceVoList(@Param("cId") Integer cId,@Param("gName") String gName);
+	//Ф÷╔Х╞╒sidИ≈╗Е╨≈Д╦▀Е┘╗И┐╗Е█∙Е⌠│И╩≤Х╝╓Д╩╥Ф═╪
+    public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
+	
 	/**
-	 * вт╤╗рЕ
+	 * О©╫т╤О©╫О©╫О©╫
 	 */
     int deleteByPrimaryKey(Integer id);
-	//╣╔╦ЖпбтЖ
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
     int insert(Goodsinstance record);
 
     int insertSelective(Goodsinstance record);
