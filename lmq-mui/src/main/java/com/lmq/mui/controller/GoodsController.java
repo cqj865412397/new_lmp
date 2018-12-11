@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +33,8 @@ import com.lmq.service.StandardinstanceService;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-
+	@Value("${imgUrl}")
+	String imgUrl;
 	// ========注入========
 	@Autowired
 	GoodsService goodsService;
@@ -163,7 +165,7 @@ public class GoodsController {
 		goodsvo.getGoods().setUid("lirui");
 		goodsvo.getGoods().setSid(1);
 		// 设置图片路径
-		String path = "D:/img/goods";// session.getServletContext().getRealPath("/static/img/goods");
+		String path = imgUrl+"goods";// session.getServletContext().getRealPath("/static/img/goods");
 		goodsvo.setPath(path);
 		File file = new File(path);
 		if (!file.isDirectory()) {
@@ -203,7 +205,7 @@ public class GoodsController {
 		goodsvo.getGoods().setUid("lirui");
 		goodsvo.getGoods().setSid(1);
 		// 设置图片路径
-		String path = "D:/img/goods";// session.getServletContext().getRealPath("/static/img/goods");
+		String path = imgUrl+"goods";// session.getServletContext().getRealPath("/static/img/goods");
 		File file = new File(path);
 		if (!file.isDirectory()) {
 			file.mkdirs();
