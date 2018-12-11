@@ -45,7 +45,7 @@
 		delete from stock
 		where Id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.lmq.domain.Stock">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.lmq.domain.Stock">
 		insert into stock (Id, `Code`,
 		Allprice,
 		Allcount, Time, Sid,

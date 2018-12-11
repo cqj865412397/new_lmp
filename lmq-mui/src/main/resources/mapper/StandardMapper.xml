@@ -227,4 +227,22 @@
 		DELETE FROM `standard`
 		WHERE  `standard`.`status` = 0 AND`standard`.`Gid` =#{gId}
 	</delete>
+	
+	<!-- 查询，添加分类时，查询所有类目下的属性 -->
+    <select id="queryALLStandardByTid" resultMap="StandardAndInstance">
+	    	SELECT `standard`.*
+			FROM ( 
+	    SELECT 
+	        @r AS _id, 
+	        (SELECT @r := `Parentid` FROM goodstype WHERE Id = _id) AS Parentid, 
+	        @l := @l + 1 AS lvl 
+	    FROM 
+	        (SELECT @r := #{tId}, @l := 0) vars, 
+	        goodstype h 
+	    WHERE @r &lt;&gt; 0) T1 
+	JOIN goodstype T2 
+	ON T1._id = T2.Id 
+	INNER JOIN `standard` ON `standard`.`Tid` = T2.`Id`
+	ORDER BY `standard`.`Id`
+    </select>
 </mapper>
