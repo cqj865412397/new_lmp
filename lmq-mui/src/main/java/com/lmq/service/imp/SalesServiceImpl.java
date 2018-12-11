@@ -41,7 +41,6 @@ public class SalesServiceImpl implements SalesService {
 	@Autowired
 	CustomerMapper cm;
 
-
 	@Override
 	public int insertSelective(Sales record) {
 		// TODO Auto-generated method stub
@@ -74,21 +73,21 @@ public class SalesServiceImpl implements SalesService {
 				sdm.updateBatch(sdlist);
 			}
 		}
-		// 成功了修改订单表的状态
-		System.out.println(sidm.updateStatusById(record.getSiId(), 2));
-		double balance = Double.parseDouble(record.getTakeinmoney()) - Double.parseDouble(record.getUser5());
-		if (balance != 0) {
-			Customer c = new Customer();
-			c.setId(record.getCid());
-			c.setBalance(balance);
-			System.out.println("这是实际支付金额" + c.getBalance());
-			cm.updateBalanceById(c);
+		if (record.getId() != -1) {
+			// 成功了修改订单表的状态
+			System.out.println(sidm.updateStatusById(record.getSiId(), 2));
+			double balance = Double.parseDouble(record.getTakeinmoney()) - Double.parseDouble(record.getUser5());
+			if (balance != 0) {
+				Customer c = new Customer();
+				c.setId(record.getCid());
+				c.setBalance(balance);
+				System.out.println("这是实际支付金额" + c.getBalance());
+				cm.updateBalanceById(c);
+			}
 		}
-
 		return 0;
 	}
 
-	
 	@Override
 	public String getTimeNum(Integer uid) {
 		// TODO Auto-generated method stub
@@ -185,15 +184,17 @@ public class SalesServiceImpl implements SalesService {
 				sdm.updateScountById(stinfo.getStockdetailid(), stinfo.getCount());
 			}
 		}
-		// 第七步，我们已经完成了回档商品的操作,现在进行修改销售单状态的操作
-		sm.updateStatusById(id, status);
-		// 第八步,完成了上述操作之后 将金额反退给客户，这里应该判断 用户是赊账还是结账 不过我们有Takeinmoney实收属性在 可以解决用户是否收款的问题把
-		// 这里我在生成销售单的时候将status做了处理,2是赊账，3是收款 收款的金额不算在账户余额上 所以这里只要判断状态是否为2 如果是 就进行退款操作
-		double balance = Double.parseDouble(s.getTakeinmoney()) - Double.parseDouble(s.getUser5());
-		Customer c = new Customer();
-		c.setId(s.getCid());
-		c.setBalance(-balance);
-		cm.updateBalanceById(c);
+		if (id != -1) {
+			// 第七步，我们已经完成了回档商品的操作,现在进行修改销售单状态的操作
+			sm.updateStatusById(id, status);
+			// 第八步,完成了上述操作之后 将金额反退给客户，这里应该判断 用户是赊账还是结账 不过我们有Takeinmoney实收属性在 可以解决用户是否收款的问题把
+			// 这里我在生成销售单的时候将status做了处理,2是赊账，3是收款 收款的金额不算在账户余额上 所以这里只要判断状态是否为2 如果是 就进行退款操作
+			double balance = Double.parseDouble(s.getTakeinmoney()) - Double.parseDouble(s.getUser5());
+			Customer c = new Customer();
+			c.setId(s.getCid());
+			c.setBalance(-balance);
+			cm.updateBalanceById(c);
+		}
 		return 0;
 	}
 }
