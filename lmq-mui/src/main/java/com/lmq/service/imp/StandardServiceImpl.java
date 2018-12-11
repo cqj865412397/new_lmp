@@ -44,4 +44,10 @@ public class StandardServiceImpl implements StandardService{
 		return standardMapper.deleteByGid(gId);
 	}
 
+
+	@Override
+	public List<Standard> queryALLStandardByTid(Integer tId) {
+		return standardMapper.queryALLStandardByTid(tId);
+	}
+
 }

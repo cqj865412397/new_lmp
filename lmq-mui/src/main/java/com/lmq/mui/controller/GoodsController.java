@@ -80,7 +80,12 @@ public class GoodsController {
 		List<Goodstype> list = goodstypeService.queryTypeByParentId(0);
 		return list;
 	}
-
+	// 查询类目（包含所有父类）下所有规格值
+	@RequestMapping("/queryALLStandardByTid")
+	public List<Standard> queryALLStandardByTid(Integer tId) {
+		List<Standard> list = standardService.queryALLStandardByTid(tId);
+		return list;
+	}
 	// 查询规格(常规类目下的规格)
 	@RequestMapping("/queryStandardsBytId")
 	public List<Standard> queryStandardsBytId(Integer tId) {

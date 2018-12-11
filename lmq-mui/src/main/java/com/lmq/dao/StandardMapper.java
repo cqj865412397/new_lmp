@@ -14,7 +14,8 @@ public interface StandardMapper {
 	public List<Standard> queryStandardsBytIdAndGid(@Param("list")List<Goodstype> list,@Param("gId") Integer gId);
 	//删除自定义规格
 	public Integer deleteByGid(Integer gId);
-	
+	//查询添加分类时，父类tid（包含本类目）所有类目下的属性
+	public List<Standard> queryALLStandardByTid(Integer tId);
 	
 	/**
 	 * 自动生成
