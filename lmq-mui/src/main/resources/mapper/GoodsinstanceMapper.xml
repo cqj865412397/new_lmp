@@ -278,9 +278,33 @@
 	GROUP BY `goodsinstanceprice`.`Id`
 	ORDER BY goods.`time`DESC#排序
   </select>
-  <!-- 查询sid门店下全部单品默认价格 -->
+  
+  <!-- 查询sid门店下单个单品默认价格 和 报价 -->
+  <select id="querySimGoodsInstanceVoAboutDefPriceAndPrice" resultType="com.lmq.domain.GoodsInstanceVo">
+  	SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
+	,goodsinstanceprice.`price`,pricetype.`Name`AS priceName,q.`monye` AS money,`pricetype`.`DefaultPrice`,`goodsinstanceprice`.`Ptype`
+	,goods.`name`AS goodsName,i.url,`bit`.`Name` AS bitName
+	FROM goodsinstance
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+	LEFT JOIN `goodsinstanceprice` ON `goodsinstanceprice`.`goodsinstanceid` = goodsinstance.`Id`
+	INNER JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
+	LEFT JOIN (
+		SELECT * FROM `quote` WHERE `quote`.`status` = 0 AND `quote`.`cid` = #{sId}
+	) AS q ON q.`gid` = goodsinstance.`Id`
+	INNER JOIN `goods` ON `goods`.id = goodsinstance.`Gid`
+	INNER JOIN `bit` ON `bit`.`Id` = `goods`.`Bid`
+	INNER JOIN (SELECT * FROM `img` WHERE `img`.`status` = 0 GROUP BY `img`.`Id`)AS i ON i.Gid = goods.`Id`
+	WHERE goodsinstance.`status` = 0 AND (standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND goodsinstanceprice.`status` = 0
+	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
+	AND (standardinstance.`Name` LIKE '%%' OR goods.`name` LIKE '%%')
+	AND `pricetype`.`DefaultPrice` = 1
+	AND `goods`.`Sid` = #{sId}
+	AND `goodsinstance`.`Id` = #{gInId}
+	GROUP BY `goodsinstanceprice`.`Id`
+  </select>
+  <!-- 查询全部单品默价格 -->
   <select id="queryGoodsInstanceVoAboutDefPriceList" resultType="com.lmq.domain.GoodsInstanceVo">
-	 SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
+	SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
 	,goodsinstanceprice.`price`,pricetype.`Name`AS priceName,`pricetype`.`DefaultPrice`,`goodsinstanceprice`.`Ptype`
 	,goods.`name`AS goodsName,`bit`.`Name` AS bitName,i.url
 	FROM goodsinstance

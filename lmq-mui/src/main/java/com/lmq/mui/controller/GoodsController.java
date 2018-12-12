@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +33,8 @@ import com.lmq.service.StandardinstanceService;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-
+	@Value("${imgUrl}")
+	String imgUrl;
 	// ========注入========
 	@Autowired
 	GoodsService goodsService;
@@ -78,7 +80,12 @@ public class GoodsController {
 		List<Goodstype> list = goodstypeService.queryTypeByParentId(0);
 		return list;
 	}
-
+	// 查询类目（包含所有父类）下所有规格值
+	@RequestMapping("/queryALLStandardByTid")
+	public List<Standard> queryALLStandardByTid(Integer tId) {
+		List<Standard> list = standardService.queryALLStandardByTid(tId);
+		return list;
+	}
 	// 查询规格(常规类目下的规格)
 	@RequestMapping("/queryStandardsBytId")
 	public List<Standard> queryStandardsBytId(Integer tId) {
@@ -134,7 +141,15 @@ public class GoodsController {
 		List<GoodsInstanceVo> list = goodsinstanceService.queryGoodsInstanceVoAboutDefPriceList(sId);
 		return list;
 	}
-
+	
+	//查询sid门店下单个单品（默认价格和报价）
+	@RequestMapping("/querySimGoodsInstanceVoAboutDefPriceAndPrice")
+	public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceAndPrice(Integer gInId,Integer sId,Integer  cId) {
+		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutDefPriceAndPrice(gInId, sId, cId);
+		return gIn;
+	}
+	
+	
 	// 添加单位
 	@RequestMapping("/addBit")
 	public Integer addBit(String name) {
@@ -155,7 +170,7 @@ public class GoodsController {
 		goodsvo.getGoods().setUid("lirui");
 		goodsvo.getGoods().setSid(1);
 		// 设置图片路径
-		String path = "D:/img/goods";// session.getServletContext().getRealPath("/static/img/goods");
+		String path = imgUrl+"goods";// session.getServletContext().getRealPath("/static/img/goods");
 		goodsvo.setPath(path);
 		File file = new File(path);
 		if (!file.isDirectory()) {
@@ -195,7 +210,7 @@ public class GoodsController {
 		goodsvo.getGoods().setUid("lirui");
 		goodsvo.getGoods().setSid(1);
 		// 设置图片路径
-		String path = "D:/img/goods";// session.getServletContext().getRealPath("/static/img/goods");
+		String path = imgUrl+"goods";// session.getServletContext().getRealPath("/static/img/goods");
 		File file = new File(path);
 		if (!file.isDirectory()) {
 			file.mkdirs();
