@@ -77,13 +77,12 @@ public class SalesServiceImpl implements SalesService {
 			// 成功了修改订单表的状态
 			System.out.println(sidm.updateStatusById(record.getSiId(), 2));
 			double balance = Double.parseDouble(record.getTakeinmoney()) - Double.parseDouble(record.getUser5());
-			if (balance != 0) {
-				Customer c = new Customer();
-				c.setId(record.getCid());
-				c.setBalance(balance);
-				System.out.println("这是实际支付金额" + c.getBalance());
-				cm.updateBalanceById(c);
-			}
+			Customer c = new Customer();
+			c.setId(record.getCid());
+			c.setCore(record.getMoney());
+			c.setBalance(balance);
+			System.out.println("这是实际支付金额" + c.getBalance());
+			cm.updateBalanceById(c);
 		}
 		return 0;
 	}
@@ -193,6 +192,7 @@ public class SalesServiceImpl implements SalesService {
 			Customer c = new Customer();
 			c.setId(s.getCid());
 			c.setBalance(-balance);
+			c.setCore(-s.getMoney());
 			cm.updateBalanceById(c);
 		}
 		return 0;

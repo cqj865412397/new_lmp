@@ -336,7 +336,7 @@
 
 
 	<select id="queryById" resultMap="SSMap">
-		SELECT s.`Id` AS id,s.`takeinmoney` AS
+		SELECT s.`Id` AS id,s.`money`,s.`takeinmoney` AS
 		takeinmoney,s.`count` AS
 		`count`,s.`user2` AS `user2`,s.`user1` AS `user1`,
 		s.`user3` AS
