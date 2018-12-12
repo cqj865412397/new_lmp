@@ -24,7 +24,6 @@ public class QuotedPriceController {
 	}
 	@RequestMapping("addQuoteprice")
 	public int addQuoteprice(Quote obj){
-		System.out.println(123);
 		return service.addQuoteprice(obj);
 	}
 	@RequestMapping("updateByIdQuoteprice")

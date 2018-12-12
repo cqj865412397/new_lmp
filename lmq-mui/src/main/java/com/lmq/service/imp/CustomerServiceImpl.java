@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lmq.dao.CustomerMapper;
+import com.lmq.dao.SalesMapper;
 import com.lmq.domain.Classify;
 import com.lmq.domain.Customer;
 import com.lmq.service.CustomerService;
@@ -18,6 +19,8 @@ public class CustomerServiceImpl implements CustomerService{
 	CustomerMapper mapper;
 	@Autowired
 	ChineseToEnglish chinese;
+	@Autowired
+	SalesMapper salesmapper;
 	/**
 	 * 按照门店查询客户
 	 */
@@ -49,6 +52,15 @@ public class CustomerServiceImpl implements CustomerService{
 	 * 修改客戶
 	 */
 	@Override
+	public int deleteByCid(Integer id) {
+		// 未发生业务关系可以删除
+		int count=salesmapper.queryCountByCid(id);
+		if(count<1) {
+			return mapper.deleteByCid(id);
+		}
+		return 0;
+	}
+	@Override
 	public int updateByPrimaryKeySelective(Customer record) {
 		// TODO Auto-generated method stub
 		String name=record.getName();
@@ -57,6 +69,7 @@ public class CustomerServiceImpl implements CustomerService{
 		return mapper.updateByPrimaryKeySelective(record);
 	}
 	
+	//删除
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
@@ -95,6 +108,7 @@ public class CustomerServiceImpl implements CustomerService{
 		// TODO Auto-generated method stub
 		return mapper.queryByIdResultPid(id);
 	}
+	
 
 
 }

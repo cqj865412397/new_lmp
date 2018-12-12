@@ -385,4 +385,7 @@
 		update sales set `status`=#{status} where
 		Id=#{id}
 	</update>
+	<select id="queryCountByCid" resultType="int">
+		select count(*) from sales where cid=#{cid}
+	</select>
 </mapper>

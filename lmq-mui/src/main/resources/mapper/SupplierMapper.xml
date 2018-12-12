@@ -347,11 +347,11 @@
 	</resultMap>
 	<select id="queryByIdAllSupplier" resultMap="ResultMapClassify">
 		SELECT DISTINCT `acronymname`,sid as id FROM
-		supplier WHERE sid=#{sid}
+		supplier WHERE sid=#{sid} and status=0
 	</select>
 	<select id="queryByIdAllSupplier1" resultMap="BaseResultMap">
 		SELECT * FROM
-		supplier WHERE sid=#{id} AND acronymname=#{acronymname}
+		supplier WHERE sid=#{id} AND acronymname=#{acronymname} and status=0
 	</select>
 
   

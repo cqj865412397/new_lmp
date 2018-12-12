@@ -45,5 +45,7 @@ public interface CustomerMapper {
     String getTimeNum(Integer uid);
     //根据客户ID查询客户Pid(客户类型)
     int queryByIdResultPid(Integer id);
-
+    
+    //根据客户ID删除
+    int deleteByCid(Integer id);
 }

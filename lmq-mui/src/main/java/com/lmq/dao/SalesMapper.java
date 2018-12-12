@@ -26,5 +26,6 @@ public interface SalesMapper {
     List<Sales> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate);
     
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
-
+    
+    int queryCountByCid(Integer cid);
 }
