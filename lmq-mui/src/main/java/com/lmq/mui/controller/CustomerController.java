@@ -64,6 +64,15 @@ public class CustomerController {
 		return customerService.selectByPrimaryKey(id);
 	}
 	
+	/***
+	 * 删除客户
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/deleteByCid")
+	public int deleteByCid(Integer id) {
+		return customerService.deleteByCid(id);
+	}
 
 	
 }

@@ -45,4 +45,6 @@ public interface CustomerService {
 	    int updateBalanceById(Customer record);
 	    
 	    Customer queryBalanceById(Integer id);
+	    
+	    int deleteByCid(Integer id);
 }
