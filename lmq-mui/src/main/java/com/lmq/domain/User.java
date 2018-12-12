@@ -17,6 +17,7 @@ public class User {
 
     private String uid;
 
+    //门店编号   主门店  最大级别的门店 能查看下面的所以子门店
     private String user1;
 
     private String user2;
@@ -82,7 +83,7 @@ public class User {
     public void setUid(String uid) {
         this.uid = uid;
     }
-
+  //门店编号   主门店  最大级别的门店 能查看下面的所以子门店
     public String getUser1() {
         return user1;
     }
