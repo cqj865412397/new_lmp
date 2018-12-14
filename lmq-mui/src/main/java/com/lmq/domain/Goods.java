@@ -64,7 +64,7 @@ public class Goods {
 
     private String uid;
 
-    private String user1;
+    private String user1;//商品价格（一口价）
 
     private String user2;
 
