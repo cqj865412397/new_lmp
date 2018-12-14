@@ -270,7 +270,6 @@
 		LEFT JOIN `pricetype` ON `pricetype`.`Id` = `goodsinstanceprice`.`Ptype`
 		WHERE goodsinstance.`DefaultState` = 1
 		AND goods.`status` = 0 AND goodsinstance.`status` = 0 AND goodsinstanceprice.`status` = 0 AND `stockdetail`.`status` = 0 AND `bit`.`status` = 0  AND `pricetype`.`status` = 0
-		OR ISNULL(`pricetype`.`status`) = TRUE #特殊情况一口价
 		AND goods.`Sid` = #{Sid}
 		AND goods.`name` LIKE CONCAT('%',#{goodsName},'%')
 		GROUP BY goodsinstance.`Id`,goodsinstanceprice.`Ptype`
