@@ -1,5 +1,7 @@
 package com.lmq.dao;
 
+import java.util.List;
+
 import com.lmq.domain.Store;
 
 public interface StoreMapper {
@@ -14,4 +16,6 @@ public interface StoreMapper {
     int updateByPrimaryKeySelective(Store record);
 
     int updateByPrimaryKey(Store record);
+    
+    List<Store> queryByUserId(Integer id);
 }
