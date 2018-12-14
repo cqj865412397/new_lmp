@@ -43,7 +43,7 @@ public class CustomerrechargeServiceImpl implements CustomerrechargeService{
 	}
 
 	@Override
-	public List<Customerrecharge> queryList(String startTime, String endTime, String filtrate) {
+	public List<Customerrecharge> queryList(String startTime, String endTime, String filtrate,Integer sid) {
 		// TODO Auto-generated method stub
 		
 		System.out.println(filtrate);
@@ -52,7 +52,7 @@ public class CustomerrechargeServiceImpl implements CustomerrechargeService{
 			System.out.println("你好我是杨菊花");
 			filtrate = "";
 		}
-		return ccm.queryList(startTime, endTime, filtrate);
+		return ccm.queryList(startTime, endTime, filtrate,sid);
 		
 	}
 

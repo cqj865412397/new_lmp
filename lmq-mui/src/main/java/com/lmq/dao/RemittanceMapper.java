@@ -22,7 +22,7 @@ public interface RemittanceMapper {
 	String getTimeNum(Integer uid);
 
 	List<Remittance> queryList(@Param("startTime") String startTime, @Param("endTime") String endTime,
-			@Param("filtrate") String filtrate);
+			@Param("filtrate") String filtrate,@Param("sid")Integer sid);
 	
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
     Remittance queryInfoById(Integer id);

@@ -28,7 +28,7 @@ public class Customerrecharge {
     private String user3;
     //备注
     private String user4;
-
+    //门店id
     private String user5;
     
     //支付名称

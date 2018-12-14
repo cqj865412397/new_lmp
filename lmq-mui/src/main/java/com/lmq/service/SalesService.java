@@ -12,7 +12,7 @@ public interface SalesService {
 
     String getTimeNum(Integer uid);
     Sales queryById(Integer id);
-    List<Sales> queryList(String startTime,String endTime,String filtrate);
+    List<Sales> queryList(String startTime,String endTime,String filtrate,Integer sid);
     int updateStatusById(Integer id,Integer status);
 
 }

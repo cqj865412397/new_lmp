@@ -56,9 +56,9 @@ public class SalesController {
 	
 	//查询出列表数据
 		@RequestMapping("/queryList")
-		public List<Sales> queryList(String startTime,String endTime,String filtrate) {
-			System.out.println("显示参数"+startTime+","+endTime+","+filtrate);
-			return ss.queryList(startTime,endTime,filtrate);
+		public List<Sales> queryList(String startTime,String endTime,String filtrate,Integer sid) {
+			System.out.println("显示参数"+startTime+","+endTime+","+filtrate+","+sid);
+			return ss.queryList(startTime,endTime,filtrate,sid);
 		}
 		//通过id查询出订单详情
 		@RequestMapping("/queryById")

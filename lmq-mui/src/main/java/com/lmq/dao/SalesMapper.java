@@ -23,7 +23,7 @@ public interface SalesMapper {
     
     Sales queryById(Integer id);
 
-    List<Sales> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate);
+    List<Sales> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate,@Param("sid")Integer sid);
     
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
 

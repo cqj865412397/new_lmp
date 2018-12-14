@@ -2,6 +2,7 @@ package com.lmq.mui.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,9 @@ public class RemittanceController {
 		}
 		
 		@RequestMapping("/queryList")
-		public List<Remittance> queryList(String startTime,String endTime,String filtrate) {
-			System.out.println("显示参数"+startTime+","+endTime+","+filtrate);
-			return rs.queryList(startTime,endTime,filtrate);
+		public List<Remittance> queryList(String startTime,String endTime,String filtrate,Integer sid) {
+			System.out.println("显示参数"+startTime+","+endTime+","+filtrate+","+sid);
+			return rs.queryList(startTime,endTime,filtrate,sid);
 		}
 		
 		//删除 实质是修改的状态

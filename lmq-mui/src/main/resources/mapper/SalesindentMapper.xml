@@ -358,7 +358,9 @@
 		s.`SalesIndentNub` LIKE CONCAT('%',#{filtrate},'%') OR
 		st.`name`
 		LIKE
-		CONCAT('%',#{filtrate},'%') ) ORDER BY s.`user1` DESC
+		CONCAT('%',#{filtrate},'%') )
+		and s.`sid`=#{sid}
+		 ORDER BY s.`user1` DESC
 		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
 			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
 			</if> -->

@@ -101,7 +101,7 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Sales> queryList(String startTime, String endTime, String filtrate) {
+	public List<Sales> queryList(String startTime, String endTime, String filtrate,Integer sid) {
 		// TODO Auto-generated method stub
 		System.out.println(filtrate);
 		List<Salesindent> list = null;
@@ -109,7 +109,7 @@ public class SalesServiceImpl implements SalesService {
 			System.out.println("你好我是杨菊花");
 			filtrate = "";
 		}
-		return sm.queryList(startTime, endTime, filtrate);
+		return sm.queryList(startTime, endTime, filtrate,sid);
 	}
 
 	/**

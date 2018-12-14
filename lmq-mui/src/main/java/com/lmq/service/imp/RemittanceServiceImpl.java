@@ -2,6 +2,7 @@ package com.lmq.service.imp;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,7 @@ public class RemittanceServiceImpl implements RemittanceService{
 	}
 
 	@Override
-	public List<Remittance> queryList(String startTime, String endTime, String filtrate) {
+	public List<Remittance> queryList(String startTime, String endTime, String filtrate,Integer sid) {
 		// TODO Auto-generated method stub
 		System.out.println(filtrate);
 		List<Salesindent> list = null;
@@ -53,7 +54,7 @@ public class RemittanceServiceImpl implements RemittanceService{
 			System.out.println("你好我是杨菊花");
 			filtrate = "";
 		}
-		return rm.queryList(startTime, endTime, filtrate);
+		return rm.queryList(startTime, endTime, filtrate,sid);
 	}
 
 	@Override
