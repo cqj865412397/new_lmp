@@ -45,7 +45,6 @@ public class SalesServiceImpl implements SalesService {
 	public int insertSelective(Sales record) {
 		// TODO Auto-generated method stub
 		sm.insertSelective(record);
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("salesid", record.getId());
 		List<Salesdetails> slist = record.getSalesdetails();
@@ -56,8 +55,6 @@ public class SalesServiceImpl implements SalesService {
 		for (Salesdetails sd : ssm.queryBySalesid(record.getId())) {
 			// 通过商品编号和门店编号查询到还有剩余的库存详情表集合
 			List<Stockdetail> sdlist = sdm.queryByGidAndSid(Integer.parseInt(sd.getUser1()), record.getSid());
-			// List<Stockdetail> sdlist = sdm.queryByGidAndSid(1, 1);
-
 			// 判断是否还有有库存的商品
 			if (sdlist.size() > 0) {
 				// 创建一个销售库存记录表集合
@@ -73,6 +70,7 @@ public class SalesServiceImpl implements SalesService {
 				sdm.updateBatch(sdlist);
 			}
 		}
+		//判断是否是零售
 		if (record.getId() != -1) {
 			// 成功了修改订单表的状态
 			System.out.println(sidm.updateStatusById(record.getSiId(), 2));
@@ -150,17 +148,20 @@ public class SalesServiceImpl implements SalesService {
 		// TODO Auto-generated method stub
 		// 第一步先通过id获取到对象
 		Sales s = sm.queryById(id);
-		// 第二步,通过获取的对象找到订单编号,得到订单对象；
-		String SalesIndentNub = s.getUser2();
-		Salesindent si = sidm.queryBySalesIndentNub(SalesIndentNub);
-		// 第三步，判断是否存在定金，如果有定金就返退
-		/*
-		 * if(si.getDeposi()!=null) { Customer c=new Customer();
-		 * c.setId(Integer.parseInt(si.getCid())); c.setBalance(-si.getDeposi());
-		 * cm.updateBalanceById(c); }
-		 */
-		// 第四步，完成之后将订单状态修改为未完成
-		sidm.updateStatusById(si.getId(), 0);
+		//判断是否为直接添加的走流程生成的销售单，是就去修改他的订单表状态
+		if (s.getStatus() == 0) {
+			// 第二步,通过获取的对象找到订单编号,得到订单对象；
+			String SalesIndentNub = s.getUser2();
+			Salesindent si = sidm.queryBySalesIndentNub(SalesIndentNub);
+			// 第三步，判断是否存在定金，如果有定金就返退
+			/*
+			 * if(si.getDeposi()!=null) { Customer c=new Customer();
+			 * c.setId(Integer.parseInt(si.getCid())); c.setBalance(-si.getDeposi());
+			 * cm.updateBalanceById(c); }
+			 */
+			// 第四步，完成之后将订单状态修改为未完成
+			sidm.updateStatusById(si.getId(), 0);
+		}
 		// 已经完成的订单和定金的回档，开始回档销售单的内容，销售单需要回档的内容有:
 		// 销售单的状态改为1，销售单的结算金额需要回退客户，销售的商品需要对应的回到库存详情表中，销售库存详情表也要修改为1号状态
 		// 销售详情单也要修改为状态1
