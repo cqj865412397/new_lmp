@@ -8,4 +8,6 @@ public interface GoodstypeService {
 	public List<Goodstype> queryTypeByParentId(Integer parentId);
 	
 	public List<Goodstype> queryAllParentIdByTid(Integer tId);
+	//查询顶级类目
+	public List <Goodstype>  queryGoodstypeTop();
 }

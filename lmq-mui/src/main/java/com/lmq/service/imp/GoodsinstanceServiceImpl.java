@@ -59,6 +59,12 @@ public class GoodsinstanceServiceImpl implements GoodsinstanceService{
 	}
 
 
+	@Override
+	public List<GoodsInstanceVo> queryAllGoodsInstanceBySid(Integer sId, String gName) {
+		return goodsinstanceMapper.queryAllGoodsInstanceBySid(sId, gName);
+	}
+
+
 	
 
 	
