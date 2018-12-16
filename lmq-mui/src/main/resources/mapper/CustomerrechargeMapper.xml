@@ -221,7 +221,7 @@
 		c.`name`
 		LIKE
 		CONCAT('%',#{filtrate},'%') )
-		cc.`user5`=#{sid}
+		and cc.`user5`=#{sid}
 		 ORDER BY cc.`time` DESC
 		<!-- <if test=""> and DATE(s.`time`) BETWEEN '2018-11-14' AND '2018-11-14' 
 			</if> <if test=""> and s.`SalesIndentNub` LIKE '%1%' OR st.`name` LIKE '%1%' 
