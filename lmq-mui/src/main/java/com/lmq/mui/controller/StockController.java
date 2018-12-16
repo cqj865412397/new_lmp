@@ -2,6 +2,7 @@ package com.lmq.mui.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,9 @@ public class StockController {
 	
 	//显示列表 传入了时间和搜索条件
 		@RequestMapping("/queryList")
-		public List<Stock> queryList(String startTime,String endTime,String filtrate) {
-			System.out.println("显示参数"+startTime+","+endTime+","+filtrate);
-			return ssi.queryList(startTime,endTime,filtrate);
+		public List<Stock> queryList(String startTime,String endTime,String filtrate,Integer sid) {
+			System.out.println("显示参数"+startTime+","+endTime+","+filtrate+","+sid);
+			return ssi.queryList(startTime,endTime,filtrate,sid);
 		}
 		
 		//通过用户id找到用户当日最新的订单

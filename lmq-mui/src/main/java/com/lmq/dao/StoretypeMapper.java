@@ -1,5 +1,7 @@
 package com.lmq.dao;
 
+import java.util.List;
+
 import com.lmq.domain.Storetype;
 
 public interface StoretypeMapper {
@@ -14,4 +16,6 @@ public interface StoretypeMapper {
     int updateByPrimaryKeySelective(Storetype record);
 
     int updateByPrimaryKey(Storetype record);
+
+    List<Storetype> Storetype(Integer User1);
 }

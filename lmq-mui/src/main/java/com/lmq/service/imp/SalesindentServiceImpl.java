@@ -51,7 +51,7 @@ public class SalesindentServiceImpl implements SalesindentService{
 
 
 	@Override
-	public List<Salesindent> queryList(String startTime,String endTime,String filtrate) {
+	public List<Salesindent> queryList(String startTime,String endTime,String filtrate,Integer sid) {
 		// TODO Auto-generated method stub
 		System.out.println(filtrate);
 		List<Salesindent> list=null;
@@ -59,7 +59,7 @@ public class SalesindentServiceImpl implements SalesindentService{
 			System.out.println("你好我是杨菊花");
 			filtrate="";
 		}
-		return sim.queryList(startTime, endTime, filtrate);
+		return sim.queryList(startTime, endTime, filtrate,sid);
 	}
 
 	@Override

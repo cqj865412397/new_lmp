@@ -25,4 +25,9 @@ public class GoodstypeServiceImpl implements GoodstypeService{
 		return goodstypeMapper.queryAllParentIdByTid(tId);
 	}
 
+	@Override
+	public List<Goodstype> queryGoodstypeTop() {
+		return goodstypeMapper.queryGoodstypeTop();
+	}
+
 }

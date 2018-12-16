@@ -80,6 +80,15 @@ public class GoodsController {
 		List<Goodstype> list = goodstypeService.queryTypeByParentId(0);
 		return list;
 	}
+	//顶级类目查询
+	@RequestMapping("/queryGoodstypeTop")
+	public List<Goodstype> queryGoodstypeTop() {
+		List<Goodstype> list = goodstypeService.queryGoodstypeTop();
+		return list;
+	}
+	
+	
+	
 	// 查询类目（包含所有父类）下所有规格值
 	@RequestMapping("/queryALLStandardByTid")
 	public List<Standard> queryALLStandardByTid(Integer tId) {
@@ -148,7 +157,12 @@ public class GoodsController {
 		GoodsInstanceVo gIn = goodsinstanceService.querySimGoodsInstanceVoAboutDefPriceAndPrice(gInId, sId, cId);
 		return gIn;
 	}
-	
+	//查询sId门店下全部单品信息
+	@RequestMapping("/queryAllGoodsInstanceBySid")
+	public List<GoodsInstanceVo> queryAllGoodsInstanceBySid(Integer sId,String gName) {
+		List<GoodsInstanceVo> list = goodsinstanceService.queryAllGoodsInstanceBySid(sId, gName);
+		return list;
+	}
 	
 	// 添加单位
 	@RequestMapping("/addBit")

@@ -1,6 +1,7 @@
 package com.lmq.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Store {
     private Integer id;
@@ -36,7 +37,8 @@ public class Store {
     private String user4;
 
     private String user5;
-
+    
+    private List<Store> list;
     public Integer getId() {
         return id;
     }
@@ -45,7 +47,15 @@ public class Store {
         this.id = id;
     }
 
-    public String getName() {
+    public List<Store> getList() {
+		return list;
+	}
+
+	public void setList(List<Store> list) {
+		this.list = list;
+	}
+
+	public String getName() {
         return name;
     }
 

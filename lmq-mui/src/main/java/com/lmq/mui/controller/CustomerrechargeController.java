@@ -38,9 +38,9 @@ public class CustomerrechargeController {
 		}
 		
 		@RequestMapping("/queryList")
-		public List<Customerrecharge> queryList(String startTime,String endTime,String filtrate) {
-			System.out.println("显示参数"+startTime+","+endTime+","+filtrate);
-			return ccs.queryList(startTime,endTime,filtrate);
+		public List<Customerrecharge> queryList(String startTime,String endTime,String filtrate,Integer sid) {
+			System.out.println("显示参数"+startTime+","+endTime+","+filtrate+","+sid);
+			return ccs.queryList(startTime,endTime,filtrate,sid);
 		}
 		
 		//删除 实质是修改的状态

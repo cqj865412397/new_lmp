@@ -10,6 +10,9 @@ public interface GoodstypeMapper {
 	
 	//查询所有父类id（包含本类id）
 	public List<Goodstype> queryAllParentIdByTid(Integer tId);
+	//查询顶级类目
+	public List <Goodstype>  queryGoodstypeTop();
+	
 	/**
 	 * 自动生成的方法
 	 */
