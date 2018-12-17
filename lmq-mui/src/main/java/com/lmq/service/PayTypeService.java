@@ -17,4 +17,6 @@ public interface PayTypeService {
 
 	    int updateByPrimaryKey(Paytype record);
 	    List<Paytype> queryAll();
+	    
+	    List<Paytype> queryByUserid(Paytype obj);
 }

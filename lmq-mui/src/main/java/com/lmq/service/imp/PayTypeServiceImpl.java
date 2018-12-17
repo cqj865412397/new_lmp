@@ -17,7 +17,7 @@ public class PayTypeServiceImpl implements PayTypeService{
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return pm.deleteByPrimaryKey(id);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class PayTypeServiceImpl implements PayTypeService{
 	@Override
 	public int insertSelective(Paytype record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return pm.insertSelective(record);
 	}
 
 	@Override
@@ -55,6 +55,12 @@ public class PayTypeServiceImpl implements PayTypeService{
 		// TODO Auto-generated method stub
 		System.out.println(1);
 		return pm.queryAll();
+	}
+
+	@Override
+	public List<Paytype> queryByUserid(Paytype obj) {
+		// TODO Auto-generated method stub
+		return pm.queryByUserid(obj);
 	}
 
 }

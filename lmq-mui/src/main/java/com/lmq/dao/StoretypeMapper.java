@@ -18,4 +18,6 @@ public interface StoretypeMapper {
     int updateByPrimaryKey(Storetype record);
 
     List<Storetype> Storetype(Integer User1);
+    
+    List<Storetype> queryBylevel(Storetype obj);
 }

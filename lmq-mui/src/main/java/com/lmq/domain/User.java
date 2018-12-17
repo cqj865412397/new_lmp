@@ -9,7 +9,7 @@ public class User {
 
     private String pwd;
 
-    private Date time;
+    private String time;
 
     private Integer status;
 
@@ -27,8 +27,19 @@ public class User {
     private String user4;
 
     private String user5;
+    /**
+     * 门店
+     */
+    private Store store;
+    public Store getStore() {
+		return store;
+	}
 
-    public Integer getId() {
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -52,15 +63,17 @@ public class User {
         this.pwd = pwd;
     }
 
-    public Date getTime() {
-        return time;
-    }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
 
-    public Integer getStatus() {
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public Integer getStatus() {
         return status;
     }
 
