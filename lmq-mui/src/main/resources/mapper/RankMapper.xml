@@ -6,21 +6,22 @@
     <result column="number" property="number" />
     <result column="name" property="name" />
     <result column="name2" property="name2" />
+    <result column="name3" property="name3" />
     <result column="percentage" property="percentage" />
   </resultMap>
 
   <select id="querySalesPersonRank" resultMap="Rank">
 	SELECT u.`Id` AS id,u.`name`,SUM(s.`Takeinmoney`) AS number FROM `user` AS u
 	LEFT JOIN sales AS s ON s.`uid`=u.`Id`
-	WHERE u.`status`=0 AND s.`status`=0 
-<!-- 	AND s.`time`>DATE_ADD(DATE(NOW()),INTERVAL  1-DAYOFWEEK(NOW()) DAY) -->
+	WHERE u.`status`=0 AND s.`status`=0 AND s.Sid=#{storeid}
+	AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate})
 	GROUP BY u.`Id`
 	ORDER BY number;
   </select>
   <select id="queryCustomerRank" resultMap="Rank">
 	SELECT c.`Id` AS id,c.`Name` AS `name`,SUM(s.`Takeinmoney`) AS number FROM customer AS c
 	LEFT JOIN sales AS s ON c.`Id`=s.`cid`
-	WHERE c.`status`=0 AND s.`status`=0
+	WHERE c.`status`=0 AND s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
 	GROUP BY c.`Id`
 	ORDER BY number DESC
   </select>
@@ -34,8 +35,36 @@
 	) AS t ON t.Id=gi.`Id`
 	LEFT JOIN salesdetails AS st ON st.`user1`=gi.`Id`
 	LEFT JOIN sales AS s ON s.`Id`=st.`Salesid`
-	WHERE gi.`status`=0 AND s.`status`=0
+	WHERE gi.`status`=0 AND s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
 	GROUP BY gi.`Id`
 	ORDER BY number DESC
+  </select>
+  <select id="queryChartIncome" resultMap="Rank">
+  	SELECT temp.date AS `name`,COALESCE ( SUM(sales.`Takeinmoney`), 0 ) AS `number`,DATE_FORMAT(temp.date,'%Y%m') AS `name2`,DATE_FORMAT(temp.date,'%Y%u') AS `name3` FROM (
+		SELECT ADDDATE( DATE(#{startdate}), numlist.id ) AS 'date' 
+		FROM( SELECT n1.i + n10.i * 10 + n100.i * 100 AS id FROM num n1 CROSS JOIN num AS n10 CROSS JOIN num AS n100 ) AS numlist 
+		WHERE ADDDATE( DATE(#{startdate}), numlist.id ) &lt;= DATE(#{enddate})
+	) temp
+	LEFT JOIN sales ON temp.date=sales.`time`
+	 AND sales.`time` BETWEEN #{startdate} AND #{enddate} AND sales.`status`=0 AND sales.`Sid`=#{storeid}
+	GROUP BY temp.date;
+  </select>
+  <select id="queryChartProfit" resultMap="Rank">
+  	SELECT temp.date AS `name`,COALESCE ( SUM(a.`number`), 0 ) AS `number`,DATE_FORMAT(temp.date,'%Y%m') AS `name2`,DATE_FORMAT(temp.date,'%Y%u') AS `name3`  FROM (
+		SELECT ADDDATE( DATE(#{startdate}), numlist.id ) AS 'date' 
+		FROM( SELECT n1.i + n10.i * 10 + n100.i * 100 AS id FROM num n1 CROSS JOIN num AS n10 CROSS JOIN num AS n100 ) AS numlist 
+		WHERE ADDDATE( DATE(#{startdate}), numlist.id ) &lt;= DATE(#{enddate})
+	) temp
+	LEFT JOIN (
+		SELECT salesstockinfo.`Id`,DATE(salesstockinfo.`time`) AS `name`,salesstockinfo.`count`*stockdetail.`Price` AS `number` FROM salesstockinfo
+		INNER JOIN stockdetail ON salesstockinfo.`stockdetailid`=stockdetail.`Id` 
+		AND salesstockinfo.`status`=0 AND salesstockinfo.`time` BETWEEN #{startdate} AND #{enddate}
+		INNER JOIN salesdetails ON salesdetails.`Id`=salesstockinfo.`salesid` 
+		INNER JOIN sales ON sales.`Id`=salesdetails.`Salesid` AND sales.`Sid`=#{storeid}
+	) AS a ON temp.date=a.`name`
+	GROUP BY temp.date;
+  </select>
+  <select id="queryChartExpenses" resultMap="Rank">
+  	select * from sales
   </select>
 </mapper>

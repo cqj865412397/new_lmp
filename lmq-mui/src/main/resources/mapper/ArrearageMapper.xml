@@ -55,11 +55,11 @@
 	SELECT su.`Name` AS `name`,a.*,b.initMoney FROM supplier AS su
 	LEFT JOIN (
 	SELECT Supid AS id,'进货' AS `reason`,stock.`Code` AS bh,`Allprice` AS addMoney,stock.`Time` AS `time` FROM stock
-	WHERE `Time` BETWEEN #{startdate} AND #{endtime} AND `status`=0
+	WHERE `Time` BETWEEN #{starttime} AND #{endtime} AND `status`=0
 	) AS a ON su.`Id`=a.id
 	LEFT JOIN (
 	SELECT Supid,SUM(`Allprice`) AS initMoney FROM stock
-	WHERE `Time` &lt; #{startdate} AND `status`=0 AND stock.`Supid`=#{sid}
+	WHERE `Time` &lt; #{starttime} AND `status`=0 AND stock.`Supid`=#{sid}
 	) AS b ON su.`Id`=b.Supid
 	WHERE su.`Id`=#{sid}
   </select>

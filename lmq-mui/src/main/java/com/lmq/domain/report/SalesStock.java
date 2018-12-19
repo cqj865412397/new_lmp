@@ -21,7 +21,7 @@ public class SalesStock {
 	//明细使用：
 	private Integer cid;	//客户id
 	private String cname;	//客户名
-	private Integer sid;	//销售单号id
+	private String sid;	//销售单号id
 	private String time;	//销售单日期
 	private Double money;	//原价
 	
@@ -83,10 +83,10 @@ public class SalesStock {
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
-	public Integer getSid() {
+	public String getSid() {
 		return sid;
 	}
-	public void setSid(Integer sid) {
+	public void setSid(String sid) {
 		this.sid = sid;
 	}
 	public String getTime() {

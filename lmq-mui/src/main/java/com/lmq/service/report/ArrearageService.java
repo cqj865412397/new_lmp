@@ -10,5 +10,5 @@ public interface ArrearageService {
 	public List<Arrearage> queryReceipt(String starttime,String endtime);
 	public List<Arrearage> queryReceiptDetail(Integer cid,String starttime,String endtime);
 	public List<Arrearage> queryPay(String starttime,String endtime);
-	public List<Arrearage> queryPayDetail(Integer sid,String starttime,String endtime);
+	public List<Arrearage> queryPayDetail(Integer sid,String startdate,String enddate);
 }

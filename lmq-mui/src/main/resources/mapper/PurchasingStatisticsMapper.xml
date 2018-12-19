@@ -31,6 +31,7 @@
 		GROUP BY goodsinstance.`Id`
 	) AS t ON t.Id=gi.`Id`
 	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
+	WHERE s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) And s.`Sid`=#{storeid}
 	GROUP BY gi.`Id`;
   </select>
   <!-- 进货统计-详细记录-->
@@ -46,7 +47,8 @@
 		GROUP BY goodsinstance.`Id`
 	) AS t ON t.Id=gi.`Id`
 	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
-	WHERE gi.`Id`=#{gid}
+	WHERE s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) And s.`Sid`=#{storeid}
+	AND gi.`Id`=#{goodsid}
   </select>
   
 </mapper>

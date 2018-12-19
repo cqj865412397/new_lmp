@@ -23,12 +23,8 @@ public class AccountController {
 	@RequestMapping("/receiptAccount")
 	public List<Account> receiptAccount(Condition c) {
 		System.out.println("应收对账");
-		c.setCustomer(1);
 		System.out.println("时间范围date:"+c.getDate()+"客户："+c.getCustomer()+"\n"+c.getStartdate()+"-"+c.getEnddate());
 		List<Account> list=as.queryReceipt(c);
-		for (Account a : list) {
-			System.out.println(a.getName()+a.getAddMoney()+"-"+a.getBackMoney());
-		}
 		return as.queryReceipt(c);
 	}
 	//应付-供应商

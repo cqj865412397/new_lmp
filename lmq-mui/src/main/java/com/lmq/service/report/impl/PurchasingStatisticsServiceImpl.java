@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lmq.dao.report.PurchasingStatisticsMapper;
+import com.lmq.domain.report.Condition;
 import com.lmq.domain.report.SalesStock;
 import com.lmq.service.report.PurchasingStatisticsService;
 
@@ -14,15 +15,15 @@ public class PurchasingStatisticsServiceImpl implements PurchasingStatisticsServ
 	@Autowired
 	PurchasingStatisticsMapper mapper;
 	@Override
-	public List<SalesStock> query() {
+	public List<SalesStock> query(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.query();
+		return mapper.query(c);
 	}
 
 	@Override
-	public List<SalesStock> queryDetail(Integer gid) {
+	public List<SalesStock> queryDetail(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryDetail(gid);
+		return mapper.queryDetail(c);
 	}
 	
 }

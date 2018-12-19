@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lmq.dao.report.SalesStatisticsMapper;
+import com.lmq.domain.report.Condition;
 import com.lmq.domain.report.SalesStock;
 import com.lmq.service.report.SalesStatisticsService;
 @Service
@@ -16,15 +17,21 @@ public class SalesStatisticsServiceImpl implements SalesStatisticsService {
 	SalesStatisticsMapper sm;
 	
 	@Override
-	public List<SalesStock> query() {
+	public List<SalesStock> query(Condition c) {
 		// TODO Auto-generated method stub
-		return sm.query();
+		return sm.query(c);
 	}
 
 	@Override
-	public List<SalesStock> queryDetail(Integer gid) {
+	public List<SalesStock> queryDetail(Condition c) {
 		// TODO Auto-generated method stub
-		return sm.queryDetail(gid);
+		return sm.queryDetail(c);
+	}
+
+	@Override
+	public double[] queryToday(Integer storeid) {
+		// TODO Auto-generated method stub
+		return sm.queryToday(storeid);
 	}
 
 }

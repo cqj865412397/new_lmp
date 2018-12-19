@@ -1,5 +1,6 @@
 package com.lmq.mui.controller.report;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,21 @@ public class RankController {
 	public List<Rank> goodsRank(Condition c) {
 		System.out.println("货品销售排名");
 		return rs.queryGoodsRank(c);
+	}
+	@RequestMapping("/chartIncome")
+	public List<Rank> chartIncome(Condition c) {
+		System.out.println("销售收入-折线图数据");
+		System.out.println(c.getStartdate()+"\n"+c.getEnddate());
+		return rs.queryChartIncome(c);
+	}
+	@RequestMapping("/chartProfit")
+	public List<Rank> chartProfit(Condition c) {
+		System.out.println("销售成本-折线图数据");
+		return rs.queryChartProfit(c);
+	}
+	@RequestMapping("/chartExpenses")
+	public List<Rank> chartExpenses(Condition c) {
+		System.out.println("经营费用-折线图数据");
+		return rs.queryChartExpenses(c);
 	}
 }

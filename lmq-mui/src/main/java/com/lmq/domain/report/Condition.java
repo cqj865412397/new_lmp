@@ -22,6 +22,7 @@ public class Condition {
 	private Integer goodstype;	//货品类型-商品类型id
 	private Integer goodsid;	//按货品-商品实例id
 	private Integer storeid;	//门店id
+	private Integer userid;		//登录用户
 	
 	public Condition() {
 		// TODO Auto-generated constructor stub
@@ -68,13 +69,17 @@ public class Condition {
 		return startdate;
 	}
 	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+		if(this.date==6) {
+			this.startdate = startdate;
+		}
 	}
 	public String getEnddate() {
 		return enddate;
 	}
 	public void setEnddate(String enddate) {
-		this.enddate = enddate;
+		if(this.date==6) {
+			this.enddate = enddate;
+		}
 	}
 	public Integer getCustomer() {
 		return customer;
@@ -126,6 +131,12 @@ public class Condition {
 	}
 	public void setStoreid(Integer storeid) {
 		this.storeid = storeid;
+	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 }

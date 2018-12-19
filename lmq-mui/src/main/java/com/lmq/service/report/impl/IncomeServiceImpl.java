@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lmq.dao.report.IncomeMapper;
 import com.lmq.domain.report.AllIncome;
+import com.lmq.domain.report.Condition;
 import com.lmq.domain.report.Income;
 import com.lmq.service.report.IncomeService;
 @Service
@@ -16,33 +17,33 @@ public class IncomeServiceImpl implements IncomeService {
 	@Autowired
 	IncomeMapper mapper;
 	@Override
-	public AllIncome queryAll() {
+	public AllIncome queryAll(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryAll();
+		return mapper.queryAll(c);
 	}
 
 	@Override
-	public List<Income> queryXS() {
+	public List<Income> queryXS(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryXS();
+		return mapper.queryXS(c);
 	}
 
 	@Override
-	public List<Income> querySK() {
+	public List<Income> querySK(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.querySK();
+		return mapper.querySK(c);
 	}
 
 	@Override
-	public List<Income> queryJH() {
+	public List<Income> queryJH(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryJH();
+		return mapper.queryJH(c);
 	}
 
 	@Override
-	public List<Income> queryFK() {
+	public List<Income> queryFK(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryFK();
+		return mapper.queryFK(c);
 	}
 	
 }

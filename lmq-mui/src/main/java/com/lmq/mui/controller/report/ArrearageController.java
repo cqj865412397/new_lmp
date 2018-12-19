@@ -20,25 +20,25 @@ public class ArrearageController {
 	ArrearageService as;
 	//应收--客户
 	@RequestMapping("/receiptArrearage")
-	public List<Arrearage> receiptArrearage(String starttime,String endtime) {
+	public List<Arrearage> receiptArrearage(Condition c) {
 		System.out.println("应收欠款");
-		return as.queryReceipt("2017-1-1", "2018-1-1");
+		return as.queryReceipt(c.getStartdate(), c.getEnddate());
 	}
 	@RequestMapping("/receiptArrearage_Detail")
-	public List<Arrearage> receiptArrearage_Detail(Integer cid,String starttime,String endtime) {
+	public List<Arrearage> receiptArrearage_Detail(Condition c) {
 		System.out.println("应收欠款-详情");
-		return as.queryReceiptDetail(cid,"2017-1-1", "2018-1-1");
+		return as.queryReceiptDetail(c.getCustomer(),c.getStartdate(),c.getEnddate());
 	}
 	
 	//应付--供应商
 	@RequestMapping("/paytArrearage")
 	public List<Arrearage> paytArrearage(Condition c) {
 		System.out.println("应付欠款");
-		return as.queryPay("2017-1-1", "2018-1-1");
+		return as.queryPay(c.getStartdate(),c.getEnddate());
 	}
 	@RequestMapping("/paytArrearage_Detail")
-	public List<Arrearage> paytArrearage_Detail(Integer sid,String starttime,String endtime) {
+	public List<Arrearage> paytArrearage_Detail(Condition c) {
 		System.out.println("应付欠款-详情");
-		return as.queryPayDetail(sid,"2017-1-1", "2018-1-1");
+		return as.queryPayDetail(c.getSupplier(),c.getStartdate(),c.getEnddate());
 	}
 }

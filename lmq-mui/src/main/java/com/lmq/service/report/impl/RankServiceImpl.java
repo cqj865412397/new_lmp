@@ -33,4 +33,22 @@ public class RankServiceImpl implements RankService {
 		return rm.queryGoodsRank(c);
 	}
 
+	@Override
+	public List<Rank> queryChartIncome(Condition c) {
+		// TODO Auto-generated method stub
+		return rm.queryChartIncome(c);
+	}
+
+	@Override
+	public List<Rank> queryChartProfit(Condition c) {
+		// TODO Auto-generated method stub
+		return rm.queryChartProfit(c);
+	}
+
+	@Override
+	public List<Rank> queryChartExpenses(Condition c) {
+		// TODO Auto-generated method stub
+		return rm.queryChartExpenses(c);
+	}
+
 }
