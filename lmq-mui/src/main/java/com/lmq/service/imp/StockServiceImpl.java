@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,14 +56,14 @@ public class StockServiceImpl implements StockService {
 
 	
 	@Override
-	public List<Stock> queryList(String startTime, String endTime, String filtrate) {
+	public List<Stock> queryList(String startTime, String endTime, String filtrate,Integer sid) {
 		System.out.println(filtrate);
 		List<Stock> list=null;
 		if(filtrate.equals("null")) {
 			System.out.println("你好我是杨菊花");
 			filtrate="";
 		}
-		return stockmapper.queryList(startTime, endTime, filtrate);
+		return stockmapper.queryList(startTime, endTime, filtrate,sid);
 	}
 
 	@Override

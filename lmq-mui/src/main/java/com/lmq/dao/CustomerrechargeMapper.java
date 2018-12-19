@@ -21,7 +21,7 @@ public interface CustomerrechargeMapper {
     
     String getTimeNum(Integer uid);
     
-    List<Customerrecharge> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate);
+    List<Customerrecharge> queryList(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("filtrate")String filtrate,@Param("sid")Integer sid);
     
     int updateStatusById(@Param("id")Integer id,@Param("status")Integer status);
     

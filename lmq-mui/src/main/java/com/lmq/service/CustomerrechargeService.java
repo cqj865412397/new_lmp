@@ -9,7 +9,7 @@ public interface CustomerrechargeService {
     
     String getTimeNum(Integer uid);
     
-    List<Customerrecharge> queryList(String startTime,String endTime,String filtrate);
+    List<Customerrecharge> queryList(String startTime,String endTime,String filtrate,Integer sid);
     
     int updateStatusById(Integer id,Integer status);
     

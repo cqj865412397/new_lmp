@@ -211,6 +211,9 @@
 		WHERE T2.status = 0
 		ORDER BY T1.lvl DESC;
 	</select>
-
+	<select id="queryGoodstypeTop" resultType="com.lmq.domain.Goodstype">
+			SELECT * FROM goodstype
+			WHERE `status` = 0 AND parentId = 0
+	</select>
 
 </mapper>

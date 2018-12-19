@@ -27,4 +27,6 @@ public interface GoodsinstanceService {
 	public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
 	//查询sid门店下单个单品默认价格和报价
     public GoodsInstanceVo querySimGoodsInstanceVoAboutDefPriceAndPrice(Integer gInId,Integer sId,Integer cId);
-  }
+    //查询sId门店下全部单品信息
+    public List<GoodsInstanceVo> queryAllGoodsInstanceBySid(Integer sId,String gName);
+}

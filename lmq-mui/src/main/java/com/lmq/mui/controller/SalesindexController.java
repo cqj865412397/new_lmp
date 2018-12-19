@@ -29,9 +29,9 @@ public class SalesindexController {
 	
 	//显示列表 传入了时间和搜索条件
 	@RequestMapping("/queryList")
-	public List<Salesindent> queryList(String startTime,String endTime,String filtrate) {
-		System.out.println("显示参数"+startTime+","+endTime+","+filtrate);
-		return sis.queryList(startTime,endTime,filtrate);
+	public List<Salesindent> queryList(String startTime,String endTime,String filtrate,Integer sid) {
+		System.out.println("显示参数"+startTime+","+endTime+","+filtrate+","+sid);
+		return sis.queryList(startTime,endTime,filtrate,sid);
 	}
 	//删除销售订单 实质是修改订单的状态
 	@RequestMapping("/deleteById")
