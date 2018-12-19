@@ -8,4 +8,6 @@ public interface Storetypeservice {
 	List<Storetype> Storetype(Integer User1);
 	
 	List<Storetype> queryBylevel(Storetype obj);
+	
+	int insertSelective(Storetype obj);
 }

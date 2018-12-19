@@ -27,6 +27,12 @@ public class StoretypeServiceimpl implements Storetypeservice{
 		return s.queryBylevel(obj);
 	}
 
+	@Override
+	public int insertSelective(com.lmq.domain.Storetype obj) {
+		// TODO Auto-generated method stub
+		return s.insertSelective(obj);
+	}
+
 	
 
 	

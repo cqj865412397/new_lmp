@@ -21,4 +21,10 @@ public class StoretypeController {
 		System.out.println();
 		return s.queryBylevel(obj);
 	}
+	
+	@RequestMapping("insertSelective")
+	public int insertSelective(Storetype obj){
+		System.out.println();
+		return s.insertSelective(obj);
+	}
 }
