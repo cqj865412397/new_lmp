@@ -18,6 +18,19 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return mapper.queryuser(obj);
 	}
-
+	@Override
+	public User queryuser1(User obj) {
+		// TODO Auto-generated method stub
+		return mapper.queryuser1(obj);
+	}
+	@Override
+	public int insertSelective(User obj) {
+		// TODO Auto-generated method stub
+		return mapper.insertSelective(obj);
+	}
+	
+	
+	
+	
 	
 }

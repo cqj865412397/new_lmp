@@ -58,7 +58,7 @@
 		#{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.lmq.domain.Store">
+		parameterType="com.lmq.domain.Store" useGeneratedKeys="true" keyProperty="id">
 		insert into store
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -257,5 +257,10 @@
 	
 	<select id="selectquery2" resultMap="selectquery1">
 		SELECT * FROM store WHERE parented=#{id}
+	</select>
+	
+	
+	<select id="CurrentStore" resultMap="BaseResultMap">
+		 SELECT * FROM `store` WHERE id=#{user1}
 	</select>
 </mapper>

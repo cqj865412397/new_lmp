@@ -6,4 +6,8 @@ import com.lmq.domain.Store;
 
 public interface StoreService {
 	 List<Store> queryByUserId(Integer id);
+	 
+	 List<Store> CurrentStore(Integer id);
+	 
+	 int insertSelective(Store obj);
 }

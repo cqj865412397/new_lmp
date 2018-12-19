@@ -9,7 +9,7 @@ public interface StoreMapper {
 
     int insert(Store record);
 
-    int insertSelective(Store record);
+    int insertSelective(Store obj);
 
     Store selectByPrimaryKey(Integer id);
 
@@ -18,4 +18,7 @@ public interface StoreMapper {
     int updateByPrimaryKey(Store record);
     
     List<Store> queryByUserId(Integer id);
+    
+    List<Store> CurrentStore(Integer id);
+    
 }

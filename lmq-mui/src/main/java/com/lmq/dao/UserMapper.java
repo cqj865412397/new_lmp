@@ -7,7 +7,7 @@ public interface UserMapper {
 
     int insert(User record);
 
-    int insertSelective(User record);
+    int insertSelective(User obj);
 
     User selectByPrimaryKey(Integer id);
 
@@ -16,4 +16,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     User queryuser(User obj);
+    
+    User queryuser1(User obj);
+    
 }

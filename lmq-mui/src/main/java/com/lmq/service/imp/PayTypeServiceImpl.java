@@ -14,12 +14,29 @@ import com.lmq.service.PayTypeService;
 public class PayTypeServiceImpl implements PayTypeService{
 	@Autowired
 	PaytypeMapper pm;
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return pm.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int insertSelective(Paytype record) {
+		// TODO Auto-generated method stub
+		return pm.insertSelective(record);
+	}
 
 	@Override
 	public List<Paytype> queryAll() {
 		// TODO Auto-generated method stub
 		System.out.println(1);
 		return pm.queryAll();
+	}
+
+	@Override
+	public List<Paytype> queryByUserid(Paytype obj) {
+		// TODO Auto-generated method stub
+		return pm.queryByUserid(obj);
 	}
 
 }

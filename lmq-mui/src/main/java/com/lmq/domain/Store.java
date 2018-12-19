@@ -15,8 +15,16 @@ public class Store {
     private String district;
 
     private String address;
+    private User user;
+    public User getUser() {
+		return user;
+	}
 
-    private Date time;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	private Date time;
 
     private Integer stid;
 
@@ -37,8 +45,16 @@ public class Store {
     private String user4;
 
     private String user5;
-    
-    private List<Store> list;
+    private Storetype storetype;
+    public Storetype getStoretype() {
+		return storetype;
+	}
+
+	public void setStoretype(Storetype storetype) {
+		this.storetype = storetype;
+	}
+
+	private List<Store> list;
     public Integer getId() {
         return id;
     }

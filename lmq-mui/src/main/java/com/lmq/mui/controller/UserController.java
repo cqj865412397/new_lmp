@@ -15,14 +15,20 @@ public class UserController {
 	@Autowired
 	UserService users;
 	@RequestMapping("queryuser")
-	public User queryuser(User obj,HttpSession session) {
+	public User queryuser(User obj) {
 		 User user=users.queryuser(obj);
-		 if (user!=null) {
-			 session.setAttribute("user",user);
-			 System.out.println(user);
-			 return user;
-		 }
-		 return null;
+		return user;
+	 }
+	@RequestMapping("queryuser1")
+	public User queryuser1(User obj) {
+		 User user=users.queryuser1(obj);
+		 return user;
+	 }
+	
+	@RequestMapping("insertSelective")
+	public int insertSelective(User obj) {
+		 int user=users.insertSelective(obj);
+		 return user;
 	 }
 	
 	

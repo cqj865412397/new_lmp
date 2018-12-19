@@ -82,7 +82,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -162,5 +162,9 @@
   </update>
   <select id="queryAll" resultMap="BaseResultMap">
   	select * from paytype where status=0
+  </select>
+  
+  <select id="queryByUserid" resultMap="BaseResultMap">
+	SELECT * FROM `paytype` WHERE uid=#{uid}
   </select>
 </mapper>

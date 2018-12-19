@@ -186,4 +186,7 @@
 		SELECT stid FROM `store` WHERE id='1'
 		)
 	</select>
+	<select id="queryBylevel" resultMap="BaseResultMap">
+		SELECT * FROM storetype WHERE `Level`>#{level}
+	</select>
 </mapper>
