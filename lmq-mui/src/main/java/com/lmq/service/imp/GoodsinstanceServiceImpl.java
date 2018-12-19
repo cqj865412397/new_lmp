@@ -44,8 +44,8 @@ public class GoodsinstanceServiceImpl implements GoodsinstanceService{
 	}
 
 
-	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer cId,String gName) {
-		return goodsinstanceMapper.queryGoodsInstanceVoList(cId,gName);
+	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer sid,Integer cId,String gName) {
+		return goodsinstanceMapper.queryGoodsInstanceVoList(sid,cId,gName);
 	}
 	
 	public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId) {
