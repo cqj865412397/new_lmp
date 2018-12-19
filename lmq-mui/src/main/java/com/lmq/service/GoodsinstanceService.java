@@ -22,7 +22,7 @@ public interface GoodsinstanceService {
 	//查询商品下所有单品id集合
 	public List<Integer> quertyGoodsInstanceIdsByGid(Integer gId);
 	//查询单品价格 (报价>客户类型价格>默认价格)
-	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer cId,String gName);
+	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer sid,Integer cId,String gName);
 	//查询sid门店下全部单品默认价格
 	public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
 	//查询sid门店下单个单品默认价格和报价

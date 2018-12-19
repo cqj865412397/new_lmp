@@ -139,8 +139,8 @@ public class GoodsController {
 
 	// 查询单品各个价格
 	@RequestMapping("/queryGoodsInstanceVoList")
-	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer cId, String gName) {
-		List<GoodsInstanceVo> list = goodsinstanceService.queryGoodsInstanceVoList(cId, gName);
+	public List<GoodsInstanceVo> queryGoodsInstanceVoList(Integer sid,Integer cId, String gName) {
+		List<GoodsInstanceVo> list = goodsinstanceService.queryGoodsInstanceVoList(sid,cId, gName);
 		return list;
 	}
 

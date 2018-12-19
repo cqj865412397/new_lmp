@@ -275,6 +275,7 @@
 	WHERE goodsinstance.`status` = 0 AND (standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND goodsinstanceprice.`status` = 0
 	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
 	AND (standardinstance.`Name` LIKE CONCAT('%',#{gName},'%') OR goods.`name` LIKE CONCAT('%',#{gName},'%'))
+	AND `goods`.`Sid` = #{sid}
 	GROUP BY `goodsinstanceprice`.`Id`
 	ORDER BY goods.`time`DESC#排序
   </select>
@@ -317,7 +318,7 @@
 	WHERE goodsinstance.`status` = 0 AND (standardinstance.`status` = 0 OR ISNULL(standardinstance.`status`)) AND goodsinstanceprice.`status` = 0
 	AND pricetype.`status` = 0 AND goods.`status` = 0 AND `bit`.`status` = 0
 	AND `pricetype`.`DefaultPrice` = 1
-	AND `goods`.`Sid` = #{sId}
+	AND `goods`.`Sid` = #{sid}
 	GROUP BY `goodsinstanceprice`.`Id`
 	ORDER BY goods.`time`DESC#排序
   </select>

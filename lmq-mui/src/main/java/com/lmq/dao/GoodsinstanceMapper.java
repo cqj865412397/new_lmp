@@ -19,7 +19,7 @@ public interface GoodsinstanceMapper {
 	//��ѯ��Ʒ��Ϣ���ϣ���ӡ��
 	public List<Goodsinstance> queryGoodsInstanceInfoByGid(Integer gId);
 	//��ѯ��Ʒ�۸� (����>�ͻ����ͼ۸�>Ĭ�ϼ۸�) ֧��ģ����ѯ gNameΪ����Ʒ������Ʒ���ƣ�
-	public List<GoodsInstanceVo> queryGoodsInstanceVoList(@Param("cId") Integer cId,@Param("gName") String gName);
+	public List<GoodsInstanceVo> queryGoodsInstanceVoList(@Param("sid") Integer sid,@Param("cId") Integer cId,@Param("gName") String gName);
 	//查询sid门店下全部单品默认价格
     public List<GoodsInstanceVo> queryGoodsInstanceVoAboutDefPriceList(Integer sId);
 	//查询sid门店下单个单品默认价格和报价

@@ -3,6 +3,8 @@ package com.lmq.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Goods {
 	//=========扩展============
 	//库存（默认单品）
@@ -49,7 +51,7 @@ public class Goods {
     private Integer tid;
 
     private Integer bid;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     private String code;
