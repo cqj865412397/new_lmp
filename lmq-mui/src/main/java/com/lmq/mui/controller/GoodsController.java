@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,7 @@ import com.lmq.domain.GoodsVo;
 import com.lmq.domain.Goodstype;
 import com.lmq.domain.Pricetype;
 import com.lmq.domain.Standard;
+import com.lmq.domain.StandardVO;
 import com.lmq.domain.Standardinstance;
 import com.lmq.service.BitService;
 import com.lmq.service.GoodsService;
@@ -251,5 +254,10 @@ public class GoodsController {
 			return "200";// "{\"status\":200,\"gid\":"+goodsV.getGoods().getId()+"}";//成功
 		else
 			return "0";// 修改失败
+	}
+	@RequestMapping("typeSave")
+	public int typeSave(@RequestBody StandardVO standardVO) {
+		System.out.println();
+		return 0;
 	}
 }
