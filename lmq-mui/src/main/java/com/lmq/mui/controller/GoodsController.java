@@ -54,9 +54,9 @@ public class GoodsController {
 	// ========注入end========
 	// 查询货物主页数据
 	@RequestMapping("/queryGoodsHome")
-	public List<Goods> queryGoodsHome(String goodsName) {
+	public List<Goods> queryGoodsHome(String goodsName,Integer sId) {
 		// System.out.println(goodsName);
-		List<Goods> list = goodsService.queryGoodsList(1, goodsName);
+		List<Goods> list = goodsService.queryGoodsList(sId, goodsName);
 		return list;
 	}
 
@@ -69,8 +69,8 @@ public class GoodsController {
 
 	// 单位查询
 	@RequestMapping("/queryBitBySid")
-	public List<Bit> queryBitBySid() {
-		List<Bit> list = bitService.queryBitBySid(1);
+	public List<Bit> queryBitBySid(Integer sId) {
+		List<Bit> list = bitService.queryBitBySid(sId);
 		return list;
 	}
 
@@ -166,9 +166,9 @@ public class GoodsController {
 	
 	// 添加单位
 	@RequestMapping("/addBit")
-	public Integer addBit(String name) {
+	public Integer addBit(String name,Integer sId) {
 		Bit bit = new Bit();
-		bit.setSid(1);
+		bit.setSid(sId);
 		bit.setName(name);
 		bit.setStatus(0);
 		return bitService.insert(bit);
