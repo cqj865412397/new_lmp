@@ -285,7 +285,7 @@
 		ON
 		s.id=sd.Salesindentid
 		LEFT JOIN img AS i
-		ON sd.user1=i.gid
+		ON sd.user1=i.id
 		LEFT JOIN
 		`store` AS st
 		ON st.`Id`=s.`Sid`

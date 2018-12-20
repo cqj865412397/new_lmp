@@ -34,6 +34,7 @@
 			<result column="sdsum" jdbcType="DOUBLE" property="sum" />
 			<result column="sdprice" jdbcType="DOUBLE" property="price" />
 			<result column="gname" jdbcType="VARCHAR" property="user1" />
+			<result column="url" jdbcType="VARCHAR" property="url" />
 		</collection>
 	</resultMap>
 
@@ -348,12 +349,12 @@
 		sd.`Goodsinstanceid` AS sdid,sd.`count`
 		AS sdcount ,sd.`Price` AS sdprice,
 		sd.`Sum` AS sdsum,sd.`user1` AS
-		gname
+		gname,i.`url`
 		FROM stock s INNER JOIN stockdetail sd ON s.`Id`=sd.`Sid` AND
 		s.id=#{id}
 		LEFT JOIN supplier sup ON sup.`Id`=s.`Supid`
 		LEFT JOIN paytype
 		AS pt ON pt.`Id`=s.`user4`
-
+		LEFT JOIN img i ON i.`Id`=sd.`Goodsinstanceid`
 	</select>
 </mapper>
