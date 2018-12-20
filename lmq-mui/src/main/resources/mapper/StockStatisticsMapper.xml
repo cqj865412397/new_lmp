@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmq.dao.report.StockStatisticsMapper">
+  <resultMap id="StockStatistics" type="com.lmq.domain.report.StockStatistics">
+    <result column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+	<result column="standardName" property="standardName"/>
+    <result column="bname" jdbcType="VARCHAR" property="bname" />
+    <result column="initCount" jdbcType="INTEGER" property="initCount" />
+    <result column="initMoney" property="initMoney" />
+    <result column="addCount" property="addCount" />
+    <result column="addtMoney" property="addtMoney" />
+    <result column="backCount" property="backCount" />
+    <result column="backMoney" property="backMoney" />
+    <result column="finalCount" property="finalCount" />
+    <result column="finaltMoney" property="finaltMoney" />
+    <collection property="list" ofType="com.lmq.domain.report.StockStatisticsDetail">
+    	<result column="time" property="time"/>
+    	<result column="name" property="name"/>
+    	<result column="lx" property="lx"/>
+    	<result column="price" property="price"/>
+    	<result column="count" property="count"/>
+    	<result column="sum" property="sum"/>
+    	<result column="surplusCount" property="surplusCount"/>
+    	<result column="surplusMoney" property="surplusMoney"/>
+    </collection>
+  </resultMap>
+  <resultMap id="StockWarning" type="com.lmq.domain.report.StockWarning">
+    <id column="gid" property="gid" />
+    <result column="gname" property="gname" />
+    <result column="standardName" property="standardName" />
+    <result column="bname" property="bname" />
+    <result column="count" property="count" />
+  </resultMap>
+  <!-- 与按客户利润统计相同 -->
+  <select id="queryAll" resultMap="StockStatistics">
+	SELECT gi.`Id` AS gid,g.`name` AS gname,t.standardName,sd.`Id` AS sdId,sd.`Price`,(sd.`count`-IFNULL(b.finalSaleCount,0)) AS finalCount,(init.initCount-IFNULL(a.initSaleCount,0)) AS initCount,sd.`Price`*(sd.`count`-IFNULL(b.finalSaleCount,0)) AS finaltMoney,sd.`Price`*(init.initCount-IFNULL(a.initSaleCount,0)) AS initMoney,(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backCount,sd.`Price`*(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backMoney 
+	FROM goodsinstance AS gi
+	LEFT JOIN stockdetail AS sd ON sd.`Goodsinstanceid`=gi.`Id`
+	LEFT JOIN stock AS s ON s.`Id`=sd.`Sid` AND s.`status`=0 AND s.`Sid`=#{storeid} AND s.`Time` &lt; #{enddate}
+	LEFT JOIN goods AS g ON g.`Id`=gi.`Gid`
+	LEFT JOIN (
+		SELECT goodsinstance.Id,GROUP_CONCAT(standardinstance.`Name`)AS standardName FROM goodsinstance 
+		LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+		GROUP BY goodsinstance.`Id`
+	) AS t ON t.Id=gi.`Id`
+	LEFT JOIN(
+	SELECT stockdetail.`Id`,stockdetail.`Price`,stockdetail.`count` AS initCount FROM stockdetail
+	LEFT JOIN stock ON stock.`Id`=stockdetail.`Sid` AND stock.`status`=0 AND stock.`Sid`=#{storeid} AND stock.`Time` &lt; #{startdate}
+	) AS init ON init.Id=sd.`Id`
+	LEFT JOIN (
+	SELECT salesstockinfo.`stockdetailid`,SUM(IFNULL(salesstockinfo.`count`,0)) AS initSaleCount FROM salesstockinfo
+	INNER JOIN salesdetails ON salesdetails.`Id`=salesstockinfo.`salesid`
+	INNER JOIN sales ON sales.`Id`=salesdetails.`Salesid` AND sales.`status`=0 AND sales.`Sid`=#{storeid} AND sales.`Time` &lt; #{startdate}
+	GROUP BY salesstockinfo.`stockdetailid`
+	) AS a ON a.stockdetailid=sd.`Id`
+	LEFT JOIN (
+	SELECT salesstockinfo.`stockdetailid`,SUM(IFNULL(salesstockinfo.`count`,0)) AS finalSaleCount FROM salesstockinfo
+	INNER JOIN salesdetails ON salesdetails.`Id`=salesstockinfo.`salesid`
+	INNER JOIN sales ON sales.`Id`=salesdetails.`Salesid` AND sales.`status`=0 AND sales.`Sid`=#{storeid} AND sales.`Time` &lt; #{enddate}
+	GROUP BY salesstockinfo.`stockdetailid`
+	) AS b ON b.stockdetailid=sd.`Id`
+	GROUP BY gi.`Id`
+  </select>
+  <select id="queryDetail" resultMap="StockStatistics">
+	select * from stockdetail
+  </select>
+  <select id="queryWarning" resultMap="StockWarning">
+	SELECT gi.`Id` AS gid,g.`name` AS gname,t.standardName,(sd.`count`-sd.`scount`) AS `count`,`bit`.`Name` AS bname FROM goodsinstance AS gi
+	LEFT JOIN stockdetail AS sd ON sd.`Goodsinstanceid`=gi.`Id`
+	LEFT JOIN goods AS g ON g.`Id`=gi.`Gid`
+	LEFT JOIN (
+		SELECT goodsinstance.Id,GROUP_CONCAT(standardinstance.`Name`)AS standardName FROM goodsinstance 
+		LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+		GROUP BY goodsinstance.`Id`
+	) AS t ON t.Id=gi.`Id`
+	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
+	WHERE gi.`status`=0 AND g.`Sid`=#{storeid}
+	GROUP BY sd.`Goodsinstanceid`
+  </select>
+  
+</mapper>
