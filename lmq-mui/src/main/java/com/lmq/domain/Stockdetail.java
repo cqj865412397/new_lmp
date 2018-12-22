@@ -33,8 +33,17 @@ public class Stockdetail {
     
     //所属的批次号
     private String code;
+    private String url;
     
-    public String getCode() {
+    public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getCode() {
 		return code;
 	}
 
