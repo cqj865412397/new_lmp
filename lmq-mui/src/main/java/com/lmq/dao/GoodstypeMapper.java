@@ -17,7 +17,7 @@ public interface GoodstypeMapper {
 	 * 自动生成的方法
 	 */
     int deleteByPrimaryKey(Integer id);
-
+    //添加类目
     int insert(Goodstype record);
 
     int insertSelective(Goodstype record);

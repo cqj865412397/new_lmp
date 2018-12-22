@@ -220,5 +220,27 @@
   		<result column="standardId" property="standardId"/>
   		<result column="standardGid" property="standardGid"/>
   </resultMap>
+  <!-- 批量新增 -->
+  <insert id="addStandardInByMap" >
+  	INSERT INTO `standardinstance` ( `Name`, `sid`, `Gid` )
+  	VALUES 
+  	<foreach collection="standardList" item="s" separator="," >
+  	(#{s.name},#{sId},-1)
+  	</foreach>
+  </insert>
+  <!-- 批量改状态 -->
+    <update id="updateStandardardStatus">
+    UPDATE `standardinstance` SET `status` = 1
+	WHERE `Id` IN
+	( -100,
+	<foreach collection="array" item="a" separator=",">
+		#{a}
+	</foreach>	
+	)
+    </update>
+  <update id="updateStandardardStatusBySid">
+    UPDATE `standardinstance` SET `status` = 1
+	WHERE `sid` = #{sId}
+    </update>
   
 </mapper>

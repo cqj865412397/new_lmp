@@ -255,9 +255,10 @@ public class GoodsController {
 		else
 			return "0";// 修改失败
 	}
-	@RequestMapping("typeSave")
+	@RequestMapping("/addStype")
 	public int typeSave(@RequestBody StandardVO standardVO) {
-		System.out.println();
-		return 0;
+		System.out.println(JSON.toJSONString(standardVO));
+		 Integer effectCount =goodstypeService.addStype(standardVO);
+		 return effectCount;
 	}
 }
