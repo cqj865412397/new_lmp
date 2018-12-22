@@ -32,7 +32,7 @@
 		delete from goodstype
 		where Id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.lmq.domain.Goodstype">
+	<insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="com.lmq.domain.Goodstype">
 		insert into goodstype (Id, Name, Parentid,
 		time, status, async,
 		uid, user1, user2,
@@ -40,7 +40,7 @@
 		)
 		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
 		#{parentid,jdbcType=INTEGER},
-		#{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER},
+		NOW(), #{status,jdbcType=INTEGER}, #{async,jdbcType=INTEGER},
 		#{uid,jdbcType=VARCHAR}, #{user1,jdbcType=VARCHAR},
 		#{user2,jdbcType=VARCHAR},
 		#{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR}, #{user5,jdbcType=VARCHAR}

@@ -245,4 +245,15 @@
 	INNER JOIN `standard` ON `standard`.`Tid` = T2.`Id`
 	ORDER BY `standard`.`Id`
     </select>
+    <!-- 批量改状态 -->
+    <update id="updateStandardStatus">
+    UPDATE `standard` SET `status` = 1
+	WHERE `Id` IN
+	( -100,
+	<foreach collection="array" item="a" separator=",">
+		#{a}
+	</foreach>	
+	)
+    </update>
+    
 </mapper>

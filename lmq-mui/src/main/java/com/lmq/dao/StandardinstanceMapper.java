@@ -1,6 +1,7 @@
 package com.lmq.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +14,12 @@ public interface StandardinstanceMapper {
 	public Integer deleteByGid(Integer gId);
 	//查询自定义规格值和对应的规格
 	public List<Standardinstance> queryStandardListByGid(Integer gId);
-	
+	//批量新增
+	public Integer addStandardInByMap(Map<String, Object> map);
+	// 批量改状态
+	public Integer updateStandardardStatus(Integer[] ids);
+	//批量改状态 根据规格id
+	public Integer updateStandardardStatusBySid(Integer sId);
 	
 	/***
 	 * 自动生成

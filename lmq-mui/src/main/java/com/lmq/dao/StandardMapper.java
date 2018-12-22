@@ -16,7 +16,8 @@ public interface StandardMapper {
 	public Integer deleteByGid(Integer gId);
 	//查询添加分类时，父类tid（包含本类目）所有类目下的属性
 	public List<Standard> queryALLStandardByTid(Integer tId);
-	
+	//批量改状态
+	public Integer updateStandardStatus(Integer[] ids);
 	/**
 	 * 自动生成
 	 */
