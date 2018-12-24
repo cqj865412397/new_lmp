@@ -48,9 +48,9 @@
 	ORDER BY s.`time`, s.`Id`
   </select>
   <select id="queryToday" resultType="double">
-  	SELECT 1 AS id, IFNULL(SUM(Takeinmoney),0) FROM sales WHERE DATE(`time`)=DATE(NOW()) AND `status`=0 AND Sid=#{storeid}
+  	SELECT 1 AS id, IFNULL(SUM(user5),0) FROM sales WHERE DATE(`time`)=DATE(NOW()) AND `status`=0 AND Sid=#{storeid}
 	UNION ALL
-	SELECT 2 AS id, IFNULL(SUM(Takeinmoney),0) FROM sales WHERE DATE(`time`) BETWEEN DATE(NOW()) AND LAST_DAY(NOW()) AND `status`=0 AND Sid=#{storeid}
+	SELECT 2 AS id, IFNULL(SUM(user5),0) FROM sales WHERE DATE(`time`) BETWEEN DATE(NOW()) AND LAST_DAY(NOW()) AND `status`=0 AND Sid=#{storeid}
 	UNION ALL
 	SELECT 3 AS id, IFNULL(SUM(stockdetail.`count`-stockdetail.`scount`),0) FROM stockdetail 
 	INNER JOIN stock ON stock.`Id`=stockdetail.`Sid`
