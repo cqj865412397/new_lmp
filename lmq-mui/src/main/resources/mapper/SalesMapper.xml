@@ -358,9 +358,9 @@
 		JOIN salesdetails AS sd
 		ON
 		s.id=sd.Salesid
-		LEFT JOIN img AS
-		i
-		ON sd.user1=i.id
+		LEFT JOIN `goodsinstance` AS
+		gs
+		ON sd.user1=gs.id
 		LEFT JOIN
 		`store` AS st
 		ON st.`Id`=s.`Sid`
@@ -371,8 +371,7 @@
 		`customer` AS c
 		ON c.`Id`=s.`cid`
 		LEFT JOIN
-		`goods` AS g
-		ON g.`Id`=sd.`user1`
+		`img` i ON i.`Gid`=gs.`Gid`
 		WHERE s.`Id`=#{id}
 	</select>
 
