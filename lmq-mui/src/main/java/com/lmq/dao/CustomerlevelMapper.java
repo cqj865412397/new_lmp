@@ -1,5 +1,7 @@
 package com.lmq.dao;
 
+import java.util.List;
+
 import com.lmq.domain.Customerlevel;
 
 public interface CustomerlevelMapper {
@@ -14,4 +16,6 @@ public interface CustomerlevelMapper {
     int updateByPrimaryKeySelective(Customerlevel record);
 
     int updateByPrimaryKey(Customerlevel record);
+    
+    List<Customerlevel> queryCustomerlevelBySid(Integer sid);
 }

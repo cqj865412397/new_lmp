@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lmq.domain.Classify;
 import com.lmq.domain.Customer;
+import com.lmq.domain.Customerlevel;
 import com.lmq.service.CustomerService;
+import com.lmq.service.CustomerlevelService;
 
 @RestController
 @RequestMapping("Customer")
 public class CustomerController {
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	CustomerlevelService customerlevelService;
 	@RequestMapping("queryGroupByAcronymname")
 	/**
 	 * 查询客户
@@ -73,6 +77,11 @@ public class CustomerController {
 	public int deleteByCid(Integer id) {
 		return customerService.deleteByCid(id);
 	}
-
+	
+	//查询客户级别
+	@RequestMapping("queryCustomerlevelBySid")
+	public List<Customerlevel> queryCustomerlevelBySid(Integer sid){
+		return customerlevelService.queryCustomerlevelBySid(sid);
+	}
 	
 }
