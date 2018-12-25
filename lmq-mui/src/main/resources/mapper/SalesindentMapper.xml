@@ -278,14 +278,14 @@
 		i.url AS imgurl,sd.`Id` AS
 		sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS
-		pname,c.`Name` AS cname,sd.user2 AS gname,sd.`id` as sdid,s.cid
+		pname,c.`Name` AS cname,sd.user2 AS gname,sd.`id` AS sdid,s.cid
 		FROM salesindent AS s
 		LEFT
 		JOIN salesindentdetails AS sd
 		ON
 		s.id=sd.Salesindentid
-		LEFT JOIN img AS i
-		ON sd.user1=i.gid
+		LEFT JOIN goodsinstance AS gs
+		ON sd.user1=gs.id
 		LEFT JOIN
 		`store` AS st
 		ON st.`Id`=s.`Sid`
@@ -296,8 +296,7 @@
 		`customer` AS c
 		ON c.`Id`=s.`cid`
 		LEFT JOIN
-		`goods` AS g
-		ON g.`Id`=sd.`user1`
+		`img` i ON i.`Gid`=gs.`Gid`
 		where s.`Id`=#{id}
 	</select>
 	<select id="queryBySalesIndentNub" resultMap="SSMap">
