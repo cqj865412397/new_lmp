@@ -261,7 +261,7 @@
   <select id="queryGoodsInstanceVoList" resultType="com.lmq.domain.GoodsInstanceVo">
   	SELECT goodsinstance.Id AS goodsInstanceId,goodsinstance.ids,GROUP_CONCAT(standardinstance.`Name`)AS standardName
 	,goodsinstanceprice.`price`,pricetype.`Name`AS priceName,q.`monye` AS money,`pricetype`.`DefaultPrice`,`goodsinstanceprice`.`Ptype`
-	,goods.`name`AS goodsName,i.url,`bit`.`Name` AS bitName,q.id AS qid
+	,goods.`name`AS goodsName,i.url,`bit`.`Name` AS bitName,q.id AS qid,goods.`user1` AS primePrice
 	FROM goodsinstance
 	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
 	LEFT JOIN `goodsinstanceprice` ON `goodsinstanceprice`.`goodsinstanceid` = goodsinstance.`Id`

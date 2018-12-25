@@ -243,6 +243,7 @@
 	JOIN goodstype T2 
 	ON T1._id = T2.Id 
 	INNER JOIN `standard` ON `standard`.`Tid` = T2.`Id`
+	WHERE standard.`status` = 0
 	ORDER BY `standard`.`Id`
     </select>
     <!-- 批量改状态 -->

@@ -32,6 +32,16 @@ public class GoodsInstanceVo {
 	String bitName;
 	
 	Integer qid;
+	
+	//商品价格一口价格（yikoujia）
+	Double primePrice;
+	
+	public Double getPrimePrice() {
+		return primePrice;
+	}
+	public void setPrimePrice(Double primePrice) {
+		this.primePrice = primePrice;
+	}
 	public String getBitName() {
 		return bitName;
 	}
