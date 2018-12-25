@@ -184,4 +184,7 @@
       user5 = #{user5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryCustomerlevelBySid" resultMap="BaseResultMap">
+  	select * from customerlevel where sid=#{sid} and `status` = 0
+  </select>
 </mapper>
