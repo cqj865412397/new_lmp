@@ -50,8 +50,9 @@ public class GoodstypeServiceImpl implements GoodstypeService{
 		List<Standard> newStandard = standardVO.getNewStandard();//修改之后
 		//新增类目
 		Goodstype g = new Goodstype();
-		g.setName(standardVO.getStypeName());
+		g.setName(standardVO.getNewStypeName());
 		g.setParentid(standardVO.gettId());
+		g.setStatus(0);
 		if(goodstypeMapper.insert(g)<=0)
 			return 0;
 		
@@ -59,15 +60,19 @@ public class GoodstypeServiceImpl implements GoodstypeService{
 			Standard s = newStandard.get(i);
 			if(s.getId() == null) {
 				//新增规格以及下面的规格值
-				s.setTid(standardVO.gettId());
+				s.setTid(g.getId());
 				s.setGid(-1);
+				s.setStatus(0);
 				if(standardMapper.insert(s)<=0)
 					return 0;
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("sId", s.getId());
-				map.put("standardList", s.getsInList());
-				if(standardinstanceMapper.addStandardInByMap(map)<=0)
-					return 0;
+				//规格值批量新增
+				if(s.getsInList().size()>0) {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("sId", s.getId());
+					map.put("standardList", s.getsInList());
+					if(standardinstanceMapper.addStandardInByMap(map)<=0)
+						return 0;
+				}
 			}else {//修改
 				for(int j=0;j<oldStandard.size();j++) {
 					if(newStandard.get(i).getId() == oldStandard.get(j).getId()) {//修改
@@ -91,9 +96,13 @@ public class GoodstypeServiceImpl implements GoodstypeService{
 							for(int b = 0; b<oldStandard.get(j).getsInList().size();b++) {
 								//修改规格值名称
 								if(newStandard.get(i).getsInList().get(a).getId() == oldStandard.get(j).getsInList().get(b).getId()) {
-									if(newStandard.get(i).getsInList().get(a).getName().equals(oldStandard.get(j).getsInList().get(b).getName()))
+									//
+									if(!newStandard.get(i).getsInList().get(a).getName().equals(oldStandard.get(j).getsInList().get(b).getName())) {
+										System.out.println(newStandard.get(i).getsInList().get(a).getName()+"---"+oldStandard.get(j).getsInList().get(b).getName());
 										if(standardinstanceMapper.updateByPrimaryKeySelective(newStandard.get(i).getsInList().get(a))<=0)
 											return 0;
+									}
+										
 									break;
 								}
 							}
@@ -103,23 +112,21 @@ public class GoodstypeServiceImpl implements GoodstypeService{
 					}
 				}
 			}
-			//删除规格和删除规格值
-			if(standardVO.getDeleteStandardId().length>0) {
-				if(standardMapper.updateStandardStatus(standardVO.getDeleteStandardId())<=0)
-					return 0;
-				else {
-					for(int h=0;h<standardVO.getDeleteStandardId().length;h++) {
-						if(standardinstanceMapper.updateStandardardStatusBySid(standardVO.getDeleteStandardId()[h])<=0)
-							return 0;
-					}
+		}
+		//删除规格和删除规格值
+		if(standardVO.getDeleteStandardId().length>0) {
+			if(standardMapper.updateStandardStatus(standardVO.getDeleteStandardId())<=0)
+				return 0;
+			else {
+				for(int h=0;h<standardVO.getDeleteStandardId().length;h++) {
+					if(standardinstanceMapper.updateStandardardStatusBySid(standardVO.getDeleteStandardId()[h])<=0)
+						return 0;
 				}
 			}
-			if(standardVO.getDeleteStandardInId().length>0) {
-				if(standardinstanceMapper.updateStandardardStatus(standardVO.getDeleteStandardInId())<0)
-					return 0;
-			}
-			
-			
+		}
+		if(standardVO.getDeleteStandardInId().length>0) {
+			if(standardinstanceMapper.updateStandardardStatus(standardVO.getDeleteStandardInId())<0)
+				return 0;
 		}
 		return 1;
 	}
