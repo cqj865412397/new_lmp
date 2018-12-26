@@ -39,6 +39,7 @@
 			<result column="gid" property="user1" />
 			<result column="imgurl" jdbcType="INTEGER" property="imgurl" />
 			<result column="gname" jdbcType="VARCHAR" property="user2" />
+			<result column="suser3" jdbcType="VARCHAR" property="user3" />
 		</collection>
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -278,7 +279,7 @@
 		i.url AS imgurl,sd.`Id` AS
 		sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS
-		pname,c.`Name` AS cname,sd.user2 AS gname,sd.`id` AS sdid,s.cid
+		pname,c.`Name` AS cname,sd.user2 AS gname,sd.`id` AS sdid,s.cid,sd.`user3` as suser3,s.`money`
 		FROM salesindent AS s
 		LEFT
 		JOIN salesindentdetails AS sd

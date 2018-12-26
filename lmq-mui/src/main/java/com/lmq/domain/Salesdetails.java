@@ -20,7 +20,7 @@ public class Salesdetails {
     private String user1;
 
     private String user2;
-
+    //商品价格
     private String user3;
 
     private String user4;
