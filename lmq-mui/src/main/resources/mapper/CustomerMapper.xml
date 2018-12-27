@@ -341,7 +341,11 @@
 	</update>
 
   <update id="updateBalanceById" parameterType="com.lmq.domain.Customer">
-  update customer set Balance=Balance-#{balance,jdbcType=DOUBLE},Core =Core+ #{core,jdbcType=DOUBLE} where Id = #{id,jdbcType=INTEGER};
+  update customer set Balance=Balance-#{balance,jdbcType=DOUBLE}
+  <if test="core != null">
+  ,Core =Core+ #{core,jdbcType=DOUBLE} 
+  </if>
+  where Id = #{id,jdbcType=INTEGER};
   </update>
   <select id="queryBalanceById" parameterType="com.lmq.domain.Customer">
   	select * from customer where id=#{id}
