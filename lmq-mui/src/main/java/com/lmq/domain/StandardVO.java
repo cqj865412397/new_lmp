@@ -11,15 +11,16 @@ public class StandardVO {
 	private List<Standard> newStandard;//修改之后
 	private Integer[] deleteStandardId;//规格id集合
 	private Integer[] deleteStandardInId;//规格值id集合
-	private String stypeName; //类目名称
+	private String newStypeName; //新增类目名称
 	
 	
 	
-	public String getStypeName() {
-		return stypeName;
+	
+	public String getNewStypeName() {
+		return newStypeName;
 	}
-	public void setStypeName(String stypeName) {
-		this.stypeName = stypeName;
+	public void setNewStypeName(String newStypeName) {
+		this.newStypeName = newStypeName;
 	}
 	public Integer[] getDeleteStandardId() {
 		return deleteStandardId;
