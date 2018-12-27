@@ -26,6 +26,8 @@
 		<result column="stname" jdbcType="VARCHAR" property="stname" />
 		<result column="pname" jdbcType="VARCHAR" property="pname" />
 		<result column="cname" jdbcType="VARCHAR" property="cname" />
+		<result column="balance" jdbcType="DOUBLE" property="balance" />
+		
 	</resultMap>
 
 
@@ -351,7 +353,7 @@
 		i.url AS imgurl,sd.`Id` AS
 		sdid,sd.`user1` AS gid,
 		st.`name` AS stname,s.`pid`,p.`Name` AS
-		pname,c.`Name` AS cname,sd.`user2` AS gname,sd.`id` AS sdid,s.cid
+		pname,c.`Name` AS cname,sd.`user2` AS gname,sd.`id` AS sdid,s.cid,c.`Balance` AS balance
 		FROM
 		sales AS s
 		LEFT

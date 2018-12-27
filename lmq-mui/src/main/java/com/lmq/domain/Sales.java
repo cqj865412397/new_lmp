@@ -58,8 +58,19 @@ public class Sales {
 	private String pname;
 	// 客户名称
 	private String cname;
-
+	
 	private Integer siId;
+	//查询用的 查看当前用户的欠款或者余额
+	private Double balance;
+
+	
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
 
 	public Integer getSiId() {
 		return siId;
