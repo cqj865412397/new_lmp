@@ -20,7 +20,7 @@
 	UNION ALL
 	SELECT `cid`,NULL AS addMoney,`money` AS backMoney FROM customerrecharge WHERE `time` BETWEEN #{starttime} AND #{endtime} AND `status`=0
 	) AS a ON a.cid=customer.`Id`
-	LEFT JOIN (SELECT sales.`cid`,(sales.`Takeinmoney`+sales.`deposi`) AS money FROM sales WHERE `time` &lt; #{starttime} AND `status`=0
+	LEFT JOIN (SELECT sales.`cid`,(sales.`user5`+sales.`deposi`) AS money FROM sales WHERE `time` &lt; #{starttime} AND `status`=0
 	UNION ALL
 	SELECT cid,money FROM customerrecharge  WHERE `time` &lt; #{starttime} AND `status`=0
 	) AS b ON b.cid=customer.`Id`
@@ -34,7 +34,7 @@
 	SELECT `cid`,'收款' AS `reason`,customerrecharge.`user1` AS bh,NULL AS addMoney,`money` AS backMoney,customerrecharge.`Time` AS `time` FROM customerrecharge WHERE `time` BETWEEN #{starttime} AND #{endtime} AND `status`=0
 	) AS a ON a.id=customer.`Id`
 	LEFT JOIN (
-	SELECT (SELECT SUM(sales.`Takeinmoney`+sales.`deposi`) FROM sales WHERE `time` &lt; #{starttime} AND `status`=0 AND sales.`cid`=#{cid})
+	SELECT (SELECT SUM(sales.`user5`+sales.`deposi`) FROM sales WHERE `time` &lt; #{starttime} AND `status`=0 AND sales.`cid`=#{cid})
 	+(SELECT SUM(money) FROM customerrecharge  WHERE `time` &lt; #{starttime} AND `status`=0 AND customerrecharge.`cid`=#{cid}) AS initMoney
 	) AS c ON 1=1
 	WHERE customer.`Id`=#{cid}

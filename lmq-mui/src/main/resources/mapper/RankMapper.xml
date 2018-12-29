@@ -11,7 +11,7 @@
   </resultMap>
 
   <select id="querySalesPersonRank" resultMap="Rank">
-	SELECT u.`Id` AS id,u.`name`,SUM(s.`Takeinmoney`) AS number FROM `user` AS u
+	SELECT u.`Id` AS id,u.`name`,SUM(s.`user5`) AS number FROM `user` AS u
 	LEFT JOIN sales AS s ON s.`uid`=u.`Id`
 	WHERE u.`status`=0 AND s.`status`=0 AND s.Sid=#{storeid}
 	AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate})
@@ -19,7 +19,7 @@
 	ORDER BY number;
   </select>
   <select id="queryCustomerRank" resultMap="Rank">
-	SELECT c.`Id` AS id,c.`Name` AS `name`,SUM(s.`Takeinmoney`) AS number FROM customer AS c
+	SELECT c.`Id` AS id,c.`Name` AS `name`,SUM(s.`user5`) AS number FROM customer AS c
 	LEFT JOIN sales AS s ON c.`Id`=s.`cid`
 	WHERE c.`status`=0 AND s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
 	GROUP BY c.`Id`
@@ -40,7 +40,7 @@
 	ORDER BY number DESC
   </select>
   <select id="queryChartIncome" resultMap="Rank">
-  	SELECT temp.date AS `name`,COALESCE ( SUM(sales.`Takeinmoney`), 0 ) AS `number`,DATE_FORMAT(temp.date,'%Y%m') AS `name2`,DATE_FORMAT(temp.date,'%Y%u') AS `name3` FROM (
+  	SELECT temp.date AS `name`,COALESCE ( SUM(sales.`user5`), 0 ) AS `number`,DATE_FORMAT(temp.date,'%Y%m') AS `name2`,DATE_FORMAT(temp.date,'%Y%u') AS `name3` FROM (
 		SELECT ADDDATE( DATE(#{startdate}), numlist.id ) AS 'date' 
 		FROM( SELECT n1.i + n10.i * 10 + n100.i * 100 AS id FROM num n1 CROSS JOIN num AS n10 CROSS JOIN num AS n100 ) AS numlist 
 		WHERE ADDDATE( DATE(#{startdate}), numlist.id ) &lt;= DATE(#{enddate})

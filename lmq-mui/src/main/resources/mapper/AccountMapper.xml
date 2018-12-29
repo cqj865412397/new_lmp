@@ -38,7 +38,7 @@
 	SELECT `cid`,'收款' AS `lx`,customerrecharge.`user1` AS bh,NULL AS addMoney,`money` AS backMoney,customerrecharge.`Time` AS `time`,NULL AS gid,NULL AS gname,NULL AS num,NULL AS `money` FROM customerrecharge WHERE `time` BETWEEN #{startdate} AND #{enddate} AND `status`=0
 	) AS a ON a.id=customer.`Id`
 	LEFT JOIN (
-	SELECT (SELECT SUM(sales.`Takeinmoney`+sales.`deposi`) FROM sales WHERE `time` &lt; #{startdate} AND `status`=0 AND sales.`cid`=#{customer})
+	SELECT (SELECT SUM(sales.`user5`+sales.`deposi`) FROM sales WHERE `time` &lt; #{startdate} AND `status`=0 AND sales.`cid`=#{customer})
 	+(SELECT SUM(money) FROM customerrecharge  WHERE `time` &lt; #{startdate} AND `status`=0 AND customerrecharge.`cid`=#{customer}) AS initMoney
 	) AS c ON 1=1
 	WHERE customer.`Id`=#{customer}

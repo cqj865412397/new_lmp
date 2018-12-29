@@ -20,7 +20,7 @@
   </resultMap>
   <!-- 与按客户利润统计相同 -->
   <select id="query" resultMap="SalesStock">
-  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`Takeinmoney`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
+  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`user5`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
@@ -32,7 +32,7 @@
 	GROUP BY gi.`Id`;
   </select>
   <select id="queryDetail" resultMap="SalesStock">
-  	SELECT s.`user1` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`Takeinmoney` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
+  	SELECT s.`user1` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`user5` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`

@@ -42,7 +42,7 @@
 	  
 	</resultMap>
   <select id="queryByCustomer" resultMap="ProfitByCustomer">
-  	SELECT c.`Id` AS cid,c.`Name` AS cname,SUM(s.`money`) AS money,SUM(s.`Takeinmoney`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney,s.time AS time FROM sales AS s
+  	SELECT c.`Id` AS cid,c.`Name` AS cname,SUM(s.`money`) AS money,SUM(s.`user5`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney,s.time AS time FROM sales AS s
 	INNER JOIN customer AS c ON s.`cid`=c.`Id`
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
@@ -51,7 +51,7 @@
 	GROUP BY c.id;
   </select>
   <select id="queryByGoods" resultMap="ProfitByCustomer">
-  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`Takeinmoney`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
+  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`user5`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
@@ -63,7 +63,7 @@
 	GROUP BY gi.`Id`;
   </select>
   <select id="queryDetailBycid" resultMap="ProfitDetaile">
-	SELECT s.`Id` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`Takeinmoney` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
+	SELECT s.`Id` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`user5` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
@@ -79,7 +79,7 @@
 	ORDER BY s.`time`, s.`Id`;
   </select>
   <select id="queryDetailBygid" resultMap="ProfitDetaile">
-	SELECT s.`Id` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`Takeinmoney` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
+	SELECT s.`Id` AS sid,c.`Id` AS cid,c.`Name` AS cname,gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,sd.`count` AS `count`,`bit`.`Name` AS bname, s.`money` AS money,s.`user5` AS paymoney,(stockdetail.`Price`*st.`count`) AS costmoney,s.`time` FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`stockdetailid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`

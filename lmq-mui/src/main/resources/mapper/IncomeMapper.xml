@@ -19,15 +19,15 @@
 	SELECT (SELECT SUM(money) FROM customerrecharge WHERE `status`=0) AS cz,
 	(SELECT SUM(Allprice) FROM stock WHERE `status`=0) AS jh,
 	(SELECT SUM(money) FROM remittance WHERE `status`=0) AS fk,
-	SUM(deposi) AS dj, SUM(Takeinmoney) AS xs FROM `Sales` WHERE `status`=0
+	SUM(deposi) AS dj, SUM(user5) AS xs FROM `Sales` WHERE `status`=0
   </select>
   <select id="queryXS" resultMap="Income">
-	SELECT s.user1 AS bh,c.`Name` AS `name`,s.`time`,s.`Takeinmoney` AS money,'销售收入' AS lx FROM sales AS s 
+	SELECT s.user1 AS bh,c.`Name` AS `name`,s.`time`,s.`user5` AS money,'销售收入' AS lx FROM sales AS s 
 	LEFT JOIN customer AS c ON c.`Id`=s.`cid`
 	WHERE s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
   </select>
   <select id="querySK" resultMap="Income">
-	SELECT customer.`Name` AS NAME,sales.`user1` AS bh,sales.`deposi` AS money,sales.`time`,'定金' AS lx FROM sales 
+	SELECT customer.`Name` AS NAME,sales.`user1` AS bh,(sales.`deposi`+sales.`Takeinmoney`) AS money,sales.`time`,'定金和订单' AS lx FROM sales 
 	LEFT JOIN customer ON customer.`Id`=sales.`cid`
 	WHERE deposi>0 AND sales.`status`=0  AND sales.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND sales.`Sid`=#{storeid}
 	UNION ALL
