@@ -21,4 +21,5 @@ public interface StoreMapper {
     
     List<Store> CurrentStore(Integer id);
     
+    Integer isAddEdit(Integer sId);
 }

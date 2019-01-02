@@ -10,4 +10,7 @@ public interface StoreService {
 	 List<Store> CurrentStore(Integer id);
 	 
 	 int insertSelective(Store obj);
+	 
+	 //write by lirui(是否为主门店)
+	 Integer isAddEdit(Integer sId);
 }

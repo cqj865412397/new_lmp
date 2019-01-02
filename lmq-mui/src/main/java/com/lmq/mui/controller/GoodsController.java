@@ -32,6 +32,7 @@ import com.lmq.service.GoodstypeService;
 import com.lmq.service.PriceTypeService;
 import com.lmq.service.StandardService;
 import com.lmq.service.StandardinstanceService;
+import com.lmq.service.StoreService;
 
 @RestController
 @RequestMapping("/goods")
@@ -53,6 +54,8 @@ public class GoodsController {
 	PriceTypeService priceTypeService;
 	@Autowired
 	StandardinstanceService standardinstanceService;
+	@Autowired
+	StoreService storeService;
 
 	// ========注入end========
 	// 查询货物主页数据
@@ -255,10 +258,21 @@ public class GoodsController {
 		else
 			return "0";// 修改失败
 	}
+	//删除商品
+	@RequestMapping("/deleteGoods")
+	public Integer deleteGoods(Integer gId) {
+		Integer isOk = goodsService.deleteGoods(gId);
+		return isOk;
+	}
 	@RequestMapping("/addStype")
 	public int typeSave(@RequestBody StandardVO standardVO) {
 		System.out.println(JSON.toJSONString(standardVO));
 		 Integer effectCount =goodstypeService.addStype(standardVO);
 		 return effectCount;
+	}
+	//添加商品和修改商品的权限(是否为主门店)
+	@RequestMapping("/isAddEdit")
+	public int isAddEdit(Integer sId) {
+		 return storeService.isAddEdit(sId);
 	}
 }

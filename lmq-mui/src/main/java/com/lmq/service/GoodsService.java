@@ -16,6 +16,8 @@ public interface GoodsService {
 	public Integer updateGoods(GoodsVo goodsVo,Integer gId);
 	//查询商品（in goodsid）
 	public List<Goods> queryGoodsListByGoodsIds(Integer[] goodsIds);
+	//删除商品(根据主键id)
+	public Integer deleteGoods(Integer gId);
 	/**
 	 * 自动生成方法
 	 */

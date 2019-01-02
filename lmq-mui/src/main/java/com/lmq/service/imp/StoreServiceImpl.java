@@ -48,6 +48,10 @@ public class StoreServiceImpl implements StoreService{
 		 }
 		 return 0;
 	}
+	@Override
+	public Integer isAddEdit(Integer sId) {
+		return mapper.isAddEdit(sId);
+	}
 	
 
 }

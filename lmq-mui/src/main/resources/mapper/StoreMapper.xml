@@ -263,4 +263,9 @@
 	<select id="CurrentStore" resultMap="BaseResultMap">
 		 SELECT * FROM `store` WHERE id=#{user1}
 	</select>
+	<!-- 是否为主门店 -->
+	<select id="isAddEdit" resultType="Integer">
+		SELECT COUNT(*) FROM `store`
+		WHERE `store`.`Parented` = 0 AND `store`.`Id` = #{sId}
+	</select>
 </mapper>

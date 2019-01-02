@@ -387,6 +387,17 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.queryGoodsListByGoodsIds(goodsIds);
 	}
 
+	@Override
+	public Integer deleteGoods(Integer gId) {
+		/**
+		 * 删除逻辑
+		 * 1.没有销售记录
+		 * 2.没有进货记录
+		 */
+		
+		return 0;
+	}
+
 
 
 
