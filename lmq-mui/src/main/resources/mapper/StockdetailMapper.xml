@@ -282,7 +282,7 @@
 		`user4`,
 		`user5`) values
 		<foreach collection="slist" separator="," item="s">
-			(#{s.goodsinstanceid},#{sid},#{s.count},0,#{s.sum},#{s.price},#{s.uid},#{s.user1},#{s.user2},#{s.user3},#{s.user4},#{s.user5})
+			(#{s.goodsinstanceid},#{sid},#{s.count},0,#{s.sum},#{s.price},#{uid},#{s.user1},#{s.user2},#{s.user3},#{s.user4},#{s.user5})
 		</foreach>
 	</insert>
 	

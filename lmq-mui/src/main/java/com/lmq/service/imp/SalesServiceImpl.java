@@ -67,6 +67,7 @@ public class SalesServiceImpl implements SalesService {
 				Map<String, Object> ssmap = new HashMap<String, Object>();
 				ssmap.put("salesid", sd.getId());
 				ssmap.put("ssilist", ssilist);
+				ssmap.put("uid", record.getUid());
 				// 批量新增库存销售详情表
 				skm.adds(ssmap);
 				// 批量修改库存详情表
