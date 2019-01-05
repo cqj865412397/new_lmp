@@ -261,6 +261,9 @@ public class GoodsController {
 	//删除商品
 	@RequestMapping("/deleteGoods")
 	public Integer deleteGoods(Integer gId) {
+		// 0 可以删除商品，但是删除失败
+		//-1不能删除商品
+		//200 删除成功
 		Integer isOk = goodsService.deleteGoods(gId);
 		return isOk;
 	}

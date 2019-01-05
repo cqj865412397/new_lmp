@@ -20,4 +20,6 @@ public interface StockService {
 		public Integer insert(Stock stock);
 		//批量删除
 		public Integer deleteByIds(List<Integer> stockIds);
+		//更新库存主表（总数量和总价格）
+		public int updateByPrimaryKeySelective(Stock  stock);
 }
