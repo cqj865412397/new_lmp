@@ -91,6 +91,12 @@ public class StockServiceImpl implements StockService {
 	public Integer deleteByIds(List<Integer> stockIds) {
 		return stockmapper.deleteByIds(stockIds);
 	}
+
+
+	@Override
+	public int updateByPrimaryKeySelective(Stock stock) {
+		return stockmapper.updateByPrimaryKeySelective(stock);
+	}
 }
 
 	

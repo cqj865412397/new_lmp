@@ -284,35 +284,44 @@ public class GoodsServiceImpl implements GoodsService{
 				return 0;
 		}
 		
+		
+		//库存主表
+		Double allPrice = 0.0;//总价格
+		Integer allCount = 0;//总数量
+		Stock stock = null;
+		stock = new Stock();
+		stock.setCode("-1");//批次号
+		stock.setSid(sid);
+		stock.setStatus(0);
+		stock.setUid(uid);
+		if(stockService.insert(stock)<=0)
+			return 0;
 		//添加库存(实例id) sid（-1）库存主表编号
 		for(int k = 0;k<gInList.size();k++) {
-			Stock stock = new Stock();
-			stock.setCode("-1");//批次号
 			//总共进货价格
-			Double allPrice = gInList.get(k).getTotalCount() * gInList.get(k).getBasePrice();
-			stock.setAllprice(allPrice);
-			stock.setAllcount(gInList.get(k).getTotalCount());
-			stock.setSid(sid);
-			stock.setStatus(0);
-			stock.setUid(uid);
-			if(stockService.insert(stock)<=0)
+			allPrice += gInList.get(k).getTotalCount() * gInList.get(k).getBasePrice();
+			//stock.setAllprice(allPrice);
+			//stock.setAllcount(gInList.get(k).getTotalCount());
+			//总数量
+			allCount+=gInList.get(k).getTotalCount();
+			//添加库存详情表
+			Stockdetail stockdetail = new Stockdetail();
+			stockdetail.setGoodsinstanceid(gInList.get(k).getId());
+			//主表编号
+			stockdetail.setSid(stock.getId());
+			stockdetail.setCount(gInList.get(k).getTotalCount());
+			stockdetail.setScount(0);
+			stockdetail.setSum(gInList.get(k).getTotalCount() * gInList.get(k).getBasePrice());
+			stockdetail.setPrice(gInList.get(k).getBasePrice());
+			stockdetail.setStatus(0);
+			if(stockdetailService.insert(stockdetail)<=0)
 				return 0;
-			else {
-				//添加库存详情表
-				Stockdetail stockdetail = new Stockdetail();
-				stockdetail.setGoodsinstanceid(gInList.get(k).getId());
-				//主表编号
-				stockdetail.setSid(stock.getId());
-				stockdetail.setCount(gInList.get(k).getTotalCount());
-				stockdetail.setScount(0);
-				stockdetail.setSum(gInList.get(k).getTotalCount() * gInList.get(k).getBasePrice());
-				stockdetail.setPrice(gInList.get(k).getBasePrice());
-				stockdetail.setStatus(0);
-				if(stockdetailService.insert(stockdetail)<=0)
-					return 0;
-			}
 		}
-		
+		//更新主表stock 总数量和总价格
+		stock.setAllprice(allPrice);
+		stock.setAllcount(allCount);
+		if(stockService.updateByPrimaryKeySelective(stock)<0)
+			return 0;
 		//成功添加
 		return 200;
 	}
@@ -392,10 +401,51 @@ public class GoodsServiceImpl implements GoodsService{
 		/**
 		 * 删除逻辑
 		 * 1.没有销售记录
-		 * 2.没有进货记录
+		 * 2.没有订单记录
+		 * 3.没有进货,只进了一批货物（初始化库存）
 		 */
-		
-		return 0;
+		if(goodsMapper.isSaleGoodsByGid(gId)==0
+			|| 	goodsMapper.isSaleGoodsByGid(gId) == null
+			||  	goodsMapper.isStockInGoodsByGid(gId) == 0
+				) {
+			//可以删除
+			//获取goodsInstanceId
+			List<Integer> goodsInstanceIds = goodsinstanceService.quertyGoodsInstanceIdsByGid(gId);
+			//goods 主键gId
+			if(goodsMapper.deleteByPrimaryKey(gId)<=0)
+				return 0;
+			//goodsinstance单品  Gid
+			if(goodsinstanceService.deleteByGid(gId)<=0)
+				return 0;
+			//goodsinstanceprice 价格 多删除goodsInstanceIdList
+			if(goodsInstancePriceService.deleteByIds(goodsInstanceIds)<=0)
+				return 0;
+			//删除规格（自定义）standard Gid
+			if(standardService.deleteByGid(gId) < 0)
+				return 0;
+			//删除规格值（自定义）standardinstance Gid
+			if(standardinstanceService.deleteByGid(gId)<0)
+				return 0;
+			//图片删除Gid 
+			if(imgService.deleteByGid(gId)<0)
+				return 0;
+			//查询sid库存主表id集合
+			List<Integer> stockIds = new ArrayList<Integer>();
+			for (Integer gInId : goodsInstanceIds) {
+				Integer stockId = stockdetailService.querySid(gInId);
+				stockIds.add(stockId);
+			}
+			//库存从表 list
+			if(stockService.deleteByIds(stockIds)<=0)
+				return 0;
+			//删除主表 list
+			if(stockdetailService.deleteByGoodsInstanceIds(goodsInstanceIds)<=0)
+				return 0;
+			return 200;
+		}else {
+			//不能删除
+			return -1;
+		}
 	}
 
 

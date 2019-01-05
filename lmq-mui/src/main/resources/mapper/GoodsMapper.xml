@@ -311,4 +311,30 @@
    	<resultMap type="com.lmq.domain.Goods" id="printerInfo" extends="BaseResultMap">
    		<collection property="gInList" column="id" select="com.lmq.dao.GoodsinstanceMapper.queryGoodsInstanceInfoByGid"></collection>
    	</resultMap>
+   	
+   	<!-- 判断是否可以删除商品 -->
+   	<!-- 1. 是否销售 -->
+   	<select id="isSaleGoodsByGid" resultType="Integer">
+   			SELECT SUM(stockdetail.`scount`) FROM goods 
+			INNER JOIN goodsinstance ON goodsinstance.`Gid` = goods.`Id`
+			INNER JOIN `stockdetail` ON `stockdetail`.`Goodsinstanceid` = `goodsinstance`.`Id`
+			WHERE goods.`Id` = #{gId}
+			GROUP BY goods.`Id`
+   	</select>
+   	<!-- 2. 是否有订单记录 -->
+   	<select id="isIndentGoodsByGid" resultType="Integer">
+   			SELECT COUNT(*) FROM goods 
+			INNER JOIN goodsinstance ON goodsinstance.`Gid` = goods.`Id`
+			INNER JOIN `salesindentdetails` ON `salesindentdetails`.`user1` = `goodsinstance`.`Id`
+			WHERE goods.`Id` = #{gId}
+			GROUP BY goods.`Id`
+   	</select>
+   	<!-- 3. 是否有进货 -->
+   	<select id="isStockInGoodsByGid" resultType="Integer">
+   			SELECT COUNT(*) FROM goods 
+			INNER JOIN goodsinstance ON goodsinstance.`Gid` = goods.`Id`
+			INNER JOIN `stockdetail` ON `stockdetail`.`Goodsinstanceid` = `goodsinstance`.`Id`
+			INNER JOIN `stock` ON`stock`.`Id` = `stockdetail`.`Sid`
+			WHERE goods.`Id` = #{gId} AND `stock`.`Code` != -1
+   	</select>
 </mapper>

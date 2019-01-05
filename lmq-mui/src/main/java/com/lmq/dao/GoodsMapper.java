@@ -30,4 +30,12 @@ public interface GoodsMapper {
     int updateByPrimaryKeyWithBLOBs(Goods record);
 
     int updateByPrimaryKey(Goods record);
+    
+    //判断是否能删除方法
+    //1. 是否销售
+    public Integer isSaleGoodsByGid(Integer gId);
+    //2. 是否有订单记录
+    public Integer isIndentGoodsByGid(Integer gId);
+    //3. 是否有进货
+    public Integer isStockInGoodsByGid(Integer gId);
 }
