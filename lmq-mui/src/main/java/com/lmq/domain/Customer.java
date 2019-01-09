@@ -52,9 +52,31 @@ public class Customer {
 	 * @return
 	 */
 	private Integer pid;
+	
+	private Pricetype pobj;
+	private Customerlevel cobj;
 
 
 
+
+
+
+
+	public Pricetype getPobj() {
+		return pobj;
+	}
+
+	public void setPobj(Pricetype pobj) {
+		this.pobj = pobj;
+	}
+
+	public Customerlevel getCobj() {
+		return cobj;
+	}
+
+	public void setCobj(Customerlevel cobj) {
+		this.cobj = cobj;
+	}
 
 	public Integer getPid() {
 		return pid;

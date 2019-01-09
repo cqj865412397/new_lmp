@@ -31,6 +31,14 @@
 			property="acronymname" />
 		<result column="contactsname" jdbcType="VARCHAR"
 			property="contactsname" />
+			<association property="pobj" javaType="com.lmq.domain.Pricetype">
+				<id property="id" column="ppid"/>
+				<result property="name" column="pname"/>
+			</association>
+			<association property="cobj" javaType="com.lmq.domain.Customerlevel">
+				<id property="id" column="cid"/>
+				<result property="name" column="cname"/>
+			</association>
 	</resultMap>
 
 	<resultMap type="com.lmq.domain.Classify" id="ResultMapClassify">
@@ -62,9 +70,8 @@
 	</sql>
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
-		select *
-		from customer
-		where Id = #{id,jdbcType=INTEGER}
+		SELECT customer.*,customerlevel.name AS cname,customerlevel.id AS cid,pricetype.`Name` AS pname,pricetype.`id` AS ppid FROM customer INNER JOIN customerlevel ON customer.lid=customerlevel.id 
+INNER JOIN pricetype ON pricetype.id=customer.`pid` WHERE customer.id=#{id}
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
