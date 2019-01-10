@@ -218,7 +218,7 @@
 			(#{salesid},
 			#{l.stockdetailid,jdbcType=INTEGER},
 			#{l.count,jdbcType=INTEGER}, now(), #{l.status,jdbcType=INTEGER},
-			#{l.async,jdbcType=INTEGER}, #{l.uid,jdbcType=VARCHAR},
+			#{l.async,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
 			#{l.user1,jdbcType=VARCHAR},
 			#{l.user2,jdbcType=VARCHAR}, #{l.user3,jdbcType=VARCHAR}, #{l.user4,jdbcType=VARCHAR},
 			#{l.user5,jdbcType=VARCHAR})

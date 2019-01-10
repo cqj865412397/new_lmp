@@ -16,10 +16,11 @@
   	<result column="lx" property="lx"/>
   </resultMap>
   <select id="queryAll" resultMap="AllIncome">
-	SELECT (SELECT SUM(money) FROM customerrecharge WHERE `status`=0) AS cz,
-	(SELECT SUM(Allprice) FROM stock WHERE `status`=0) AS jh,
-	(SELECT SUM(money) FROM remittance WHERE `status`=0) AS fk,
-	SUM(deposi) AS dj, SUM(user5) AS xs FROM `Sales` WHERE `status`=0
+	SELECT (SELECT SUM(money) FROM customerrecharge INNER JOIN customer ON customer.`Id`=customerrecharge.`cid` WHERE customerrecharge.`status`=0 AND customer.`Sid`=#{storeid}) AS cz, 
+	(SELECT SUM(Allprice) FROM stock WHERE `status`=0 AND Sid=#{storeid}) AS jh, 
+	(SELECT SUM(money) FROM remittance INNER JOIN supplier ON supplier.`Id`=remittance.`Sid` WHERE remittance.`status`=0 AND supplier.`Sid`=#{storeid}) AS fk, 
+	(SELECT SUM(salesindent.`deposi`) FROM sales INNER JOIN salesindent ON salesindent.`SalesIndentNub`=sales.`user2` WHERE sales.`status`=0 AND sales.`Sid`=#{storeid}) AS dj, 
+	SUM(user5) AS xs FROM `sales` WHERE `status`=0 AND Sid=#{storeid};
   </select>
   <select id="queryXS" resultMap="Income">
 	SELECT s.user1 AS bh,c.`Name` AS `name`,s.`time`,s.`user5` AS money,'销售收入' AS lx FROM sales AS s 
@@ -27,11 +28,12 @@
 	WHERE s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
   </select>
   <select id="querySK" resultMap="Income">
-	SELECT customer.`Name` AS NAME,sales.`user1` AS bh,(sales.`deposi`+sales.`Takeinmoney`) AS money,sales.`time`,'定金和订单' AS lx FROM sales 
+	SELECT customer.`Name` AS NAME,sales.`user1` AS bh,(salesindent.`deposi`+sales.`Takeinmoney`) AS money,sales.`time`,'定金和订单' AS lx FROM sales 
 	LEFT JOIN customer ON customer.`Id`=sales.`cid`
-	WHERE deposi>0 AND sales.`status`=0  AND sales.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND sales.`Sid`=#{storeid}
+	LEFT JOIN salesindent ON salesindent.`SalesIndentNub`=sales.`user2`
+	WHERE sales.`status`=0  AND sales.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND sales.`Sid`=#{storeid}
 	UNION ALL
-	SELECT customer.`Name` AS NAME,customerrecharge.`Id` AS bh,customerrecharge.`money`,customerrecharge.`Time`,'充值' AS lx FROM customerrecharge 
+	SELECT customer.`Name` AS NAME,customerrecharge.`user2` AS bh,customerrecharge.`money`,customerrecharge.`Time`,'充值' AS lx FROM customerrecharge 
 	LEFT JOIN customer ON customer.`Id`=customerrecharge.`cid`
 	WHERE customerrecharge.`status`=0  AND customerrecharge.`Time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND customer.`Sid`=#{storeid}
 	ORDER BY `time`

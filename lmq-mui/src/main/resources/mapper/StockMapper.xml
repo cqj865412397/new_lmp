@@ -330,7 +330,7 @@
 		MAX(RIGHT(`Code`,12))AS maxNub FROM
 		`stock`
 		WHERE `Code` LIKE
-		CONCAT('%',#{uid},YEAR(NOW()),MONTH(NOW()),SUBSTR(NOW(),9,2),'%')
+		CONCAT('%',#{uid},YEAR(NOW()),SUBSTR(NOW(),6,2),SUBSTR(NOW(),9,2),'%')
 	</select>
 
 	<!-- 批量删除 -->

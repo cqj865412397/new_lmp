@@ -37,6 +37,7 @@ public class StockServiceImpl implements StockService {
 		stockmapper.insertSelective(record);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sid", record.getId());
+		map.put("uid", record.getUid());
 		List<Stockdetail> slist = record.getStockdetails();
 		map.put("slist", slist);
 		// 增加销售详情数据
