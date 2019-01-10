@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lmq.dao.report.ArrearageMapper;
 import com.lmq.domain.report.Arrearage;
+import com.lmq.domain.report.Condition;
 import com.lmq.service.report.ArrearageService;
 @Service
 @Transactional
@@ -15,27 +16,27 @@ public class ArrearageServiceImpl implements ArrearageService {
 	@Autowired
 	ArrearageMapper mapper;
 	@Override
-	public List<Arrearage> queryReceipt(String starttime, String endtime) {
+	public List<Arrearage> queryReceipt(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryReceipt(starttime, endtime);
+		return mapper.queryReceipt(c);
 	}
 
 	@Override
-	public List<Arrearage> queryReceiptDetail(Integer cid,String starttime,String endtime) {
+	public List<Arrearage> queryReceiptDetail(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryReceiptDetail(cid,starttime,endtime);
+		return mapper.queryReceiptDetail(c);
 	}
 
 	@Override
-	public List<Arrearage> queryPay(String starttime,String endtime) {
+	public List<Arrearage> queryPay(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryPay(starttime, endtime);
+		return mapper.queryPay(c);
 	}
 
 	@Override
-	public List<Arrearage> queryPayDetail(Integer sid,String starttime,String endtime) {
+	public List<Arrearage> queryPayDetail(Condition c) {
 		// TODO Auto-generated method stub
-		return mapper.queryPayDetail(sid, starttime, endtime);
+		return mapper.queryPayDetail(c);
 	}
 	
 }

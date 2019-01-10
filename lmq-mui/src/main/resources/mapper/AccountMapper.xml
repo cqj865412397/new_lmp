@@ -24,7 +24,7 @@
 	
 	SELECT customer.`Name` AS `name`,a.*,c.* FROM customer
 	LEFT JOIN (
-	SELECT sales.`cid` AS id,'销售出货' AS `lx`,sales.`user1` AS bh,sales.`money` AS addMoney,NULL AS backMoney,sales.`time`,goodsinstance.`Id` AS gid,CONCAT(goods.`name`,t.standardName) AS gname,salesdetails.`count` AS num,salesdetails.`Takeinmoney` AS `money` FROM sales 
+	SELECT sales.`cid` AS id,'销售出货' AS `lx`,sales.`user1` AS bh,sales.`user5` AS addMoney,sales.`Takeinmoney` AS backMoney,sales.`time`,goodsinstance.`Id` AS gid,CONCAT(goods.`name`,t.standardName) AS gname,salesdetails.`count` AS num,salesdetails.`Takeinmoney` AS `money` FROM sales 
 	LEFT JOIN salesdetails ON salesdetails.`Salesid`=sales.`Id`
 	LEFT JOIN goodsinstance ON goodsinstance.`Id`=salesdetails.`user1`
 	LEFT JOIN goods ON goods.`Id`=goodsinstance.`Gid`
@@ -35,10 +35,10 @@
 	) AS t ON t.Id=goodsinstance.`Id`
 	WHERE sales.`time` BETWEEN #{startdate} AND #{enddate} AND sales.`status`=0
 	UNION ALL
-	SELECT `cid`,'收款' AS `lx`,customerrecharge.`user1` AS bh,NULL AS addMoney,`money` AS backMoney,customerrecharge.`Time` AS `time`,NULL AS gid,NULL AS gname,NULL AS num,NULL AS `money` FROM customerrecharge WHERE `time` BETWEEN #{startdate} AND #{enddate} AND `status`=0
+	SELECT `cid`,'收款' AS `lx`,customerrecharge.`user2` AS bh,NULL AS addMoney,`money` AS backMoney,customerrecharge.`Time` AS `time`,NULL AS gid,NULL AS gname,NULL AS num,NULL AS `money` FROM customerrecharge WHERE `time` BETWEEN #{startdate} AND #{enddate} AND `status`=0
 	) AS a ON a.id=customer.`Id`
 	LEFT JOIN (
-	SELECT (SELECT SUM(sales.`user5`+sales.`deposi`) FROM sales WHERE `time` &lt; #{startdate} AND `status`=0 AND sales.`cid`=#{customer})
+	SELECT (SELECT SUM(sales.`user5`) FROM sales WHERE `time` &lt; #{startdate} AND `status`=0 AND sales.`cid`=#{customer})
 	+(SELECT SUM(money) FROM customerrecharge  WHERE `time` &lt; #{startdate} AND `status`=0 AND customerrecharge.`cid`=#{customer}) AS initMoney
 	) AS c ON 1=1
 	WHERE customer.`Id`=#{customer}
