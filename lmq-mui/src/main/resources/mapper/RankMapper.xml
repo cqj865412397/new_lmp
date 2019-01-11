@@ -45,7 +45,7 @@
 		FROM( SELECT n1.i + n10.i * 10 + n100.i * 100 AS id FROM num n1 CROSS JOIN num AS n10 CROSS JOIN num AS n100 ) AS numlist 
 		WHERE ADDDATE( DATE(#{startdate}), numlist.id ) &lt;= DATE(#{enddate})
 	) temp
-	LEFT JOIN sales ON temp.date=sales.`time`
+	LEFT JOIN sales ON temp.date=DATE(sales.`time`)
 	 AND sales.`time` BETWEEN #{startdate} AND #{enddate} AND sales.`status`=0 AND sales.`Sid`=#{storeid}
 	GROUP BY temp.date;
   </select>

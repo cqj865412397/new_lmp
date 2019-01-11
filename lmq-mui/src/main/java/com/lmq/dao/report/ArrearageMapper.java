@@ -5,15 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lmq.domain.report.Arrearage;
+import com.lmq.domain.report.Condition;
 /**
  * 应收/付欠款
  * @author TZX
  *
  */
 public interface ArrearageMapper {
-	public List<Arrearage> queryReceipt(@Param("starttime")String starttime,@Param("endtime")String endtime);
-	public List<Arrearage> queryReceiptDetail(@Param("cid")Integer cid,@Param("starttime")String starttime,@Param("endtime")String endtime);
-	public List<Arrearage> queryPay(@Param("starttime")String starttime,@Param("endtime")String endtime);
-	public List<Arrearage> queryPayDetail(@Param("sid")Integer sid,@Param("starttime")String starttime,@Param("endtime")String endtime);
+	public List<Arrearage> queryReceipt(Condition c);
+	public List<Arrearage> queryReceiptDetail(Condition c);
+	public List<Arrearage> queryPay(Condition c);
+	public List<Arrearage> queryPayDetail(Condition c);
 	
 }

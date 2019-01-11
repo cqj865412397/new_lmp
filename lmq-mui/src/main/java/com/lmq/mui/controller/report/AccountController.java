@@ -13,7 +13,7 @@ import com.lmq.service.report.AccountService;
 /**
  * 对账
  * @author TZX
- *
+ *不记名散客-1不计入欠款对账单统计
  */
 @RestController
 public class AccountController {
