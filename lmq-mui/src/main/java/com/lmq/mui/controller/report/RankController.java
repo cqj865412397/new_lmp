@@ -47,4 +47,9 @@ public class RankController {
 		System.out.println("经营费用-折线图数据");
 		return rs.queryChartExpenses(c);
 	}
+	@RequestMapping("/getFirstCustomeridSupplier")
+	public List<Rank> getFirstCustomeridSupplier(Condition c) {
+		System.out.println("获取第一个顾客和供应商");//id-顾客id/name-顾客name/name-供应商id/name-供应商name--2条
+		return rs.getFirstCustomeridSupplier(c);
+	}
 }
