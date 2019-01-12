@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lmq.domain.report.Arrearage;
+import com.lmq.domain.report.Condition;
 
 public interface ArrearageService {
-	public List<Arrearage> queryReceipt(String starttime,String endtime);
-	public List<Arrearage> queryReceiptDetail(Integer cid,String starttime,String endtime);
-	public List<Arrearage> queryPay(String starttime,String endtime);
-	public List<Arrearage> queryPayDetail(Integer sid,String startdate,String enddate);
+	public List<Arrearage> queryReceipt(Condition c);
+	public List<Arrearage> queryReceiptDetail(Condition c);
+	public List<Arrearage> queryPay(Condition c);
+	public List<Arrearage> queryPayDetail(Condition c);
 }

@@ -20,13 +20,15 @@
   </resultMap>
   <!-- 与按客户利润统计相同 -->
   <select id="query" resultMap="SalesStock">
-  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,GROUP_CONCAT(DISTINCT standardinstance.`Name`)AS standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`user5`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
+  	SELECT gi.`Id` AS goodsinstanceid,g.`name` AS gname,t.standardName,gi.`ids`,SUM(sd.`count`) AS `count`,`bit`.`Name` as bname, SUM(s.`money`) AS money,SUM(s.`user5`) AS paymoney,SUM(stockdetail.`Price`*st.`count`) AS costmoney FROM sales AS s
 	INNER JOIN Salesdetails AS sd ON s.`Id`=sd.`Salesid`
 	INNER JOIN salesstockinfo AS st ON sd.`Id`=st.`salesid`
 	INNER JOIN stockdetail ON stockdetail.`Id`=st.`stockdetailid`
 	INNER JOIN goodsinstance AS gi ON sd.`user1`=gi.`Id`
 	INNER JOIN goods AS g ON g.`Id`=gi.`Gid`
-	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , gi.`ids`)
+	LEFT JOIN (SELECT goodsinstance.Id,GROUP_CONCAT(standardinstance.`Name`)AS standardName FROM goodsinstance 
+	LEFT JOIN standardinstance ON FIND_IN_SET(standardinstance.`Id` , goodsinstance.`ids`)
+	GROUP BY goodsinstance.`Id`) AS t ON t.Id=gi.`Id`
 	LEFT JOIN `bit` ON `bit`.`Id`=g.`Bid`
 	WHERE s.`status`=0 AND s.`time` BETWEEN DATE(#{startdate}) AND DATE(#{enddate}) AND s.`Sid`=#{storeid}
 	GROUP BY gi.`Id`;
