@@ -67,4 +67,7 @@
   <select id="queryChartExpenses" resultMap="Rank">
   	select * from sales
   </select>
+    <select id="getFirstCustomeridSupplier" resultMap="Rank">
+  	(SELECT `Id` AS id,`Name` AS `name` FROM customer WHERE Sid=#{storeid} LIMIT 1)UNION ALL (SELECT `Id` AS id,`Name` AS `name` FROM supplier WHERE Sid=#{storeid} LIMIT 1)
+  </select>
 </mapper>

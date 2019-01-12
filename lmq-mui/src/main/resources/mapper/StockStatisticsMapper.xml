@@ -34,7 +34,7 @@
   </resultMap>
   <!-- 与按客户利润统计相同 -->
   <select id="queryAll" resultMap="StockStatistics">
-	SELECT gi.`Id` AS gid,g.`name` AS gname,t.standardName,sd.`Id` AS sdId,sd.`Price`,(sd.`count`-IFNULL(b.finalSaleCount,0)) AS finalCount,(init.initCount-IFNULL(a.initSaleCount,0)) AS initCount,sd.`Price`*(sd.`count`-IFNULL(b.finalSaleCount,0)) AS finaltMoney,sd.`Price`*(init.initCount-IFNULL(a.initSaleCount,0)) AS initMoney,(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backCount,sd.`Price`*(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backMoney 
+	SELECT gi.`Id` AS gid,g.`name` AS gname,t.standardName,sd.`Id` AS sdId,sd.`Price`,(SUM(sd.`count`)-IFNULL(b.finalSaleCount,0)) AS finalCount,(init.initCount-IFNULL(a.initSaleCount,0)) AS initCount,sd.`Price`*(sd.`count`-IFNULL(b.finalSaleCount,0)) AS finaltMoney,sd.`Price`*(init.initCount-IFNULL(a.initSaleCount,0)) AS initMoney,(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backCount,sd.`Price`*(IFNULL(b.finalSaleCount,0)-IFNULL(a.initSaleCount,0)) AS backMoney 
 	FROM goodsinstance AS gi
 	LEFT JOIN stockdetail AS sd ON sd.`Goodsinstanceid`=gi.`Id`
 	LEFT JOIN stock AS s ON s.`Id`=sd.`Sid` AND s.`status`=0 AND s.`Sid`=#{storeid} AND s.`Time` &lt; #{enddate}

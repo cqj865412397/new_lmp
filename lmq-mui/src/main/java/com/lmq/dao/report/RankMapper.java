@@ -19,4 +19,10 @@ public interface RankMapper {
 	List<Rank> queryChartProfit(Condition c);
 	//经营费用-折线统计图
 	List<Rank> queryChartExpenses(Condition c);
+	/**
+	 * 获取第一个顾客和供应商-共2条数据，每条2列：id,name
+	 * @param c
+	 * @return Rank:id-顾客id/name-顾客name/id-供应商id/name-供应商name
+	 */
+	List<Rank> getFirstCustomeridSupplier(Condition c);
 }
