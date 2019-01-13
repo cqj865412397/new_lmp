@@ -158,6 +158,7 @@ public class GoodsServiceImpl implements GoodsService{
 			Stock sm =  new Stock();
 			sm.setCode("-1");//批次号
 			sm.setAllprice(goods.getCount() * goods.getBasePrice());
+			sm.setUser2(goods.getCount() * goods.getBasePrice()+"");
 			sm.setAllcount(goods.getCount());
 			sm.setSid(sid);
 			sm.setStatus(0);
@@ -320,6 +321,7 @@ public class GoodsServiceImpl implements GoodsService{
 		//更新主表stock 总数量和总价格
 		stock.setAllprice(allPrice);
 		stock.setAllcount(allCount);
+		stock.setUser2(allPrice+"");
 		if(stockService.updateByPrimaryKeySelective(stock)<0)
 			return 0;
 		//成功添加
