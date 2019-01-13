@@ -14,4 +14,5 @@ public interface RankService {
 	List<Rank> queryChartIncome(Condition c);
 	List<Rank> queryChartProfit(Condition c);
 	List<Rank> queryChartExpenses(Condition c);
+	List<Rank> getFirstCustomeridSupplier(Condition c);
 }

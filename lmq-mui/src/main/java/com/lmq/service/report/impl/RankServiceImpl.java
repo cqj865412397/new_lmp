@@ -51,4 +51,10 @@ public class RankServiceImpl implements RankService {
 		return rm.queryChartExpenses(c);
 	}
 
+	@Override
+	public List<Rank> getFirstCustomeridSupplier(Condition c) {
+		// TODO Auto-generated method stub
+		return rm.getFirstCustomeridSupplier(c);
+	}
+
 }
